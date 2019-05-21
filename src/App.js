@@ -1,26 +1,32 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import SearchField from './component/navbar/searchField';
+import HomeScreen from './views/HomeScreen';
+// import Dropdown from './component/navbar/dropdown_menu';
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { faStroopwafel } from '@fortawesome/free-solid-svg-icons';
+import Login from "./views/Login";
+import Register from './views/register';
+import NavBar from './component/navbar/navbar';
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div style={{ height: "100% "}}>
+        <NavBar />
+        <Switch>
+          <Route exact path='/' component={HomeScreen} />
+          <Route path='/login' component={Login} />
+          <Route path='/register' component={Register} />
+          <Route path='/shopping_cart' />
+        </Switch>
+      </div>
+    </Router>
   );
 }
+library.add(faStroopwafel)
 
 export default App;

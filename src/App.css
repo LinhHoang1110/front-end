@@ -1,33 +1,65 @@
-.App {
-  text-align: center;
+.container {
+    /* position: fixed */
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+.navbar {
+    padding: 0 100px!important
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.container-navbar {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    height: 100%;
 }
 
-.App-link {
-  color: #61dafb;
+.search {
+    position: absolute;
+    width: 454.32px;
+    height: 32.13px;
+    top: 0;
+    border-radius: 9999px;
+    padding-left: 10px;
+    margin-top: 30px
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.login {
+    margin-right: 100px;
+}
+
+.logo {
+    margin-top: 40px;
+    font-size: 48px
+}
+
+.link {
+    margin-right: 5px
+}
+
+.login {
+    text-align: right
+}
+
+.filter {
+    display: flex;
+    width: 100%;
+    padding: 0 10
+}
+
+.filter-product {
+    display: flex;
+}
+
+.filter-product>div {
+    width: calc(100% / 4);
+    flex-basis: calc(100% / 4)
+}
+
+.image-body {
+    width: 100%;
+    height: 100px;
+    background-image: url("https://images.unsplash.com/photo-1512659606196-523f5b283566?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=989&q=80"), linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.5));
+    background-size: cover;
+    background-repeat: no-repeat;
 }
