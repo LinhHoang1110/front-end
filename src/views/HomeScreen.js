@@ -4,7 +4,6 @@ import { Grid, Cell } from 'react-mdl'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import LinkInfo from '../component/navbar/link';
 import Login from './Login';
-import "./homescreen.css";
 import Body from '../component/Body';
 import ImageBody from '../component/ImageBody';
 

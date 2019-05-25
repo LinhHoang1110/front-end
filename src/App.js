@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 import SearchField from './component/navbar/searchField';
 import HomeScreen from './views/HomeScreen';
 // import Dropdown from './component/navbar/dropdown_menu';
@@ -12,6 +11,7 @@ import Login from "./views/Login";
 import Register from './views/register';
 import NavBar from './component/navbar/navbar';
 import Footer from './component/Footer';
+import DeataiImage from './views/DetailScreen';
 
 const styles = () => ({
   wrapper: {
@@ -35,6 +35,7 @@ function App(props) {
             <Route path='/login' component={Login} />
             <Route path='/register' component={Register} />
             <Route path='/shopping_cart' />
+            <Route path='/detal-products' component={DeataiImage}/>
           </Switch>
         </div>
         <Footer />
