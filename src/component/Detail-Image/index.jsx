@@ -33,9 +33,10 @@ class Detail_Vape extends Component {
     }
 
     render() {
+        const { classes } = this.props
 
         return (
-            <div className='detail-item'>
+            <div className={classes.detailItem}>
                 <Cell col={6}>
 
                     <div className='detail-img'>
@@ -54,7 +55,7 @@ class Detail_Vape extends Component {
                             <li>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsa nobis labore incidunt error veritatis. Nemo sapiente impedit tempore distinctio eius cumque assumenda, molestias non et fugiat inventore esse maiores consequuntur!</li>
                         </ul>
                     </div>
-                    <div className='add-cart-container'>
+                    <div className={classes.addCartContainer}>
                         <button className='btn-plus' onClick={this.plus.bind(this)}>+</button>
                         <p className='score'>{this.state.score}</p>
                         <button className='btn-minus' onClick={this.minus.bind(this)}>-</button>
