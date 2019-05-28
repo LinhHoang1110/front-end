@@ -12,9 +12,10 @@ import Register from './views/register';
 import NavBar from './component/navbar/navbar';
 import Footer from './component/Footer';
 import DeataiImage from './views/DetailScreen';
+import CartContainer from './container/CartContainer';
 
 const styles = () => ({
-  wrapper: {
+  wrapper: { 
     minHeight: "100vh",
     position: "relative"
   },
@@ -34,7 +35,7 @@ function App(props) {
             <Route exact path='/' component={HomeScreen} />
             <Route path='/login' component={Login} />
             <Route path='/register' component={Register} />
-            <Route path='/shopping_cart' />
+            <Route path='/shopping_cart' component={CartContainer}/>
             <Route path='/detal-products' component={DeataiImage}/>
           </Switch>
         </div>

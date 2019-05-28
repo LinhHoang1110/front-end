@@ -17,13 +17,14 @@ import * as Yup from 'yup'
 
 
 class SignupForm extends Component {
+
     render() {
         return (
             <div>
                 <Grid container justify='center' alignContent='center'>
                     <Grid item xs={6} md={4}>
-                        <Paper elevation={4} style={{ padding: '20px 15px', marginTop: '100px', width: '930px' }}>
-                            <Typography style={{ margin: '0 395px 0 0' }} variant="headline" gutterBottom>
+                        <Paper elevation={4} style={{ padding: '20px 15px', margin: "100px 0px 0px -181px", width: '930px' }}>
+                            <Typography style={{ margin: "auto" }} variant="headline" gutterBottom>
                                 Register
                         </Typography>
                             <FormControl fullWidth margin='normal' error={!!this.props.touched.username && !!this.props.errors.username}>
@@ -61,6 +62,7 @@ class SignupForm extends Component {
                                     variant='extendedFab'
                                     color='primary'
                                     type='submit'
+                                    style={{ width: '135px', heigh: '31px', margin: 'auto' }}
                                 >
                                     Signup
                                 </Button>

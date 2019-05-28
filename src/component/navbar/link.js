@@ -9,15 +9,20 @@ const styles = () => {
             minWidth: "145px"
         },
         shoppingCart: {
-         
+
         },
-        signUp : {
+        signUp: {
             marginLeft: '260px',
             display: "flex"
         },
-        link : {
+        link: {
             marginRight: "5px",
-            fontFamily: "Consolas"
+            fontFamily: "Consolas",
+            positon: "relative",
+            display: "inline-block",
+            "&:hover > div": {
+                display: "block"
+            }
         },
         filter: {
             display: "flex",
@@ -26,10 +31,37 @@ const styles = () => {
         },
         filterProduct: {
             display: "flex",
-            fontFamily:" Consolas",
+            fontFamily: " Consolas",
             "& > div": {
-                width:" calc(100% / 4)",
+                width: " calc(100% / 4)",
                 flexBasis: "calc(100% / 4)"
+            }
+        },
+        dropbtn: {
+            backgroundColor: "#d8d1c0",
+            color: "black",
+            fontSize: "16px",
+            border: "none",
+            cursor: "pointer",
+            "&:hover+div": {
+                display: "block"
+            },
+            "&+div": {
+                display: "none",
+                position: "absolute",
+                backgroundColor: "#f9f9f9",
+                minWidth: "160px",
+                boxShadow: "0px 8px 16px 0px rgba(0,0,0,0.2)",
+                zIndex: "1",
+                "& a:hover": {
+                    backgroundColor: "#f1f1f1"
+                },
+            },
+            "&+div a" : {
+                color:" black",
+                padding: "12px 16px",
+                textDecoration: "none",
+                display: "block"
             }
         },
     }
@@ -48,9 +80,36 @@ class LinkInfo extends Component {
                         <div>
                             <Link to='/' className='link'>Trang chủ </ Link>
                         </div>
-                        <div className={classes.link}>Sản phẩm </div>
-                        <div className={classes.link}>Thương hiệu </div>
-                        <div className={classes.link}>Tìm hiểu về Vape </div>
+                        <div className={classes.link}>
+                            <button className={classes.dropbtn}>Sản phẩm</button>
+                            <div className={classes.dropdownContent}>
+                                <a href="#">Vape</a>
+                                <a href="#">Tinh dầu Vape</a>
+                                <a href="#">Vape pop system</a>
+                                <a href="#">Tank Vape</a>
+                                <a href="#">Phụ kiện</a>
+                                
+                            
+                            </div>
+                        </div>
+                        <div className={classes.link}>
+                            <button className={classes.dropbtn}>Thương hiệu</button>
+                            <div className={classes.dropdownContent}>
+                                <a href="#">Joyetech</a>
+                                <a href="#">Eleaf</a>
+                                <a href="#">Widmec</a>
+                                <a href="#">Smoant</a>
+                                <a href="#">Wismec</a>
+                            </div>
+                        </div>
+                        <div className={classes.link}>
+                            <button className={classes.dropbtn}>Tìm hiểu về vape</button>
+                            <div className={classes.dropdownContent}>
+                                <a href="#">Vape là gì</a>
+                                <a href="#">Vape có hại không</a>
+                                <a href="#">Giá vape</a>
+                            </div>
+                        </div>
                     </div>
                 </Cell>
 
