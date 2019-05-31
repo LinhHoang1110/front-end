@@ -14,14 +14,15 @@ class Cart extends Component {
         return (
             <div>
                 <div className="table-responsive">
-                    <table className="table product-table">
+                    <table className="table
+                    ">
                         <thead>
                             <tr style={{fontFamily: "Consolas"}}>
                                 <th></th>
                                 <th>Sản phẩm</th>
                                 <th>Thông tin bảo hành</th>
-                                <th>Số lượng</th>
                                 <th>Giá(VNĐ)</th>
+                                <th>Số lượng</th>
                                 <th>Tổng</th>
                             </tr>
                         </thead>

@@ -3,8 +3,8 @@ import { withStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 import Body from "../component/Body";
 import VapeImage from "../component/VapeImage";
-import { actAddToCart } from "../actions/vapeActions"
-
+import { actAddToCart, actFetchProducts } from "../actions/vapeActions"
+import callApi from "../utils/ApiCaller";
 
 const styles = () => {
     return {
@@ -17,23 +17,48 @@ const styles = () => {
 }
 
 class ProductsContainer extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            VapeProducts: []
+        }
+    }
+
+
+    componentDidMount() {
+        callApi("api/images", "GET", null).then(res => {
+            this.setState({
+                VapeProducts: res.data
+            })
+
+            // this.props.fetchAllProducts(res.data);
+        })
+    }
+
     render() {
         const { classes } = this.props;
-        const { VapeProducts } = this.props
+        // const { VapeProducts } = this.props
+        // if(!VapeProducts) {
+        //     return <div>...Loading</div>
+        // }
+
+        let { VapeProducts } = this.state
+        console.log(VapeProducts)
 
         return (
-           <Body>
-               { this.showProducts(VapeProducts) }
-           </Body>
+            <Body>
+                {this.showProducts(VapeProducts)}
+            </Body>
         )
     }
 
     showProducts(VapeProducts) {
         let result = null;
-        let { onAddToCart } = this.props
-        if(VapeProducts.length > 0) {
-            result = VapeProducts.map((product, index ) => {
-                return <VapeImage key={index} product={product} onAddToCart={ onAddToCart }/>
+        // let { onAddToCart } = this.props
+        if (VapeProducts.length > 0) {
+            result = VapeProducts.map((product, index) => {
+                console.log(product)
+                return <VapeImage {...this.props} key={index} product={product} />
             })
         }
         return result
@@ -49,11 +74,14 @@ const mapStateToProps = state => {
     }
 }
 
-const mapDispatchToProps = (dispatch,props) => {
+const mapDispatchToProps = (dispatch, props) => {
     return {
-        onAddToCart: (product) => { 
-            dispatch(actAddToCart(product, 1))
-        }
+        // onAddToCart: (product) => {
+        //     dispatch(actAddToCart(product, 1))
+        // }
+        fetchAllProducts: (VapeProducts) => {
+            dispatch(actFetchProducts(VapeProducts))
+        } 
     }
 }
 

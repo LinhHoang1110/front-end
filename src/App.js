@@ -32,7 +32,7 @@ function App(props) {
         <NavBar />
         <div className={classes.body}>
           <Switch>
-            <Route exact path='/' component={HomeScreen} />
+            <Route exact path='/' component={propsRoute => <HomeScreen {...propsRoute}/>} />
             <Route path='/login' component={Login} />
             <Route path='/register' component={Register} />
             <Route path='/shopping_cart' component={CartContainer}/>

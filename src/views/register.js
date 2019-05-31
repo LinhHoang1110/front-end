@@ -13,12 +13,15 @@ import FormHelperText from '@material-ui/core/FormHelperText'
 import Typography from '@material-ui/core/Typography'
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom"
 import { withFormik, Form, Field } from 'formik'
-import * as Yup from 'yup'
-
+import * as Yup from 'yup';
+import axios from "axios"
+import callApi from "../utils/ApiCaller"
 
 class SignupForm extends Component {
 
     render() {
+
+        const { handleSubmit } = this.props;
         return (
             <div>
                 <Grid container justify='center' alignContent='center'>
@@ -61,7 +64,8 @@ class SignupForm extends Component {
                                 <Button
                                     variant='extendedFab'
                                     color='primary'
-                                    type='submit'
+                                    type='button'
+                                    onClick={handleSubmit}
                                     style={{ width: '135px', heigh: '31px', margin: 'auto' }}
                                 >
                                     Signup
@@ -95,7 +99,15 @@ const Register = withFormik({
             .min(8, 'Password must have min characters'),
         passwordConfirmation: Yup.string()
             .oneOf([Yup.ref('password'), null], 'Passwords must match')
-    })
+    }),
+    handleSubmit: (values) => {
+        callApi("api/auth", "POST", {
+            username: "admin",
+            password: "123456",
+        }).then(res => {
+            console.log(values)
+        })
+    }
 })(SignupForm)
 
 export default Register

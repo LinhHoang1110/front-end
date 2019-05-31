@@ -1,46 +1,73 @@
 import * as types from "../constants/ActionType"
 let data = JSON.parse(localStorage.getItem("CART"));
-
-let initialState = data ? data : [];
+console.log(data);
+let initialState = {
+    data: data ? data : [],
+    message: ""
+}
 
 const cart = (state = initialState, action) => {
+    console.log(action.type);
     let { product, quantity } = action;
     let index = -1; // không tìm thấy => index = -1
     switch (action.type) {
-        case types.ADD_TO_CART:
-            index = findProductInCart(state, product)
+        case types.ADD_TO_CART: {
+            let { data } = state;
+            index = findProductInCart(data, product)
             if (index != -1) {
-                state[index].quantity += quantity
+                data[index].quantity += quantity
             } else {
-                state.push({
-                    product,
-                    quantity
-                })
+                console.log(product, quantity)
+                data = [...data, { product, quantity }]
             }
-
-            localStorage.setItem("CART", JSON.stringify(state))
-            return [...state]
+            localStorage.setItem("CART", JSON.stringify(data))
+            return {
+                ...state,
+                data,  
+            }
+        }
 
         case types.DELETE_PRODUCT_IN_CART:
-            index = findProductInCart(state, product);
+            const { data } = state;
+            index = findProductInCart(data, product);
             
             //xóa product theo index
             if(index !== -1) {
-                state.splice(index, 1);
+                data.splice(index, 1);
             }
-            localStorage.setItem("CART", JSON.stringify(state))
-            return [...state]
+            localStorage.setItem("CART", JSON.stringify(data))
+            return {
+                ...state,
+                data: [...data]
+            }
 
-        case types.UPDATE_PRODUCT_IN_CART: 
-            index = findProductInCart(state, product);
+
+        case types.UPDATE_PRODUCT_IN_CART: {
+            const { data } = state;
+            index = findProductInCart(data, product);
             if(index !== -1) {
-                state[index].quantity = quantity;
+                data[index].quantity = quantity;
             }
             
-            localStorage.setItem("CART", JSON.stringify(state))
-            return [...state]
+            localStorage.setItem("CART", JSON.stringify(data))
+            return {
+                ...state,
+                data
+            }
+        }
+
             
-        default: return [...state]
+        case types.CHANGE_MESSAGE: 
+            //  console.log(action)
+            const { message } = action;
+            console.log(message);
+            return {
+                ...state,
+                message
+            }
+            
+        default: 
+            return state;
     }
 }
 
@@ -57,4 +84,4 @@ let findProductInCart = (cart, product) => {
     return index
 }
 
-export default cart
+export default cart;

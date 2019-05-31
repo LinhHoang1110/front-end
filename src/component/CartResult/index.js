@@ -44,11 +44,13 @@ const Styles = () => {
 class CartResult extends Component {
     render() {
         const { classes } = this.props;
-        const { cart } = this.props
+        const { item } = this.props;
+        console.log(item)
         return (
             <div style={{ margin: "0 30px" }}>
                 <div>
-                    <strong className={classes.sum} >Tổng: { this.showTotalAmout(cart)}đ</strong>
+                    <strong className={classes.sum} >Tổng: { this.showTotalAmout(item).toLocaleString('vi')}đ</strong>
+                    {/* <strong className={classes.sum} >Tổng: 10đ</strong> */}
                 </div>
                 <div className={classes.btnBackPay}>
                     <button className={classes.btnBack}>Trở lại shop</button>
@@ -58,11 +60,11 @@ class CartResult extends Component {
         )
     }
 
-    showTotalAmout = (cart) => {
+    showTotalAmout = (item) => {
         let total = 0;
-        if(cart.length > 0 ) {
-            for(var i = 0; i < cart.length; i++) {
-                total +=  parseInt(cart[i].product.price) * cart[i].quantity; 
+        if(item.length > 0 ) {
+            for(var i = 0; i < item.length; i++) {
+                total +=  parseInt(item[i].view) * item[i].view; 
             }
         }
         return total 

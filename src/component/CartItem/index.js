@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { withStyles } from '@material-ui/core';
-import * as Message from "../../constants/Message"
+import * as Message from "../../constants/Message";
+import * as Config from "../../constants/Config"
+import callApi from "../../utils/ApiCaller";
+
 
 const Styles = () => {
     return {
@@ -10,36 +13,48 @@ const Styles = () => {
         },
         imgInfor: {
             display: "flex",
-            flexFlow: "coloumn",
-            height: "100px",
+            width: 150,
+            height: 100,
+            "& > img": {
+                objectFit: "cover"
+            }
+        },
+        name: {
+            margin: "0 0 0 120px",
+            // width: "300px"
         },
         quantity: {
             display: "flex",
             paddingRight: "10px",
+            justifyContent: "center"
         },
         btnPlus: {
-            margin: "0 10px 0 0",
+            // margin: "0 10px 0 0",
             width: "39.11px",
-            height: "54px"
+            height: "20px",
+            borderRadius: "99999999px",
+            padding: "0 0 25px 0 "
         },
         number: {
-            margin: "15px 20px 0 12px",
+            // margin: "15px 20px 0 12px",
             textAlign: "center",
-            fontSize: "24px"
+            fontSize: "15px"
         },
         btnMinus: {
-            margin: "0 10px",
+            // margin: "0 10px",
             width: "39.11px",
-            height: "54px"
+            height: "20px",
+            borderRadius: "99999999px",
+            padding: "0 0 25px 0 "
         },
         guaranteeShip: {
-            margin: "0 0 0 30px",
+            margin: "0 0 0 250px",
             flexFlow: "column",
             fontFamily: "Consolas",
             width: "200px"
         },
         price: {
-            margin: "0 30px",
+            margin: "0 0 0 130px",
             fontFamily: "Consolas",
         },
         sub: {}
@@ -49,58 +64,67 @@ const Styles = () => {
 class CartItem extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            number: 1
-        }
     }
 
     render() {
         const { classes } = this.props;
         const { item } = this.props;
         console.log(item);
-        let { quantity } = item.quantity > 0 ? item : this.state;
-        console.log(quantity)
+        // let { quantity } = item.quantity > 0 ? item : this.state;
+        // console.log(quantity)
 
         return (
-            <div className={classes.containerCart}>
-                <div className={classes.imgInfor}>
-                    <img style={{ height: "100px", width: "100px" }} src={item.product.image}></img>
-                    <strong style={{ margin: "0 0 0 30px", fontFamily: "Consolas" }}>{item.product.name}</strong>
-                    <a style={{ color: "red", cursor: "pointer" }} onClick={() => this.onDelete(item.product)} >_ Remove</a>
-                </div>
 
-                <div className={classes.guaranteeShip}>
+            <tr>
+                <td>
+                    <div className={classes.imgInfor}>
+                        { /* fake data nên image = imageUrl */}
+                        <img style={{ width: '100% ' }} src={Config.API_URL + `${item.imageUrl}`}></img>
+                    </div>
+                </td>
+                <td>
+                { /* fake data nên name = title */}
+                    <strong style={{ margin: "0 0 0 30px", fontFamily: "Consolas" }}>{item.title}</strong>
+                    <div>
+                        <a style={{ color: "red", cursor: "pointer" }} onClick={() => this.onDelete(item._id)} >Remove</a>
+                    </div>
+                </td>
+                <td>
                     <div>
                         - bảo hành 3 tháng
-                    </div>
+                     </div>
                     <div>
                         - free ship toàn quốc
-                    </div>
-                </div>
+                 </div>
+                </td>
+                <td>
+                { /* fake data nên price = view */}
 
-                <div className={classes.price}>
-                    {item.product.price}
-                </div>
+                    {parseInt(item.view).toLocaleString('vi')}dd
+                </td>
+                <td>
+                { /* fake data nên quantity = view */}
 
-                <div className={classes.quantity}>
-                    <button className={classes.btnMinus} onClick={() => this.onUpdateQuantity(item.product, item.quantity - 1)}>-</button>
-                    <p className={classes.number}>{quantity}</p>
-                    <button className={classes.btnPlus} onClick={() => this.onUpdateQuantity(item.product, item.quantity + 1)}>+</button>
-
-                </div>
-
-                <div className={classes.sub}>
-                    {this.showSubTotal(item.product.price, item.quantity)}đ
-                </div>
-            </div>
+                    <button className={classes.btnMinus} onClick={() => this.onUpdateQuantityMinus(item)}>-</button>
+                    <p className={classes.number}>{item.view}</p>
+                    <button className={classes.btnPlus} onClick={() => this.onUpdateQuantityPlus(item)}>+</button>
+                </td>
+                <td>
+                    {this.showSubTotal(item.view, item.view).toLocaleString('vi')}đ
+                </td>
+            </tr>
         )
     }
 
-    onDelete(product) {
-        console.log(product);
-        let { onDeleteProductInCart, onChangeMessage } = this.props;
-        onDeleteProductInCart(product);
-        onChangeMessage(Message.MSG_DELETE_PRODUCT_IN_CART_SUCCESS)
+    onDelete(_id) {
+        if(confirm(`Nỡ lòng nào bạn lại muốn xóa sản phẩm này sao :( `)) { // eslint-disable-line
+            this.props.onDelete(_id)
+            let { onChangeMessage } = this.props;
+            onChangeMessage(Message.MSG_DELETE_PRODUCT_IN_CART_SUCCESS);
+        }
+        // let { onDeleteProductInCart, onChangeMessage } = this.props;
+        // onDeleteProductInCart(product);
+        // onChangeMessage(Message.MSG_DELETE_PRODUCT_IN_CART_SUCCESS)
     }
 
     showSubTotal = (price, quantity) => {
@@ -108,13 +132,28 @@ class CartItem extends Component {
         return parseInt(price) * quantity
     }
 
-    onUpdateQuantity = (product, quantity) => {
-        if (quantity > 0) {
+    onUpdateQuantityMinus = (item) => { 
+        callApi(`api/images/${item._id}`, "PUT", {
+            view: item.view - 1
+        }).then( res => {
+            item.view -= 1;
+            console.log(item.view);
             this.setState({
-                quantity: quantity
-            });
-            this.props.onUpdateProductInCart(product, quantity);
-        }
+                view: item.view
+            })
+        })
+    }
+
+    onUpdateQuantityPlus = (item) => { 
+        callApi(`api/images/${item._id}`, "PUT", {
+            view: item.view + 1
+        }).then( res => {
+            item.view += 1;
+            console.log(item.view);
+            this.setState({
+                view: item.view
+            })
+        })
     }
 }
 

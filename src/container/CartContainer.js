@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 import CartItem from "../component/CartItem";
@@ -6,6 +6,8 @@ import Cart from "../component/Cart";
 import CartResult from "../component/CartResult"
 import * as Message from "../constants/Message";
 import { actDeleteProductInCart, actChangeMessage, actUpdateProductInCart } from "../actions/vapeActions"
+import callApi from "../utils/ApiCaller"
+
 const styles = () => {
     return {
         containerVape: {
@@ -17,28 +19,65 @@ const styles = () => {
 }
 
 class CartContainer extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            data: []
+        }
+    }
+
+    componentDidMount() {
+        callApi('api/images', "GET", null).then(res => {
+            this.setState({
+                data: res.data
+            })
+        })
+    }
+
+    onDelete = (_id) => {
+        let { data } = this.state
+        callApi(`api/images/${_id}`, "DELETE", null).then(res => {
+            this.setState({
+                data: data.filter( el => el._id !== _id )
+            })
+        })
+        
+    }
+
     render() {
         const { classes } = this.props;
         const { cart } = this.props;
-        console.log(cart)
+        const { message } = cart;
+        let { data } = this.state
+        console.log(cart);
+        console.log(message)
 
         return (
-            <Cart>
-                {this.showCartItem(cart)}
-                {this.showTotalAmount(cart)}
-            </Cart>
+            <Fragment>
+                <div>{message}</div>
+                <Cart>
+                    {this.showCartItem(data)}
+                    {this.showTotalAmount(data)}
+                </Cart>
+            </Fragment>
         )
     }
 
-    showCartItem = (cart) => {
+    showCartItem = (data) => {
         let { onDeleteProductInCart, onChangeMessage, onUpdateProductInCart } = this.props
         let result = Message.MSG_CART_EMPTY;
-        if (cart.length > 0) {
-            console.log(cart)
+        if (data.length > 0) {
+            console.log(data)
             return (
-                result = cart.map((item, index) => {
+                result = data.map((item, index) => {
                     return (
-                        <CartItem key={index} item={item} onDeleteProductInCart={onDeleteProductInCart} onChangeMessage={onChangeMessage} onUpdateProductInCart={onUpdateProductInCart} />
+                        <CartItem key={index}
+                            item={item}
+                            onDeleteProductInCart={onDeleteProductInCart}
+                            onChangeMessage={onChangeMessage}
+                            onUpdateProductInCart={onUpdateProductInCart}
+                            onDelete={this.onDelete}
+                        />
                     )
                 })
             )
@@ -46,12 +85,12 @@ class CartContainer extends Component {
         return result
     }
 
-    showTotalAmount = (cart) => {
+    showTotalAmount = (data) => {
         let result = null;
-        if(cart.length > 0 ) {
-            result = <CartResult cart={cart}/>
+        if (data.length > 0) {
+            result = <CartResult item={data} />
         }
-        return result 
+        return result
     }
 
 }
@@ -64,14 +103,14 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch, props) => {
     return {
-        onDeleteProductInCart : (product) => {
-            dispatch(actDeleteProductInCart(product))
+        onDeleteProductInCart: (item) => {
+            dispatch(actDeleteProductInCart(item))
         },
-        onChangeMessage : (message) => {
+        onChangeMessage: (message) => {
             dispatch(actChangeMessage(message))
         },
-        onUpdateProductInCart : (product, quantity) => {
-            dispatch(actUpdateProductInCart(product, quantity))
+        onUpdateProductInCart: (item, quantity) => {
+            dispatch(actUpdateProductInCart(item, quantity))
         }
     }
 }

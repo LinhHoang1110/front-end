@@ -10,7 +10,6 @@ import { connect } from "react-redux";
 import { getVapeList, deteleVapeList, addVapelist } from "../actions/vapeActions";
 import { addUserList } from "../actions/userActions";
 import ProductsContainer from "../container/ProductsContainer";
-import CartContainer from "../container/CartContainer"
 import MessageContainer from '../container/MessageContainer';
 
 class HomeScreen extends Component {
@@ -31,7 +30,7 @@ class HomeScreen extends Component {
         return (
             <Fragment>
                 <ImageBody />
-                <ProductsContainer/>
+                <ProductsContainer {...this.props}/>
                 {/* {
                     vapeReducer.slice(0, 50).map(el => (
                         <div>
@@ -47,7 +46,7 @@ class HomeScreen extends Component {
                     <button onClick={() => { this.props.addUserList() }}>AddUserList</button>
                 </div> */}
                 <MessageContainer/>
-                <CartContainer/>
+                {/* <CartContainer/> */}
             </Fragment>
         )
     }
