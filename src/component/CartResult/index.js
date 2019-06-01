@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { withStyles } from "@material-ui/core";
+import { BrowserRouter as Router, Switch, Route, Redirect, Link } from 'react-router-dom'
 
 const Styles = () => {
     return {
@@ -44,6 +45,10 @@ const Styles = () => {
 class CartResult extends Component {
     render() {
         const { classes, item } = this.props;
+        const Token = localStorage.getItem("USER");
+        if(!Token) {
+            return <Link to={"/login"}></Link>
+        }
         console.log(item)
         return (
             <div style={{ margin: "0 30px" }}>
