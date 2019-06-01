@@ -44,11 +44,13 @@ class CartContainer extends Component {
 
     onDelete = (_id) => {
         let { dataDetail } = this.state
+        const fakeDataDetail = [...dataDetail].filter(el => el.product._id !== _id);
+        
         this.setState({
-            dataDetail: dataDetail.filter(el => el.product._id !== _id)
+            dataDetail: fakeDataDetail
         })
-        localStorage.setItem("CART-SHOPPING", JSON.stringify(dataDetail))
-        console.log(dataDetail, _id)
+        localStorage.setItem("CART-SHOPPING", JSON.stringify(fakeDataDetail))
+        console.log(fakeDataDetail, _id)
 
     }
 
@@ -56,14 +58,14 @@ class CartContainer extends Component {
         const { dataDetail } = this.state;
         for (let i = 0; i < dataDetail.length; i++) {
             if (productId == dataDetail[i].product._id) {
-                if (dataDetail[i].quantity > 1) {
-                    if (minus) {
-                        dataDetail[i].quantity -= 1
-                    } else {
-                        dataDetail[i].quantity += 1
+                if (minus) {
+                    if (dataDetail[i].quantity > 1) {
+                        dataDetail[i].quantity -= 1;
                     }
                 }
-
+                else {
+                    dataDetail[i].quantity += 1
+                }
             }
         }
 

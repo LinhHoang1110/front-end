@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { withStyles } from '@material-ui/core/styles'
-import { actFetchProducts } from "../../actions/vapeActions";
+import { actSearchProductKey } from "../../actions/vapeActions"
+import { connect } from "react-redux";
 import classNames from "classnames";
-import { connect } from "react-redux"
 
 
 const styles = () => {
@@ -71,13 +71,14 @@ class SearchField extends Component {
             searchString: ''
         }
     }
-
-    componentDidMount() {
-        this.props.actFetchProducts()
+    
+    onSearchChanged = text => this.setState({searchString: text})
+    handleTextChange = event => {
+        const { VapeProducts } = this.props;
+        const { searchString } = this.state
+        this.onSearchChanged(event.target.value)
+        this.props.actSearchProductKey(VapeProducts, event.target.value )
     }
-
-    onSearchChanged = text => this.setState({ searchString: text })
-    handleTextChange = event => this.onSearchChanged(event.target.value)
 
     render() {
         const { classes, VapeProducts } = this.props;
@@ -87,11 +88,11 @@ class SearchField extends Component {
             return <div>...Loading</div>
         }
 
-        VapeProducts.filter(
-            img =>
-                img.category.includes(this.state.searchString) ||
-                img.name.includes(this.state.searchString)
-        )
+        // VapeProducts.filter(
+        //     img => 
+        //         img.category.includes(this.state.searchString) || 
+        //         img.name.includes(this.state.searchString)
+        // )
 
         console.log(searchString)
 
@@ -109,7 +110,7 @@ class SearchField extends Component {
 
 const Store = (state) => state;
 const action = {
-    actFetchProducts
+    actSearchProductKey
 }
 
 

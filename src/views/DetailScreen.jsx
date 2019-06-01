@@ -3,9 +3,17 @@ import Detail_Vape from '../component/Detail-Image';
 
 
 class DeataiImage extends Component {
+    constructor(props) {
+        super(props)
+    }
+
+    // componentDidMount() {
+    //     this.props.actFetchProducts()
+    // }
+
     render() {
         return (
-            <Detail_Vape/>
+            <Detail_Vape {...this.props} id={this.props.match.params.productid}/>
         )
     }
 }

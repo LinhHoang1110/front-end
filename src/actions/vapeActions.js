@@ -58,11 +58,14 @@ export const actUpdateProductInCart = (product, quantity) => {
     }
 }
 
-export const actSearchProductkey = (product, searchString) => {
-    return {
-        type: types.SEARCH_PRODUCT_KEY,
-        payload: product, searchString
-    }
+export const actSearchProductKey = (product, searchString) => dispatch => {
+    callApi(`api/products?q=${searchString}`, "GET", null).then( res => {
+        console.log(res)
+        dispatch({
+            type: types.SEARCH_PRODUCT_KEY,
+            payload: res.data, searchString
+        })
+    })
 }
 
 export const actSearchProductCaterory = (product, caterory) => dispatch => {
@@ -84,6 +87,17 @@ export const actSearchProductBrand = (product, brand) => dispatch => {
         })
     })
 }
+
+export const actSearchProductId = (product, id) => dispatch => {
+    callApi(`api/products/detail/${id}`, "GET", null).then( res => {
+        console.log(res)
+        dispatch({
+            type: types.SEARCH_PRODUCT_ID,
+            payload: res.data, id
+        })
+    })
+}
+
 // export const getVapeList = () => dispatch => {
 //     axios.get("https://jsonplaceholder.typicode.com/todos").then(data => {
 //         dispatch({

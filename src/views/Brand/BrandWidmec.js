@@ -5,14 +5,14 @@ import Body from "../../component/Body";
 import { connect } from "react-redux";
 import VapeImage from "../../component/VapeImage"
 
-class BrandEleaf extends Component {
+class BrandWidmec extends Component {
     constructor(props) {
         super(props)
     }
 
     componentDidMount() {
         const { VapeProducts } = this.props
-        this.props.actSearchProductBrand(VapeProducts, 'eleaf')
+        this.props.actSearchProductBrand(VapeProducts, 'widmec')
     }
     render() {
         let { VapeProducts } = this.props;
@@ -43,4 +43,4 @@ const action = {
     actSearchProductBrand
 }
 
-export default (connect(Store, action)(BrandEleaf));
+export default (connect(Store, action)(BrandWidmec));

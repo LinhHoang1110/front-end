@@ -28,19 +28,21 @@ const VapeProducts = (state = initialState, action) => {
             console.log(action)
             return action.payload;
        
-        // case types.SEARCH_PRODUCT:
-            // const  
+        case types.SEARCH_PRODUCT_KEY:
+            return action.payload
         
         case types.SEARCH_PRODUCT_CATERORY: 
             console.log(action)
-
-            // const { caterory } = action.payload;
             return action.payload
 
         case types.SEARCH_PRODUCT_BRAND: 
             console.log(action)
             return action.payload
             
+        case types.SEARCH_PRODUCT_ID: 
+            console.log(action)
+            return action.payload
+
         default: return [...state]
     }
 }
