@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import VapeProducts from "./VapeProducts";
+import VapeProducts from "./vapeProducts";
 import cart from "./cart";
 import userReducer from "./userReducer";
 import message from "./message"
