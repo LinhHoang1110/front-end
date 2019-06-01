@@ -105,7 +105,6 @@ class LinkInfo extends Component {
                                 <Link to={`/brand/Eleaf`}>Eleaf</Link>
                                 <Link to={`/brand/Widmec`}>Widmec</Link>
                                 <Link to={`/brand/Smoant`}>Smoant</Link>
-                                <Link to={`/brand/Wismec`}>Wismec</Link>
                             </div>
                         </div>
                         <div className={classes.link}>

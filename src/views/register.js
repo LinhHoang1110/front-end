@@ -106,6 +106,7 @@ const Register = withFormik({
             password: values.password,
         }).then(res => {
             console.log(values)
+            localStorage.setItem("USER", res.data.token);
         })
     }
 })(SignupForm)

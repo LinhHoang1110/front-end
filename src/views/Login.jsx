@@ -25,7 +25,7 @@ class SignupForm extends Component {
             <div>
                 <Grid container justify='center' alignContent='center'>
                     <Grid item xs={6} md={4}>
-                        <Paper elevation={4} style={{ padding: '20px 15px', margin: '100px 0px 0px -190px', width: '930px' }}>
+                        <Paper elevation={0} style={{ padding: '20px 15px', margin: '100px 0px 0px -190px', width: '930px', boxShadow: "0px !important" }}>
                             <Typography style={{ margin: "auto" }} variant="headline" gutterBottom>
                                 Đăng nhập
                         </Typography>

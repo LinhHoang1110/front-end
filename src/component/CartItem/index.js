@@ -140,30 +140,6 @@ class CartItem extends Component {
         console.log(parseFloat(price) * quantity)
         return parseInt(price) * quantity
     }
-
-    onUpdateQuantityMinus = (item, quantity, dataDetail) => { 
-        if(item.quantity > 1) {
-            console.log(quantity)
-            for(let i = 0; i < dataDetail.length; i ++) {
-                if(dataDetail[i].product._id == item._id) {
-                    dataDetail[i].quantity -= 1;
-                    console.log(dataDetail[i].quantity)
-                }
-            }
-            // this.setState({
-            //     quantity: quantity
-            // })
-        }
-    }
-
-    onUpdateQuantityPlus = (item) => { 
-        callApi(`api/images/${item.id}`, "PUT", {
-            quantity: this.props.quantity + 1
-        }).then( res => {
-            this.props.quantity += 1;
-            console.log(item.quantity);
-        })
-    }
 }
 
 export default withStyles(Styles)(CartItem)

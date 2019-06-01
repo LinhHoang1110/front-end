@@ -53,9 +53,9 @@ class VapeImage extends Component {
                 <div className={classes.infor}>
                     <Link to={`/detal-products/${product.id}`} style={{ width: "25%" }}>
 
-                        <Link to='/detal-products'>{product.name}</Link>
+                        <Link to={`/detal-products/${product.id}`}>{product.name}</Link>
                     </Link>
-                    <p>{product.price}</p>
+                    <p>{product.price}$</p>
                     <button className={classes.btnAddCart} onClick={() => this.onAddToCart(product)}>Add to cart</button>
                 </div>
             </div>

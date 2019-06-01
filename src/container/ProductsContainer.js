@@ -34,8 +34,7 @@ class ProductsContainer extends Component {
 
 
     render() {
-        const { classes } = this.props;
-        const { VapeProducts } = this.props;
+        const { classes, VapeProducts } = this.props;
         // const { VapeProducts } = this.props
         if(!VapeProducts) {
             return <div>...Loading</div>
