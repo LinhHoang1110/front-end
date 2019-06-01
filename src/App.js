@@ -38,7 +38,8 @@ const styles = () => ({
     position: "relative"
   },
   body: {
-    paddingBottom: 400
+    paddingBottom: 400,
+    paddingTop: 182,
   }
 })
 

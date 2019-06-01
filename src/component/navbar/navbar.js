@@ -8,20 +8,30 @@ import { withStyles } from '@material-ui/core/styles'
 const styles = () => {
     return {
         navbar: {
+            textAlign: "center",
             padding: "8px 100px!important",
-            boxShadow: "0px 2px 4px rgba(0, 0, 0, 1)"
+            boxShadow: "0px 2px 4px #ccc",
+            position: "fixed",
+            width: "100%",
+            background: "white",
+            zIndex: "99999"
         },
         containarNavbar: {
             display: 'flex',
             justifyContent: "center",
             position: "relative",
             width: "100%",
-            height: "100%"
+            height: "100%",
+            marginBottom :"30px"
+
         },
         logo: {
             marginTop: "40px",
             fontSize: '48px',
             fontFamily: "Consolas"
+        },
+        SearchField : {
+            position: "relative",
         }
     }
 }
@@ -41,8 +51,8 @@ class NavBar extends Component {
                         <p className={classes.logo}>SHOPVAPE</p>
                     </Cell>
 
-                    <Cell col={6}>
-                        <SearchField />
+                    <Cell className={classes.SearchField} col={6}>
+                            <SearchField />
                     </Cell>
                 </div>
                 <LinkInfo />
