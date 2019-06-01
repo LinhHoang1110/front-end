@@ -12,43 +12,58 @@ import Grid from '@material-ui/core/Grid'
 // import FormHelperText from '@material-ui/core/FormHelperText'
 import Typography from '@material-ui/core/Typography'
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom"
-import { withFormik } from 'formik'
+import { withFormik, Field } from 'formik'
+import callApi from "../utils/ApiCaller"
 
 class SignupForm extends Component {
 
     render() {
-        return (
-                <div>
-                    <Grid container justify='center' alignContent='center'>
-                        <Grid item xs={6} md={4}>
-                            <Paper elevation={4} style={{ padding: '20px 15px', margin: '100px 0px 0px -190px', width: '930px' }}>
-                                <Typography style={{ margin: "auto" }} variant="headline" gutterBottom>
-                                    Đăng nhập
-                        </Typography>
-                                <FormControl fullWidth margin='normal'>
-                                    <InputLabel>Username</InputLabel>
-                                    <Input name='username' fullWidth />
-                                </FormControl>
+        const { handleSubmit } = this.props;
+        console.log(this.props)
 
-                                <FormControl fullWidth margin='normal'>
-                                    <InputLabel>Password</InputLabel>
-                                    <Input fullWidth name='password' type='password' />
-                                </FormControl>
-                                <FormControl fullWidth margin='normal'>
-                                    <Button
-                                        variant='extendedFab'
-                                        color='primary'
-                                        type='submit'
-                                        style={{ width: '135px', heigh: '31px', margin: 'auto' }}
-                                    >
-                                        Signup
+        return (
+            <div>
+                <Grid container justify='center' alignContent='center'>
+                    <Grid item xs={6} md={4}>
+                        <Paper elevation={4} style={{ padding: '20px 15px', margin: '100px 0px 0px -190px', width: '930px' }}>
+                            <Typography style={{ margin: "auto" }} variant="headline" gutterBottom>
+                                Đăng nhập
+                        </Typography>
+                            <FormControl fullWidth margin='normal'>
+                                <InputLabel>Username</InputLabel>
+                                <Field
+                                    name='username'
+                                    render={({ field }) => (
+                                        <Input fullWidth {...field} />
+                                    )}
+                                />
+                            </FormControl>
+
+                            <FormControl fullWidth margin='normal'>
+                                <InputLabel>Password</InputLabel>
+                                <Field
+                                    name='password'
+                                    render={({ field }) => (
+                                        <Input fullWidth type='password' {...field} />
+                                    )}
+                                />
+                            </FormControl>
+                            <FormControl fullWidth margin='normal'>
+                                <Button
+                                    variant='extendedFab'
+                                    color='primary'
+                                    type='submit'
+                                    style={{ width: '135px', heigh: '31px', margin: 'auto' }}
+                                    onClick={handleSubmit}
+                                >
+                                    Signup
                                 </Button>
-                                    <Link to='/register'>Not a memmber ? </Link>
-                                </FormControl>
-                            </Paper>
-                        </Grid>
+                                <Link to='/register'>Not a memmber ? </Link>
+                            </FormControl>
+                        </Paper>
                     </Grid>
-                </div>
+                </Grid>
+            </div>
         )
     }
 }
@@ -57,8 +72,19 @@ const Login = withFormik({
     mapPropsToValues() {
         return {
             username: '',
+            password: ''
         }
     },
+    handleSubmit: (values) => {
+        callApi("api/auth/login", "POST", {
+            username: values.username,
+            password: values.password,
+        }).then( res => {
+            localStorage.setItem("USER", res.data.token);
+            console.log(res)
+            // this.props.history.push("/")
+        })
+    }
 })(SignupForm)
 
 export default Login

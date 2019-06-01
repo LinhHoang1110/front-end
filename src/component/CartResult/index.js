@@ -43,8 +43,7 @@ const Styles = () => {
 
 class CartResult extends Component {
     render() {
-        const { classes } = this.props;
-        const { item } = this.props;
+        const { classes, item } = this.props;
         console.log(item)
         return (
             <div style={{ margin: "0 30px" }}>
@@ -64,7 +63,7 @@ class CartResult extends Component {
         let total = 0;
         if(item.length > 0 ) {
             for(var i = 0; i < item.length; i++) {
-                total +=  parseInt(item[i].view) * item[i].view; 
+                total +=  parseInt(item[i].product.price) * item[i].quantity; 
             }
         }
         return total 

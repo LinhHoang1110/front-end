@@ -13,6 +13,12 @@ import NavBar from './component/navbar/navbar';
 import Footer from './component/Footer';
 import DeataiImage from './views/DetailScreen';
 import CartContainer from './container/CartContainer';
+import CateroryVape from './views/Caterory/CateroryVape';
+import CateroryTinhDauVape from "./views/Caterory/CateroryTinhDauVape"
+import CateroryPod from "./views/Caterory/CateroryPod"
+import CateroryTankVape from "./views/Caterory/CateroryTankVape"
+import CateroryPhuKien from "./views/Caterory/CateroryPhuKien"
+import BrandJoyetech from "./views/Brand/BrandJoyetech"
 
 const styles = () => ({
   wrapper: { 
@@ -37,6 +43,13 @@ function App(props) {
             <Route path='/register' component={Register} />
             <Route path='/shopping_cart' component={CartContainer}/>
             <Route path='/detal-products' component={DeataiImage}/>
+            <Route path={`/caterory/vape`} component={CateroryVape} />
+            <Route path={'/caterory/tinhdau'} component={CateroryTinhDauVape}/>
+            <Route path={'/caterory/pods'} component={CateroryPod}/>
+            <Route path={'/caterory/tankVape'} component={CateroryTankVape}/>
+            <Route path={'/caterory/phuKien'} component={CateroryPhuKien}/>
+            <Route path={'/brand/Joyetech'} component={BrandJoyetech}/>
+
           </Switch>
         </div>
         <Footer />

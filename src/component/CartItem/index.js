@@ -61,30 +61,40 @@ const Styles = () => {
     }
 }
 
+// let cart = [];
+//         try {
+//             cart = JSON.parse(localStorage.getItem("CART-SHOPPING")) || [];
+//         } catch (error) {
+
+//         }
+
 class CartItem extends Component {
     constructor(props) {
         super(props);
     }
 
     render() {
-        const { classes } = this.props;
-        const { item } = this.props;
+        const { classes, item, quantity, changeQuantity } = this.props;
+        // const { dataDetail } = this.props
+        // console.log(dataDetail)
+        console.log(quantity)
         console.log(item);
         // let { quantity } = item.quantity > 0 ? item : this.state;
         // console.log(quantity)
-
+        console.log(item.price)
+        
         return (
 
             <tr>
                 <td>
                     <div className={classes.imgInfor}>
                         { /* fake data nên image = imageUrl */}
-                        <img style={{ width: '100% ' }} src={Config.API_URL + `${item.imageUrl}`}></img>
+                        <img style={{ width: '100% ' }} src={item.imgUrl}></img>
                     </div>
                 </td>
                 <td>
                 { /* fake data nên name = title */}
-                    <strong style={{ margin: "0 0 0 30px", fontFamily: "Consolas" }}>{item.title}</strong>
+                    <strong style={{ margin: "0 0 0 30px", fontFamily: "Consolas" }}>{item.name}</strong>
                     <div>
                         <a style={{ color: "red", cursor: "pointer" }} onClick={() => this.onDelete(item._id)} >Remove</a>
                     </div>
@@ -99,18 +109,17 @@ class CartItem extends Component {
                 </td>
                 <td>
                 { /* fake data nên price = view */}
-
-                    {parseInt(item.view).toLocaleString('vi')}dd
+                    {parseInt(item.price).toLocaleString('us')}$
                 </td>
                 <td>
                 { /* fake data nên quantity = view */}
 
-                    <button className={classes.btnMinus} onClick={() => this.onUpdateQuantityMinus(item)}>-</button>
-                    <p className={classes.number}>{item.view}</p>
-                    <button className={classes.btnPlus} onClick={() => this.onUpdateQuantityPlus(item)}>+</button>
+                    <button className={classes.btnMinus} onClick={() => changeQuantity(item._id, true)}>-</button>
+                    <p className={classes.number}>{this.props.quantity}</p>
+                    <button className={classes.btnPlus} onClick={() => changeQuantity(item._id)}>+</button>
                 </td>
                 <td>
-                    {this.showSubTotal(item.view, item.view).toLocaleString('vi')}đ
+                    {this.showSubTotal(item.price, this.props.quantity).toLocaleString('us')}$
                 </td>
             </tr>
         )
@@ -132,27 +141,27 @@ class CartItem extends Component {
         return parseInt(price) * quantity
     }
 
-    onUpdateQuantityMinus = (item) => { 
-        callApi(`api/images/${item._id}`, "PUT", {
-            view: item.view - 1
-        }).then( res => {
-            item.view -= 1;
-            console.log(item.view);
-            this.setState({
-                view: item.view
-            })
-        })
+    onUpdateQuantityMinus = (item, quantity, dataDetail) => { 
+        if(item.quantity > 1) {
+            console.log(quantity)
+            for(let i = 0; i < dataDetail.length; i ++) {
+                if(dataDetail[i].product._id == item._id) {
+                    dataDetail[i].quantity -= 1;
+                    console.log(dataDetail[i].quantity)
+                }
+            }
+            // this.setState({
+            //     quantity: quantity
+            // })
+        }
     }
 
     onUpdateQuantityPlus = (item) => { 
-        callApi(`api/images/${item._id}`, "PUT", {
-            view: item.view + 1
+        callApi(`api/images/${item.id}`, "PUT", {
+            quantity: this.props.quantity + 1
         }).then( res => {
-            item.view += 1;
-            console.log(item.view);
-            this.setState({
-                view: item.view
-            })
+            this.props.quantity += 1;
+            console.log(item.quantity);
         })
     }
 }

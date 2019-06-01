@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import { Grid, Cell } from 'react-mdl'
 import { withStyles } from '@material-ui/core/styles'
+import { connect } from "react-redux"
 
 const styles = () => {
     return {
@@ -57,8 +58,8 @@ const styles = () => {
                     backgroundColor: "#f1f1f1"
                 },
             },
-            "&+div a" : {
-                color:" black",
+            "&+div a": {
+                color: " black",
                 padding: "12px 16px",
                 textDecoration: "none",
                 display: "block"
@@ -71,8 +72,13 @@ class LinkInfo extends Component {
     constructor(props) {
         super(props)
     }
+
     render() {
-        const { classes } = this.props
+        const { classes, VapeProducts } = this.props
+        // if (!VapeProducts) {
+        //     return "Loading..."
+        // }
+        console.log(VapeProducts)
         return (
             <div className={classes.filter}>
                 <Cell col={6}>
@@ -83,23 +89,23 @@ class LinkInfo extends Component {
                         <div className={classes.link}>
                             <button className={classes.dropbtn}>Sản phẩm</button>
                             <div className={classes.dropdownContent}>
-                                <a href="#">Vape</a>
-                                <a href="#">Tinh dầu Vape</a>
-                                <a href="#">Vape pop system</a>
-                                <a href="#">Tank Vape</a>
-                                <a href="#">Phụ kiện</a>
-                                
-                            
+                                <Link to={`/caterory/vape`}>Vape</ Link>
+                                <Link to={`/caterory/tinhdau`}>Tinh dầu Vape</Link>
+                                <Link to={`/caterory/pods`}>Vape pod system</Link>
+                                <Link to={`/caterory/tankVape`}>Tank Vape</Link>
+                                <Link to={`/caterory/phuKien`}>Phụ kiện</Link>
+
+
                             </div>
                         </div>
                         <div className={classes.link}>
                             <button className={classes.dropbtn}>Thương hiệu</button>
                             <div className={classes.dropdownContent}>
-                                <a href="#">Joyetech</a>
-                                <a href="#">Eleaf</a>
-                                <a href="#">Widmec</a>
-                                <a href="#">Smoant</a>
-                                <a href="#">Wismec</a>
+                                <Link to={`/brand/Joyetech`}>Joyetech</Link>
+                                <Link to={`/brand/Eleaf`}>Eleaf</Link>
+                                <Link to={`/brand/Widmec`}>Widmec</Link>
+                                <Link to={`/brand/Smoant`}>Smoant</Link>
+                                <Link to={`/brand/Wismec`}>Wismec</Link>
                             </div>
                         </div>
                         <div className={classes.link}>

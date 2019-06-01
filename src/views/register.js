@@ -101,9 +101,9 @@ const Register = withFormik({
             .oneOf([Yup.ref('password'), null], 'Passwords must match')
     }),
     handleSubmit: (values) => {
-        callApi("api/auth", "POST", {
-            username: "admin",
-            password: "123456",
+        callApi("api/user/register", "POST", {
+            username: values.username,
+            password: values.password,
         }).then(res => {
             console.log(values)
         })

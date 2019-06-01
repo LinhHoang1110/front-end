@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Grid, Cell } from 'react-mdl';
-import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import SearchField from './searchField';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import LinkInfo from './link';

@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { withStyles } from '@material-ui/core/styles'
+import { actFetchProducts } from "../../actions/vapeActions"
+import { connect } from "react-redux"
+
 
 const styles = () => {
     return {
@@ -19,17 +22,50 @@ const styles = () => {
 
 class SearchField extends Component {
     constructor(props) {
-        super(props)
+        super(props);
+        this.state = {
+            searchString: ''
+        }
     }
+
+    componentDidMount() {
+        this.props.actFetchProducts()
+    }
+    
+    onSearchChanged = text => this.setState({searchString: text})
+    handleTextChange = event => this.onSearchChanged(event.target.value)
+
     render() {
-        const { classes } = this.props 
+        const { classes, VapeProducts } = this.props ;
+        const { searchString } = this.state
+        // const { VapeProducts } = this.props
+        if(!VapeProducts) {
+            return <div>...Loading</div>
+        }
+
+        VapeProducts.filter(
+            img => 
+                img.category.includes(this.state.searchString) || 
+                img.name.includes(this.state.searchString)
+        )
+
+        console.log(searchString)
+        
         return (
             <form className='col-3'>
-                <input className={classes.search} type="text" placeholder="Search" />
+                <input className={classes.search} type="text" placeholder="Search" onChange={this.handleTextChange}/>
+                {/* <button onClick={() => } >Search</button> */}
             </form>
 
         )
     }
+    
 }
 
-export default withStyles(styles)(SearchField);
+const Store = (state) => state;
+const action = {
+    actFetchProducts
+}
+
+
+export default withStyles(styles)(connect(Store, action)(SearchField));

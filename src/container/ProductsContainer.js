@@ -19,31 +19,33 @@ const styles = () => {
 class ProductsContainer extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            VapeProducts: []
-        }
     }
 
-
+    //Get all images
     componentDidMount() {
-        callApi("api/images", "GET", null).then(res => {
-            this.setState({
-                VapeProducts: res.data
-            })
-
-            // this.props.fetchAllProducts(res.data);
-        })
+        // callApi("api/products", "GET", null).then(res => {
+        //     this.setState({
+        //         VapeProducts: res.data
+        //     })
+        //     // this.props.fetchAllProducts(res.data);
+        // })
+        this.props.actFetchProducts()
     }
+
 
     render() {
         const { classes } = this.props;
+        const { VapeProducts } = this.props;
         // const { VapeProducts } = this.props
-        // if(!VapeProducts) {
-        //     return <div>...Loading</div>
-        // }
-
-        let { VapeProducts } = this.state
+        if(!VapeProducts) {
+            return <div>...Loading</div>
+        }
         console.log(VapeProducts)
+
+
+        // let { VapeProducts } = this.state
+        // console.log(VapeProducts)
+
 
         return (
             <Body>
@@ -67,6 +69,12 @@ class ProductsContainer extends Component {
 }
 
 
+const Store = (state) => state;
+const action = {
+    actFetchProducts
+}
+
+
 
 const mapStateToProps = state => {
     return {
@@ -85,4 +93,4 @@ const mapDispatchToProps = (dispatch, props) => {
     }
 }
 
-export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(ProductsContainer));
+export default withStyles(styles)(connect(Store, action)(ProductsContainer));

@@ -23,9 +23,24 @@ const VapeProducts = (state = initialState, action) => {
     switch(action.type) {
         case types.FETCH_PRODUCTS: 
             // state = action.VapeProducts;
-            console.log(action.VapeProducts)
-            console.log(state)
-            return [...state];
+            // console.log(action.VapeProducts)
+            // console.log(state)
+            console.log(action)
+            return action.payload;
+       
+        // case types.SEARCH_PRODUCT:
+            // const  
+        
+        case types.SEARCH_PRODUCT_CATERORY: 
+            console.log(action)
+
+            // const { caterory } = action.payload;
+            return action.payload
+
+        case types.SEARCH_PRODUCT_BRAND: 
+            console.log(action)
+            return action.payload
+            
         default: return [...state]
     }
 }

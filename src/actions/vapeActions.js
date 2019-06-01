@@ -2,22 +2,29 @@ import axios from "axios"
 import * as types from "../constants/ActionType"
 import callApi from "../utils/ApiCaller"
 
-// export const actFetchProducts = () => (dispatch) => {
-//     callApi("api/images", "GET", null).then(res => {
-//         dispatch({
-//             type: types.FETCH_PRODUCTS,
-//             payload: res.data
-//         })
-//     })
-
-// }
-
-export const actFetchProducts = (product) => {
-    return {
-        type: types.FETCH_PRODUCTS,
-        payload: product
-    }
+export const actFetchProducts = () => (dispatch) => {
+    callApi("api/products", "GET", null).then(res => {
+        console.log(res.data)
+        dispatch({
+            type: types.FETCH_PRODUCTS,
+            payload: res.data
+        })
+    })
+    // axios.get("https://jsonplaceholder.typicode.com/todos").then(data => {
+    //     console.log(data.data)
+    //     dispatch({
+    //         type: types.FETCH_PRODUCTS,
+    //         payload: data.data
+    //     })
+    // })
 }
+
+// export const actFetchProducts = (product) => {
+//     return {
+//         type: types.FETCH_PRODUCTS,
+//         payload: product
+//     }
+// }
 
 export const actAddToCart = (product, quantity) => {
     return {
@@ -51,6 +58,32 @@ export const actUpdateProductInCart = (product, quantity) => {
     }
 }
 
+export const actSearchProductkey = (product, searchString) => {
+    return {
+        type: types.SEARCH_PRODUCT_KEY,
+        payload: product, searchString
+    }
+}
+
+export const actSearchProductCaterory = (product, caterory) => dispatch => {
+    callApi(`api/products?category=${caterory}`, "GET", null).then( res => {
+        console.log(res)
+        dispatch({
+            type: types.SEARCH_PRODUCT_CATERORY,
+            payload: res.data, caterory
+        })
+    })
+}
+
+export const actSearchProductBrand = (product, brand) => dispatch => {
+    callApi(`api/products?brand=${brand}`, "GET", null).then( res => {
+        console.log(res)
+        dispatch({
+            type: types.SEARCH_PRODUCT_BRAND,
+            payload: res.data, brand
+        })
+    })
+}
 // export const getVapeList = () => dispatch => {
 //     axios.get("https://jsonplaceholder.typicode.com/todos").then(data => {
 //         dispatch({

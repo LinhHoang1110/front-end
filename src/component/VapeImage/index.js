@@ -7,6 +7,7 @@ import * as Config from "../../constants/Config"
 import callApi from '../../utils/ApiCaller';
 
 
+
 const styles = () => {
     return {
         vapeImage: {
@@ -46,13 +47,13 @@ class VapeImage extends Component {
         console.log(this.props)
         return (
             <div className={classes.vapeImage}> 
-                <Link to={`/detal-products/${product._id}`} style={{ width: "25%" }}>
-                    <img src={Config.API_URL + product.imageUrl} style={{ objectFit: "contain" }}></img>
+                <Link to={`/detal-products/${product.id}`} style={{ width: "25%" }}>
+                    <img src={product.imgUrl} style={{ objectFit: "contain" }}></img>
                 </Link>
                 <div className={classes.infor}>
-                    <Link to={`/detal-products/${product._id}`} style={{ width: "25%" }}>
+                    <Link to={`/detal-products/${product.id}`} style={{ width: "25%" }}>
 
-                        <Link to='/detal-products'>{product.title}</Link>
+                        <Link to='/detal-products'>{product.name}</Link>
                     </Link>
                     <p>{product.price}</p>
                     <button className={classes.btnAddCart} onClick={() => this.onAddToCart(product)}>Add to cart</button>
@@ -62,17 +63,33 @@ class VapeImage extends Component {
     }
 
     onAddToCart = (product) => {
-        callApi("api/images", "POST", {
-            name: "abc",
-            price: 10, 
-            image: " asfaf",
-            quantity: 12
-        }).then(res => {
-            console.log(res);
-            this.props.history.push("/shopping_cart")
-        })
-        // console.log(product)
-       
+        // callApi("api/products/order", "GET", {
+        //     product: product
+        // }).then(res => {
+        //     console.log(res);
+        //     // this.props.history.push("/shopping_cart")
+        // })
+        
+        let cart = [];
+        try {
+            cart = JSON.parse(localStorage.getItem("CART-SHOPPING")) || [];
+        } catch (error) {
+
+        }
+
+        if(cart.filter(item => item.product._id == product._id).length == 0) {
+            cart.push({ product, quantity: 1 });
+        } else {
+
+            for(let i = 0; i < cart.length; i ++) {
+                if(cart[i].product._id == product._id) {
+                    cart[i].quantity += 1
+                }
+            }
+        }
+
+        localStorage.setItem("CART-SHOPPING", JSON.stringify(cart));
+        this.props.history.push("/shopping_cart")
     }
 
 }
