@@ -10,11 +10,14 @@ const styles = () => {
             minWidth: "145px"
         },
         shoppingCart: {
-
+            "& a": {
+                textDecoration: "none"
+            }
         },
         signUp: {
             marginLeft: '260px',
-            display: "flex"
+            display: "flex",
+            textDecoration :" none",
         },
         link: {
             marginRight: "5px",
@@ -25,6 +28,12 @@ const styles = () => {
                 display: "block"
             }
         },
+        dropdownContent: {
+            transition : "all 1s",
+        },
+        category: {
+            textDecoration :"none"
+        },
         filter: {
             display: "flex",
             width: "100%",
@@ -34,32 +43,39 @@ const styles = () => {
             display: "flex",
             fontFamily: " Consolas",
             "& > div": {
-                width: " calc(100% / 4)",
-                flexBasis: "calc(100% / 4)"
+                width: " calc(100%/4)",
+                flexBasis: "calc(100%/4)"
             }
         },
         dropbtn: {
-            backgroundColor: "#d8d1c0",
             color: "black",
             fontSize: "16px",
             border: "none",
             cursor: "pointer",
             "&:hover+div": {
-                display: "block"
+                display: "block",
+                // transition: "all 1s",
+
+            },
+            "&:hover .dropdownContent":{
+                display: "none",
             },
             "&+div": {
                 display: "none",
                 position: "absolute",
-                backgroundColor: "#f9f9f9",
+                backgroundColor: "black",
+                opacity :"0.8",
                 minWidth: "160px",
                 boxShadow: "0px 8px 16px 0px rgba(0,0,0,0.2)",
                 zIndex: "1",
                 "& a:hover": {
-                    backgroundColor: "#f1f1f1"
+                    backgroundColor: "black",
+                    opacity : "0.5",
+                    
                 },
             },
             "&+div a": {
-                color: " black",
+                color: " white",
                 padding: "12px 16px",
                 textDecoration: "none",
                 display: "block"
@@ -80,7 +96,8 @@ class LinkInfo extends Component {
         // }
         console.log(VapeProducts)
         return (
-            <div className={classes.filter}>
+            
+                <div className={classes.filter}>
                 <Cell col={6}>
                     <div className={classes.filterProduct}>
                         <div>
@@ -93,7 +110,7 @@ class LinkInfo extends Component {
                                 <Link to={`/caterory/tinhdau`}>Tinh dầu Vape</Link>
                                 <Link to={`/caterory/pods`}>Vape pod system</Link>
                                 <Link to={`/caterory/tankVape`}>Tank Vape</Link>
-                                <Link to={`/caterory/phuKien`}>Phụ kiện</Link>
+                                <Link cto={`/caterory/phuKien`}>Phụ kiện</Link>
 
 
                             </div>
@@ -121,17 +138,18 @@ class LinkInfo extends Component {
 
                 <Cell col={6}>
                     <div className={classes.signUp}>
-                        <div className={classes.login} style={{ 'font-family': 'Consolas' }}>
-                            <Link to='/login'>Đăng nhập</Link>
+                        <div className={classes.login} >
+                            <Link className={classes.category} to='/login'>Đăng nhập</Link>
                         </div>
-                        <div className={classes.shoppingCart} style={{ 'font-family': 'Consolas' }}>
-                            <Link to='/shopping_cart'>Giỏ hàng</Link>
+                        <div className={classes.shoppingCart}>
+                            <Link className={classes.category} to='/shopping_cart'>Giỏ hàng</Link>
                         </div>
                     </div>
                 </Cell>
 
 
             </div>
+            
         )
     }
 }

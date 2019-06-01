@@ -11,12 +11,15 @@ import callApi from '../../utils/ApiCaller';
 const styles = () => {
     return {
         vapeImage: {
-            padding: " 15px 0 0 0",
-            width: "25%",
+            padding: " 15px 0 15px 0",
+            width: "100%",
             flexFlow: "column",
-            display: "flex"
+            display: "flex",
+            boxShadow: "0px 2px 4px #ccc",
+            borderRadius: 3
         },
         infor: {
+            // width: "100%",
             textAlign: "center",
             fontFamily: "Consolas",
         },
@@ -30,9 +33,18 @@ const styles = () => {
             fontWeight: "bold",
             fontSize: "14px",
             lineHeight: "16px",
-            color: "#FFFFFF"
+            color: "#FFFFFF",
+            marginBottom: "5px",
+            transition: "transform 0.3s ease-in-out 0s",
+            "&:hover": {
+                transform: "translateY(-4px)"
         }
-    }
+    },
+        item: {
+        width: "25%",
+            padding: 16,
+        }
+}
 }
 
 class VapeImage extends Component {
@@ -46,17 +58,19 @@ class VapeImage extends Component {
         console.log(product)
         console.log(this.props)
         return (
-            <div className={classes.vapeImage}> 
-                <Link to={`/detal-products/${product.id}`} style={{ width: "25%" }}>
-                    <img src={product.imgUrl} style={{ objectFit: "contain" }}></img>
-                </Link>
-                <div className={classes.infor}>
-                    <Link to={`/detal-products/${product.id}`} style={{ width: "25%" }}>
-
-                        <Link to='/detal-products'>{product.name}</Link>
+            <div className={classes.item}>
+                <div className={classes.vapeImage}>
+                    <Link to={`/detal-products/${product.id}`} style={{ display: "flex", width: "100%", justifyContent: "center" }}>
+                        <img src={product.imgUrl} style={{ maxWidth: "100%", maxHeight: "100%" }}></img>
                     </Link>
-                    <p>{product.price}</p>
-                    <button className={classes.btnAddCart} onClick={() => this.onAddToCart(product)}>Add to cart</button>
+                    <div className={classes.infor}>
+                        <Link to={`/detal-products/${product.id}`} >
+
+                            <Link to='/detal-products'>{product.name}</Link>
+                        </Link>
+                        <p>{product.price}</p>
+                        <button className={classes.btnAddCart} onClick={() => this.onAddToCart(product)}>Add to cart</button>
+                    </div>
                 </div>
             </div>
         )
@@ -69,7 +83,7 @@ class VapeImage extends Component {
         //     console.log(res);
         //     // this.props.history.push("/shopping_cart")
         // })
-        
+
         let cart = [];
         try {
             cart = JSON.parse(localStorage.getItem("CART-SHOPPING")) || [];
@@ -77,12 +91,12 @@ class VapeImage extends Component {
 
         }
 
-        if(cart.filter(item => item.product._id == product._id).length == 0) {
+        if (cart.filter(item => item.product._id == product._id).length == 0) {
             cart.push({ product, quantity: 1 });
         } else {
 
-            for(let i = 0; i < cart.length; i ++) {
-                if(cart[i].product._id == product._id) {
+            for (let i = 0; i < cart.length; i++) {
+                if (cart[i].product._id == product._id) {
                     cart[i].quantity += 1
                 }
             }

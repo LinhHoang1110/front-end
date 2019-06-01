@@ -26,7 +26,8 @@ const styles = () => ({
     position: "relative"
   },
   body: {
-    paddingBottom: 400
+    paddingBottom: 400,
+    paddingTop: 182,
   }
 })
 
@@ -49,7 +50,6 @@ function App(props) {
             <Route path={'/caterory/tankVape'} component={CateroryTankVape}/>
             <Route path={'/caterory/phuKien'} component={CateroryPhuKien}/>
             <Route path={'/brand/Joyetech'} component={BrandJoyetech}/>
-
           </Switch>
         </div>
         <Footer />
