@@ -4,7 +4,7 @@ import callApi from "../utils/ApiCaller"
 
 export const actFetchProducts = () => (dispatch) => {
     callApi("api/products", "GET", null).then(res => {
-        console.log(res.data)
+        console.log(res)
         dispatch({
             type: types.FETCH_PRODUCTS,
             payload: res.data

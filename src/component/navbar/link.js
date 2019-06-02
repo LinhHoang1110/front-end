@@ -189,7 +189,7 @@ class LinkInfo extends Component {
                                 <Link to={`/caterory/tinhdau`}>Tinh dầu Vape</Link>
                                 <Link to={`/caterory/pods`}>Vape pod system</Link>
                                 <Link to={`/caterory/tankVape`}>Tank Vape</Link>
-                                <Link cto={`/caterory/phuKien`}>Phụ kiện</Link>
+                                <Link to={`/caterory/phuKien`}>Phụ kiện</Link>
 
 
                             </div>
