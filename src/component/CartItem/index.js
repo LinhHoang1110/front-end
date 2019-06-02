@@ -74,7 +74,7 @@ class CartItem extends Component {
     }
 
     render() {
-        const { classes, item, quantity, changeQuantity } = this.props;
+        const { classes, item, quantity, onChangeMessage , checkQuantity } = this.props;
         // const { dataDetail } = this.props
         // console.log(dataDetail)
         console.log(quantity)
@@ -114,9 +114,9 @@ class CartItem extends Component {
                 <td>
                 { /* fake data nên quantity = view */}
 
-                    <button className={classes.btnMinus} onClick={() => changeQuantity(item._id, true)}>-</button>
-                    <p className={classes.number}>{this.props.quantity}</p>
-                    <button className={classes.btnPlus} onClick={() => changeQuantity(item._id)}>+</button>
+                    <button className={classes.btnMinus} onClick={() => onChangeMessage(item._id, true)}>-</button>
+                    <p className={classes.number}>{checkQuantity(item, item._id)}</p>
+                    <button className={classes.btnPlus} onClick={() => onChangeMessage(item._id)}>+</button>
                 </td>
                 <td>
                     {this.showSubTotal(item.price, this.props.quantity).toLocaleString('us')}$

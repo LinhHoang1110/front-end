@@ -57,6 +57,7 @@ class VapeImage extends Component {
         let { product } = this.props;
         console.log(product)
         console.log(this.props)
+  
         return (
             <div className={classes.item}>
                 <div className={classes.vapeImage}>
@@ -69,7 +70,10 @@ class VapeImage extends Component {
                             <Link to={`/detal-products/${product.id}`}>{product.name}</Link>
                         </Link>
                         <p>{product.price}</p>
-                        <button className={classes.btnAddCart} onClick={() => this.onAddToCart(product)}>Add to cart</button>
+                        {
+                            product.quantity === 0 ? "Tiếc thay là hết hàng r :(": <button className={classes.btnAddCart} onClick={() => this.onAddToCart(product)}>Add to cart</button>
+                        }
+                        
                     </div>
                 </div>
             </div>
@@ -98,6 +102,11 @@ class VapeImage extends Component {
             for (let i = 0; i < cart.length; i++) {
                 if (cart[i].product._id == product._id) {
                     cart[i].quantity += 1
+                    cart[i].product.quantity -= 1;
+                    console.log(cart[i].product.quantity)
+                    if(cart[i].product.quantity === 0) {
+                        return alert("Tiếc thay là hết hàng r :(")
+                    }
                 }
             }
         }

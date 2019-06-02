@@ -16,11 +16,19 @@ class BrandJoyetech extends Component {
     }
     render() {
         let { VapeProducts } = this.props;
-        console.log(VapeProducts)
+
+        if(VapeProducts.length === 0) {
+            console.log("hiiiiii")
+            return <div>Loading....</div>
+        }
+
+        console.log(this.showProducts(VapeProducts))
         
         return (
             <Body>
-                {this.showProducts(VapeProducts)}
+                {
+                    VapeProducts[0].brand === null ? "Không tìm thấy sản phẩm" : this.showProducts(VapeProducts)
+                }
             </Body>
         )
     }
@@ -30,9 +38,9 @@ class BrandJoyetech extends Component {
         let result = null;
         if (VapeProducts.length > 0) {
             result = VapeProducts.map((product, index) => {
-                console.log(product)
                 return <VapeImage {...this.props} key={index} product={product} />
             })
+            console.log(result)
         }
         return result
     }

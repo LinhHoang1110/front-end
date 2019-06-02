@@ -128,10 +128,21 @@ class Detail_Vape extends Component {
                             </ul>
                         </div>
                         <div className={classes.addCartContainer}>
-                            <button className={classes.btnMinus} onClick={this.minus.bind(this)}>-</button>
-                            <p className={classes.number}>{this.state.quantity}</p>
-                            <button className={classes.btnPlus} onClick={this.plus.bind(this)}>+</button>
-                            <button className={classes.addItem} onClick={() => this.ThemVaoGio()}>THÊM VÀO GIỎ</button>
+                            {
+                                VapeProducts.quantity === 0 ? " " : <button className={classes.btnMinus} onClick={this.minus.bind(this)}>-</button>
+                            }
+                            
+                            {
+                                VapeProducts.quantity === 0 ? " " : <p className={classes.number}>{this.state.quantity}</p>
+                            }
+
+                            {
+                                VapeProducts.quantity === 0 ? " " : <button className={classes.btnPlus} onClick={this.plus.bind(this)}>+</button>
+                            }
+                            
+                            {
+                                VapeProducts.quantity === 0 ? "Tiếc thay là hết hàng r :(" :  <button className={classes.addItem} onClick={() => this.ThemVaoGio()}>THÊM VÀO GIỎ</button>
+                            }
                         </div>
                     </Cell>
                 </div>

@@ -71,7 +71,16 @@ class CartContainer extends Component {
 
         this.setState({ dataDetail })
         localStorage.setItem("CART-SHOPPING", JSON.stringify(dataDetail))
+    }
 
+    checkQuantity = (dataDetail, productId) => {
+        for (let i = 0; i < dataDetail.length; i++) {
+            if (productId == dataDetail[i].product._id) {
+                if(dataDetail[i].product.quantity > dataDetail[i].quantity) {
+                    return <div>Số lượng hàng bạn cần mua đã vượt quá hàng còn trong kho</div>
+                } else return console.log('success!!!')
+            }
+        }
     }
 
     showCartItem = (dataDetail) => {
@@ -91,6 +100,8 @@ class CartContainer extends Component {
                             onDelete={this.onDelete}
                             dataDetail={dataDetail}
                             changeQuantity={this.changeQuantity}
+                            checkQuantity={this.checkQuantity}
+
                         />
                     )
                 })

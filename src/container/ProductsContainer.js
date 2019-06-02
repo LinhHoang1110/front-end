@@ -30,7 +30,8 @@ class ProductsContainer extends Component {
     render() {
         const { classes, VapeProducts } = this.props;
         // const { VapeProducts } = this.props
-        if(!VapeProducts) {
+        if(VapeProducts.length === 0) {
+            console.log('hiiiii')
             return <div>...Loading</div>
         }
         console.log(VapeProducts)

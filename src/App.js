@@ -13,6 +13,7 @@ import NavBar from './component/navbar/navbar';
 import Footer from './component/Footer';
 import DeataiImage from './views/DetailScreen';
 import CartContainer from './container/CartContainer';
+import FAQ from "./component/FAQ"
 import CateroryVape from './views/Caterory/CateroryVape';
 import CateroryTinhDauVape from "./views/Caterory/CateroryTinhDauVape"
 import CateroryPod from "./views/Caterory/CateroryPod"
@@ -58,6 +59,7 @@ function App(props) {
             <Route path='/register' component={propsRoute => <Register {...propsRoute}/>} />
             <Route path='/shopping_cart' component={CartContainer}/>
             <Route path='/detal-products/:productid' component={propsRoute => <DeataiImage {...propsRoute}/>}/>
+            <Route path='/faq' component={FAQ}/>
             <Route path={`/caterory/vape`} component={CateroryVape} />
             <Route path={'/caterory/tinhdau'} component={CateroryTinhDauVape}/>
             <Route path={'/caterory/pods'} component={CateroryPod}/>

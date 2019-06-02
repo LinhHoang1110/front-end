@@ -16,6 +16,12 @@ class BrandEleaf extends Component {
     }
     render() {
         let { VapeProducts } = this.props;
+
+        if(VapeProducts.length === 0) {
+            console.log("hiiiiii")
+            return <div>Loading....</div>
+        }
+
         console.log(VapeProducts)
         
         return (

@@ -204,12 +204,7 @@ class LinkInfo extends Component {
                             </div>
                         </div>
                         <div className={classes.link}>
-                            <button className={classes.dropbtn}>Tìm hiểu về vape</button>
-                            <div className={classes.dropdownContent}>
-                                <a href="#">Vape là gì</a>
-                                <a href="#">Vape có hại không</a>
-                                <a href="#">Giá vape</a>
-                            </div>
+                            <Link to="/faq" className={classes.dropbtn}>FAQ</Link>
                         </div>
                     </div>
                 </Cell>
