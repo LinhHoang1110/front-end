@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { withStyles } from "@material-ui/core";
 import { BrowserRouter as Router, Switch, Route, Redirect, Link } from 'react-router-dom'
+import PaypalExpressBtn from 'react-paypal-express-checkout';
 
 const Styles = () => {
     return {
@@ -43,22 +44,51 @@ const Styles = () => {
 }
 
 class CartResult extends Component {
+    constructor(props) {
+        super(props)
+    }
+
     render() {
         const { classes, item } = this.props;
-        const Token = localStorage.getItem("USER");
-        if(!Token) {
-            return <Link to={"/login"}></Link>
+        const client = {
+            sandbox:    'Ab08l9Y7JSilOoLFLR7eoYuIux9YiA9zpIJue_AWMFTb2dI2eXh29VDvLlepOIRCKyD_9U2k2EyFrPVl',
+            production: 'Ab08l9Y7JSilOoLFLR7eoYuIux9YiA9zpIJue_AWMFTb2dI2eXh29VDvLlepOIRCKyD_9U2k2EyFrPVl',
         }
+        const onSuccess = (payment) => {
+			// 1, 2, and ... Poof! You made it, everything's fine and dandy!
+                    console.log("Payment successful!", payment);
+                    alert("Chào mừng bạn đến với Nicotin's world")
+            		// You can bind the "payment" object's value to your state or props or whatever here, please see below for sample returned data
+		}
+
+		const onCancel = (data) => {
+			// The user pressed "cancel" or closed the PayPal popup
+			console.log('Payment cancelled!', data);
+			// You can bind the "data" object's value to your state or props or whatever here, please see below for sample returned data
+		}
+
+		const onError = (err) => {
+			// The main Paypal script could not be loaded or something blocked the script from loading
+			console.log("Error!", err);
+			// Because the Paypal's main script is loaded asynchronously from "https://www.paypalobjects.com/api/checkout.js"
+			// => sometimes it may take about 0.5 second for everything to get set, or for the button to appear
+        }
+
         console.log(item)
         return (
             <div style={{ margin: "0 30px" }}>
                 <div>
-                    <strong className={classes.sum} >Tổng: { this.showTotalAmout(item).toLocaleString('vi')}đ</strong>
+                    <strong className={classes.sum} >Tổng: {this.showTotalAmout(item).toLocaleString('us')}$</strong>
                     {/* <strong className={classes.sum} >Tổng: 10đ</strong> */}
                 </div>
                 <div className={classes.btnBackPay}>
                     <button className={classes.btnBack}>Trở lại shop</button>
-                    <button className={classes.btnPay}>Check out</button>
+                    <PaypalExpressBtn
+                        client={client}
+                        currency={'USD'}
+                        total={this.showTotalAmout(item).toLocaleString('us')}
+                        onError={onError} onSuccess={onSuccess} onCancel={onCancel}
+                    />
                 </div>
             </div>
         )
@@ -66,12 +96,12 @@ class CartResult extends Component {
 
     showTotalAmout = (item) => {
         let total = 0;
-        if(item.length > 0 ) {
-            for(var i = 0; i < item.length; i++) {
-                total +=  parseInt(item[i].product.price) * item[i].quantity; 
+        if (item.length > 0) {
+            for (var i = 0; i < item.length; i++) {
+                total += parseInt(item[i].product.price) * item[i].quantity;
             }
         }
-        return total 
+        return total
     }
 }
 

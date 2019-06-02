@@ -6,6 +6,7 @@ import CommentBox from '../../views/UserComment';
 import { actSearchProductId } from "../../actions/vapeActions"
 import _ from "lodash";
 import { connect } from "react-redux";
+import CommentForm from "../CommentForm"
 
 const styles = () => {
     return {
@@ -103,6 +104,10 @@ class Detail_Vape extends Component {
         console.log(id)
         console.log(VapeProducts)
         console.log(this.props)
+        if (_.isArray(VapeProducts)) {
+            return <div>Loading...</div>
+        }
+        
 
         return (
             <div>
@@ -135,6 +140,10 @@ class Detail_Vape extends Component {
 
                 <div>
                     <strong>ĐÁNH GIÁ CỦA KHÁNH HÀNG</strong>
+                    <CommentForm 
+                    VapeProducts={VapeProducts}
+                    id={id}
+                    />
                 </div>
 
                 {/* <CommentBox /> */}

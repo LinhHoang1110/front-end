@@ -43,7 +43,7 @@ const VapeProducts = (state = initialState, action) => {
             console.log(action)
             return action.payload
 
-        default: return [...state]
+        default: return state;
     }
 }
 

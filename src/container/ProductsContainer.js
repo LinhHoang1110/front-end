@@ -23,12 +23,6 @@ class ProductsContainer extends Component {
 
     //Get all images
     componentDidMount() {
-        // callApi("api/products", "GET", null).then(res => {
-        //     this.setState({
-        //         VapeProducts: res.data
-        //     })
-        //     // this.props.fetchAllProducts(res.data);
-        // })
         this.props.actFetchProducts()
     }
 
@@ -43,9 +37,7 @@ class ProductsContainer extends Component {
 
 
         // let { VapeProducts } = this.state
-        // console.log(VapeProducts)
-
-
+        // console.log(VapeProducts
         return (
             <Body>
                 {this.showProducts(VapeProducts)}

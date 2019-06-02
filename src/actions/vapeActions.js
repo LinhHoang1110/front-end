@@ -98,6 +98,20 @@ export const actSearchProductId = (product, id) => dispatch => {
     })
 }
 
+export const checkAuth = (token, currentUser) => dispatch => {
+    dispatch({
+        type: types.CHECK_AUTH,
+        payload: { token , currentUser}
+    })
+}
+
+export const clearAuthReducer = () => dispatch => {
+    dispatch({
+        type: types.CLEAR_AUTH,
+        payload: null
+    })
+}
+
 // export const getVapeList = () => dispatch => {
 //     axios.get("https://jsonplaceholder.typicode.com/todos").then(data => {
 //         dispatch({

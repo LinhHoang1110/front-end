@@ -4,7 +4,7 @@ import HomeScreen from './views/HomeScreen';
 // import Dropdown from './component/navbar/dropdown_menu';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route, Redirect, withRouter } from 'react-router-dom'
 import { faStroopwafel } from '@fortawesome/free-solid-svg-icons';
 import { withStyles } from '@material-ui/core/styles';
 import Login from "./views/Login";
@@ -21,7 +21,8 @@ import CateroryPhuKien from "./views/Caterory/CateroryPhuKien"
 import BrandJoyetech from "./views/Brand/BrandJoyetech"
 import BrandEleaf from "./views/Brand/BrandEleaf"
 import BrandWidmec from "./views/Brand/BrandWidmec"
-import BrandSmoant from "./views/Brand/BrandSmoant"
+import BrandSmoant from "./views/Brand/BrandSmoant";
+
 
 // const ProtectedRoute = (props) => {
 //   const Token = localStorage.get("USER");
@@ -35,11 +36,12 @@ import BrandSmoant from "./views/Brand/BrandSmoant"
 const styles = () => ({
   wrapper: { 
     minHeight: "100vh",
-    position: "relative"
+    position: "relative",
+    fontFamily : "Montserrat,sans-serif"
   },
   body: {
     paddingBottom: 400,
-    paddingTop: 182,
+    paddingTop: 50,
   }
 })
 
@@ -47,13 +49,13 @@ function App(props) {
   const { classes } = props;
   return (
     <Router>
-      <div className={classes.wrapper}>
+      <div style={{fontFamily: "Montserrat,sans-serif"}} className={classes.wrapper}>
         <NavBar />
         <div className={classes.body}>
           <Switch>
             <Route exact path='/' component={propsRoute => <HomeScreen {...propsRoute}/>} />
-            <Route path='/login' component={Login} />
-            <Route path='/register' component={Register} />
+            <Route path='/login' component={propsRoute => <Login {...propsRoute}/>} />
+            <Route path='/register' component={propsRoute => <Register {...propsRoute}/>} />
             <Route path='/shopping_cart' component={CartContainer}/>
             <Route path='/detal-products/:productid' component={propsRoute => <DeataiImage {...propsRoute}/>}/>
             <Route path={`/caterory/vape`} component={CateroryVape} />

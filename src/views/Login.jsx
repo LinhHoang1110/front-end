@@ -14,6 +14,8 @@ import Typography from '@material-ui/core/Typography'
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom"
 import { withFormik, Field } from 'formik'
 import callApi from "../utils/ApiCaller"
+import { checkAuth } from "../actions/vapeActions"
+import { connect } from "react-redux"
 
 class SignupForm extends Component {
 
@@ -75,16 +77,22 @@ const Login = withFormik({
             password: ''
         }
     },
-    handleSubmit: (values) => {
+    handleSubmit: (values, { props }) => {
         callApi("api/auth/login", "POST", {
             username: values.username,
             password: values.password,
         }).then( res => {
-            localStorage.setItem("USER", res.data.token);
+            // localStorage.setItem("USER", res.data.token);
             console.log(res)
-            // this.props.history.push("/")
+            props.checkAuth(res.data.token, res.data.userFound)
+            props.history.push("/")
         })
     }
 })(SignupForm)
 
-export default Login
+const Store = state => state
+const action = {
+    checkAuth
+}
+
+export default connect(Store, action)(Login)

@@ -3,11 +3,22 @@ import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import { Grid, Cell } from 'react-mdl'
 import { withStyles } from '@material-ui/core/styles'
 import { connect } from "react-redux"
+import searchField from './searchField';
+import Modal from 'react-modal';
+import { withRouter } from "react-router-dom";
+import SearchField from "./searchField"
+import { clearAuthReducer } from "../../actions/vapeActions";
 
 const styles = () => {
     return {
         login: {
-            minWidth: "145px"
+            minWidth: "115px",
+            "& > a": {
+                color: "black",
+                border: "1px solid black",
+                padding: "0 3px",
+                textDecoration: "none"
+            }
         },
         shoppingCart: {
             "& a": {
@@ -15,24 +26,26 @@ const styles = () => {
             }
         },
         signUp: {
-            marginLeft: '260px',
+            marginLeft: '150px',
             display: "flex",
-            textDecoration :" none",
+            textDecoration: " none",
         },
         link: {
             marginRight: "5px",
-            fontFamily: "Consolas",
+            // fontFamily: "Consolas",
             positon: "relative",
             display: "inline-block",
             "&:hover > div": {
                 display: "block"
-            }
+            },
+
         },
         dropdownContent: {
-            transition : "all 1s",
+            transition: "all 1s",
         },
         category: {
-            textDecoration :"none"
+            textDecoration: "none",
+            width: "80px"
         },
         filter: {
             display: "flex",
@@ -41,13 +54,23 @@ const styles = () => {
         },
         filterProduct: {
             display: "flex",
-            fontFamily: " Consolas",
+            // fontFamily: " Consolas",
             "& > div": {
                 width: " calc(100%/4)",
                 flexBasis: "calc(100%/4)"
+            },
+        },
+        home: {
+            "& > a": {
+                textDecoration: "none",
+                color: "black",
+            },
+            "& > a:hover": {
+                color: "black"
             }
         },
         dropbtn: {
+            backgroundColor: "white",
             color: "black",
             fontSize: "16px",
             border: "none",
@@ -57,21 +80,21 @@ const styles = () => {
                 // transition: "all 1s",
 
             },
-            "&:hover .dropdownContent":{
+            "&:hover .dropdownContent": {
                 display: "none",
             },
             "&+div": {
                 display: "none",
                 position: "absolute",
                 backgroundColor: "black",
-                opacity :"0.8",
+                opacity: "0.8",
                 minWidth: "160px",
                 boxShadow: "0px 8px 16px 0px rgba(0,0,0,0.2)",
                 zIndex: "1",
                 "& a:hover": {
                     backgroundColor: "black",
-                    opacity : "0.5",
-                    
+                    opacity: "0.5",
+
                 },
             },
             "&+div a": {
@@ -84,24 +107,80 @@ const styles = () => {
     }
 }
 
+const customStyles = {
+    content: {
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        marginRight: '-50%',
+        transform: 'translate(-50%, -50%)'
+    }
+};
+
+let LoginLogOut = ''
+
 class LinkInfo extends Component {
     constructor(props) {
         super(props)
+        this.state = {
+            modalIsOpen: false
+        };
+        this.openModal = this.openModal.bind(this);
+        this.afterOpenModal = this.afterOpenModal.bind(this);
+        this.closeModal = this.closeModal.bind(this);
+        this.checkLoginLogOut = this.checkLoginLogOut.bind(this)
+    }
+
+
+    checkLoginLogOut() {
+        const { history, clearAuthReducer, authReducer } = this.props 
+        if(!authReducer) {
+            history.push("/login");
+        } else {
+            history.push('/')
+            clearAuthReducer();
+        }
+    }
+
+    openModal() {
+        const Token = localStorage.getItem("USER");
+        console.log(Token)
+        if (!Token) {
+            this.setState({ modalIsOpen: true });
+            console.log("hi")
+        } else {
+            console.log(this.props);
+            this.props.history.push('/shopping_cart');
+        }
+    }
+
+    afterOpenModal() {
+        // references are now sync'd and can be accessed.
+        this.subtitle.style.color = '#f00';
+    }
+
+    closeModal() {
+        this.setState({ modalIsOpen: false });
     }
 
     render() {
-        const { classes, VapeProducts } = this.props
-        // if (!VapeProducts) {
-        //     return "Loading..."
-        // }
+        const { classes, VapeProducts, authReducer } = this.props
+        console.log(authReducer)
+        if(!authReducer) {
+            LoginLogOut = "Đăng nhập"
+        } else {
+            LoginLogOut = "Đăng xu"
+        }
+
         console.log(VapeProducts)
         return (
-            
-                <div className={classes.filter}>
-                <Cell col={6}>
+
+            <div className={classes.filter}>
+                <Cell col={7}>
                     <div className={classes.filterProduct}>
-                        <div>
-                            <Link to='/' className='link'>Trang chủ </ Link>
+                        <div className={classes.home}>
+                            <Link to='/' style={{ fontSize: "30px", fontWeight: "600" }}>SHOPVAPE</ Link>
                         </div>
                         <div className={classes.link}>
                             <button className={classes.dropbtn}>Sản phẩm</button>
@@ -135,22 +214,37 @@ class LinkInfo extends Component {
                     </div>
                 </Cell>
 
-                <Cell col={6}>
+                <Cell col={5}>
                     <div className={classes.signUp}>
                         <div className={classes.login} >
-                            <Link className={classes.category} to='/login'>Đăng nhập</Link>
+                            <button className={classes.category} onClick={this.checkLoginLogOut}>{LoginLogOut}</button>
                         </div>
                         <div className={classes.shoppingCart}>
-                            <Link className={classes.category} to='/shopping_cart'>Giỏ hàng</Link>
+                            <button className={classes.category} to='/shopping_cart' onClick={this.openModal} >Giỏ hàng</button>
+                            <Modal
+                                onRequestClose={() => this.setState({ modalIsOpen: false })}
+                                shouldCloseOnOverlayClick
+                                isOpen={this.state.modalIsOpen}
+                                style={customStyles}
+                            >
+                                <div>Bạn cần phải đăng nhập để sử dụng giỏ hàng</div>
+                                <button onClick={() => this.setState({ modalIsOpen: false })}>OK</button>
+                            </Modal>
                         </div>
+                        <SearchField />
                     </div>
                 </Cell>
 
 
             </div>
-            
+
         )
     }
 }
 
-export default withStyles(styles)(LinkInfo)
+const Store = state => state
+const actions = {
+    clearAuthReducer,
+}
+
+export default withStyles(styles)(withRouter(connect(Store, actions)(LinkInfo)))
