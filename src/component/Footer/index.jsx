@@ -4,9 +4,12 @@ import { withStyles } from '@material-ui/core/styles'
 const styles = () => {
     return {
         footer: {
-            padding: "40px 70px",
-            fontFamily: "Consolas",
+            // padding: "40px 70px",
+            paddingLeft: "10%",
+            paddingTop: "2%",
+            // fontFamily: "Consolas",
             display: "flex",
+            justtifyContent : "space-between",
             minHeight: "300px",
             position: "absolute",
             bottom: "0",

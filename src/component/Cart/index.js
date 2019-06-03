@@ -12,7 +12,7 @@ class Cart extends Component {
         const { children } = this.props;
 
         return (
-            <div>
+            <div style = {{margin: "5% 10%"}}>
                 <div className="table-responsive">
                     <table className="table
                     ">

@@ -27,7 +27,7 @@ class SignupForm extends Component {
                 <Grid container justify='center' alignContent='center'>
                     <Grid item xs={6} md={4}>
                         <Paper elevation={4} style={{ padding: '20px 15px', margin: "100px 0px 0px -181px", width: '930px' }}>
-                            <Typography style={{ margin: "auto" }} variant="headline" gutterBottom>
+                            <Typography style={{ margin: "auto",textAlign: "center" }} variant="headline" gutterBottom>
                                 Register
                         </Typography>
                             <FormControl fullWidth margin='normal' error={!!this.props.touched.username && !!this.props.errors.username}>
@@ -62,11 +62,11 @@ class SignupForm extends Component {
                             </FormControl>
                             <FormControl fullWidth margin='normal'>
                                 <Button
-                                    variant='extendedFab'
-                                    color='primary'
+                                    // variant='extendedFab'
+                                    // color='primary'
                                     type='button'
                                     onClick={handleSubmit}
-                                    style={{ width: '135px', heigh: '31px', margin: 'auto' }}
+                                    style={{ width: '141px', heigh: '30px', margin: 'auto', backgroundColor: "black", color: "white",borderRadius: "30px"  }}
                                 >
                                     Signup
                                 </Button>

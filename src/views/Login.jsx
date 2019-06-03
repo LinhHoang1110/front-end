@@ -5,6 +5,7 @@ import InputLabel from '@material-ui/core/InputLabel'
 import Button from '@material-ui/core/Button'
 import Paper from '@material-ui/core/Paper'
 import Grid from '@material-ui/core/Grid'
+
 // import FormControlLabel from '@material-ui/core/FormControlLabel'
 // import Checkbox from '@material-ui/core/Checkbox'
 // import Select from '@material-ui/core/Select'
@@ -17,6 +18,9 @@ import callApi from "../utils/ApiCaller"
 import { checkAuth } from "../actions/vapeActions"
 import { connect } from "react-redux"
 
+
+
+
 class SignupForm extends Component {
 
     render() {
@@ -25,10 +29,12 @@ class SignupForm extends Component {
 
         return (
             <div>
-                <Grid container justify='center' alignContent='center'>
+                <Grid container padding="20px 15px"
+                    margin="100px 0px 0px -181px"
+                    width="930px" justify='center' alignContent='center'>
                     <Grid item xs={6} md={4}>
-                        <Paper elevation={0} style={{ padding: '20px 15px', margin: '100px 0px 0px -190px', width: '930px', boxShadow: "0px !important" }}>
-                            <Typography style={{ margin: "auto" }} variant="headline" gutterBottom>
+                        <Paper elevation={0} style={{ padding: '20px 15px', margin: '100px 0px 0px -190px', width: '930px', boxShadow: "0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)" }}>
+                            <Typography style={{ margin: "auto", textAlign: "center" }} variant="headline" gutterBottom>
                                 Đăng nhập
                         </Typography>
                             <FormControl fullWidth margin='normal'>
@@ -52,10 +58,9 @@ class SignupForm extends Component {
                             </FormControl>
                             <FormControl fullWidth margin='normal'>
                                 <Button
-                                    variant='extendedFab'
-                                    color='primary'
+                                    // variant='extendedFab'
                                     type='submit'
-                                    style={{ width: '135px', heigh: '31px', margin: 'auto' }}
+                                    style={{ width: '141px', heigh: '30px', margin: 'auto', backgroundColor: "black", color: "white",borderRadius: "30px" }}
                                     onClick={handleSubmit}
                                 >
                                     Signup
@@ -81,7 +86,7 @@ const Login = withFormik({
         callApi("api/auth/login", "POST", {
             username: values.username,
             password: values.password,
-        }).then( res => {
+        }).then(res => {
             // localStorage.setItem("USER", res.data.token);
             console.log(res)
             props.checkAuth(res.data.token, res.data.userFound)

@@ -41,7 +41,7 @@ const styles = () => ({
     fontFamily : "Montserrat,sans-serif"
   },
   body: {
-    paddingBottom: 400,
+    paddingBottom: "20%",
     paddingTop: 50,
   }
 })

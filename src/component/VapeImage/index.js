@@ -25,7 +25,7 @@ const styles = () => {
         },
         btnAddCart: {
             width: "141px",
-            height: "19px",
+            height: "30px",
             background: "#000000",
             borderRadius: "99px",
             fontFamily: "Consolas",
@@ -37,7 +37,7 @@ const styles = () => {
             marginBottom: "5px",
             transition: "transform 0.3s ease-in-out 0s",
             "&:hover": {
-                transform: "translateY(-4px)"
+                transform: "translateY(-6px)"
         }
     },
         item: {

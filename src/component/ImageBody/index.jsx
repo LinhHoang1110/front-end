@@ -16,11 +16,12 @@ const styles = () => {
     imageBodyTextBox: {
       color: "white",
       fontWeight: "bold",
-      fontSize: "16px",
+      fontSize: "30px",
+      lineHeight: "45px",
       textShadow: "0 1px 2px rgba(0, 0, 0, 0.2)",
       textAlign: "center",
-      width: "374px",
-      height: "84px",
+      width: "700px",
+      height: "100px",
       opacity: "0.6",
       fontFamily: "Consolas"
     }
