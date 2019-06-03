@@ -13,7 +13,7 @@ const styles = () => {
         containerForm: {
 
         }
-}
+    }
 }
 
 class CommentForm extends Component {
@@ -33,7 +33,7 @@ class CommentForm extends Component {
 
     handleChanged(e) {
         console.log(e);
-        this.setState({ commentString: e.target.value})
+        this.setState({ commentString: e.target.value })
     }
 
     handleSubmit(e) {
@@ -46,7 +46,7 @@ class CommentForm extends Component {
             username: authReducer.current.username,
             idUser: authReducer._id,
             comment: this.state.commentString
-        }).then( res => {
+        }).then(res => {
             console.log(VapeProducts)
         })
     }
@@ -54,10 +54,17 @@ class CommentForm extends Component {
     renderForm() {
         const { authReducer } = this.props
         return (
-            <form>
-                <input type="text" value={authReducer.currentUser.username}/>
-                <input type="text" onChange={this.handleChanged} />
-                <button type="submit" onClick= {this.handleSubmit}>Comment</button>
+            <form style={{marginTop: "20px"}}>
+                <div style= {{width: "50%",}}>
+                    <p style={{}}>Name</p>
+                    <input style={{marginBottom: "30px",width: "100%"}} type="text" value={authReducer.currentUser.username}/>
+                </div>
+                <div>
+                    <p>Comment</p>
+                    <input style={{width: "50%"}} type="text" onChange={this.handleChanged} />
+                </div>
+
+                <button style={{backgroundColor: "black", color: "white",borderRadius: "99px",width: "141px", height:"30px",marginTop: "15px"}} type="submit" onClick={this.handleSubmit}>Submit</button>
             </form>
 
         )
@@ -68,14 +75,15 @@ class CommentForm extends Component {
     }
 
     render() {
-        const { authReducer, VapeProducts, id, classes} = this.props
+        const { authReducer, VapeProducts, id, classes } = this.props
         console.log(VapeProducts)
         console.log(authReducer)
         console.log(this.state.commentString)
         return (
-            <div className = {classes.containerForm} >
+            <div className={classes.containerForm} >
                 <h3>Add a comment</h3>
                 { !authReducer ? this.renderButton() : this.renderForm()}
+                {/* {this.renderForm()} */}
             </div>
         )
     }

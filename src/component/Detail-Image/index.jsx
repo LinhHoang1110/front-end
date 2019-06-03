@@ -11,31 +11,42 @@ import CommentForm from "../CommentForm"
 const styles = () => {
     return {
         detailItem: {
-            display: "flex"
+            display: "flex",
+            marginTop: "5%",
+            // boxShadow: "rgba(0, 0, 0, 0.2) 0px 2px 4px -1px, rgba(0, 0, 0, 0.14) 0px 4px 5px 0px, rgba(0, 0, 0, 0.12) 0px 1px 10px 0px"
         },
         addCartContainer: {
             display: "flex",
             paddingRight: "10px",
         },
         detailInfor: {
-            margin: "0"
+            margin: "0",
         },
         btnPlus: {
             margin: "0 10px 0 0",
-            width: "39.11px",
-            height: "54px"
+            width: "50px",
+            height: "50px",
+            borderRadius: "50%"
+
         },
         number: {
-            margin: "15px 10px 0 12px",
+            margin: "15px 14px 0 12px",
             textAlign: "center",
             fontSize: "24px"
         },
         btnMinus: {
-            margin: "0 10px",
-            width: "39.11px",
+            margin: "0 10px 0 0",
+            width: "50px",
+            height: "50px",
+            borderRadius: "50%"
         },
         addItem: {
-            margin: "0 10px",
+            margin: "10px 10px",
+            color: "white",
+            backgroundColor: "black",
+            width: "141px",
+            height: "30px",
+            borderRadius: "30px"
         },
         detailImg: {
             display: "flex",
@@ -110,7 +121,7 @@ class Detail_Vape extends Component {
         
 
         return (
-            <div>
+            <div className = "container">
                 <div className={classes.detailItem}>
                     <Cell col={6}>
 
@@ -118,10 +129,10 @@ class Detail_Vape extends Component {
                             <img src={VapeProducts.imgUrl} />
                         </div>
                     </Cell>
-                    <Cell col={6}>
-                        <div className='detail-infor'>
-                            <p>{VapeProducts.name}</p>
-                            <p>{VapeProducts.price}$</p>
+                    <Cell style={{marginLeft: "100px", marginTop: "30px"}} col={6}>
+                        <div className={classes.detailInfor}>
+                            <p style = {{fontWeight: "bold", fontSize: "30px"}}>{VapeProducts.name}</p>
+                            <p style={{color: "red", paddingLeft: "30px",fontSize: "20px"}}>{VapeProducts.price}$</p>
                             <ul>
                                 <li>{VapeProducts.description}</li>
 
@@ -149,7 +160,7 @@ class Detail_Vape extends Component {
 
                 <hr style={{ size: "30px" }}></hr>
 
-                <div>
+                <div style={{marginTop: "50px"}}>
                     <strong>ĐÁNH GIÁ CỦA KHÁNH HÀNG</strong>
                     <CommentForm 
                     VapeProducts={VapeProducts}

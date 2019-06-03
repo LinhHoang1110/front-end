@@ -206,7 +206,7 @@ class LinkInfo extends Component {
         if (!authReducer) {
             LoginLogOut = "Đăng nhập"
         } else {
-            LoginLogOut = "Đăng xu"
+            LoginLogOut = "Đăng xuất"
         }
 
         console.log(VapeProducts)
