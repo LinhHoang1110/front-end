@@ -8,6 +8,7 @@ const styles = () => {
             paddingLeft: "10%",
             paddingTop: "2%",
             // fontFamily: "Consolas",
+            color: "white",
             display: "flex",
             justtifyContent : "space-between",
             minHeight: "300px",
