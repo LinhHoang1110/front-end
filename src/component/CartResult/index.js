@@ -7,29 +7,29 @@ import { connect } from "react-redux"
 const Styles = () => {
     return {
         sum: {
-            textAlign: "right",
-            fontFamily: "Consolas"
+            position: "absolute",
+            right: "15%",
+            fontSize: "1.5rem"
+            // top: "0"
         },
         btnBackPay: {
             width: "100%",
             display: "flex",
-            marginTop: "30px",
+            marginTop: "30%",
             justifyContent: "center"
         },
         btnBack: {
-            width: "240px",
-            height: "56px",
-            fontFamily: "Consolas",
-            fontStyle: 'normal',
-            fontWeight: "bold",
-            fontSize: "20px",
-            lineHeight: "23px",
-            background: "#FFFFFF",
-            boxShadow: "0px 0px 2px rgba(9, 30, 74, 0.3)",
-            borderRadius: "50px"
+            position : "absolute",
+            top: "90px",
+            width: "300px",
+            height: "30px",
+            "&:hover": {
+                opacity: "0.7",
+                cursor: "pointer"
+            }
         },
         btnPay: {
-            width: "240px",
+            width: "200px",
             height: "56px",
             fontFamily: "Consolas",
             fontStyle: 'normal',
@@ -77,23 +77,25 @@ class CartResult extends Component {
 
         console.log(item)
         return (
-            <div style={{ margin: "0 30px" }}>
+            <div>
+                <a className={classes.btnBack}><i class="fas fa-chevron-left"></i>&nbsp;&nbsp;Trở lại shop</a>
                 <div>
                     <strong className={classes.sum} >Tổng: {this.showTotalAmout(item).toLocaleString('us')}$</strong>
                     {/* <strong className={classes.sum} >Tổng: 10đ</strong> */}
                 </div>
-                <div className={classes.btnBackPay}>
-                    <button className={classes.btnBack}>Trở lại shop</button>
-                    {
-                        authReducer ? 
-                        <PaypalExpressBtn
-                            client={client}
-                            currency={'USD'}
-                            total={this.showTotalAmout(item).toLocaleString('us')}
-                            onError={onError} onSuccess={onSuccess} onCancel={onCancel}
-                        /> : <span> Bạn cần phải đăng nhập. Làm hơi sâu chứ ? :3 </span>
-                    }
-
+                <div style={{ margin: "0 30px" }}>
+                    <div className={classes.btnBackPay}>
+                        
+                        {
+                            authReducer ?
+                                <PaypalExpressBtn
+                                    client={client}
+                                    currency={'USD'}
+                                    total={this.showTotalAmout(item).toLocaleString('us')}
+                                    onError={onError} onSuccess={onSuccess} onCancel={onCancel}
+                                /> : <span style={{width : "200px", fontSize: "1.5rem", lineHeight: "30px"}}><i class="fas fa-exclamation"></i> Xin quý khách vui lòng đăng nhập để thanh toán </span>
+                        }
+                    </div>
                 </div>
             </div>
         )

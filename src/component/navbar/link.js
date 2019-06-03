@@ -8,6 +8,8 @@ import Modal from 'react-modal';
 import { withRouter } from "react-router-dom";
 import SearchField from "./searchField"
 import { clearAuthReducer } from "../../actions/vapeActions";
+import classNames from "classnames";
+
 
 const styles = () => {
     return {
@@ -26,9 +28,11 @@ const styles = () => {
             }
         },
         signUp: {
-            marginLeft: '150px',
+            // marginLeft: '150px',
             display: "flex",
             textDecoration: " none",
+            flexDirection : "row-reverse"
+
         },
         link: {
             marginRight: "5px",
@@ -45,7 +49,15 @@ const styles = () => {
         },
         category: {
             textDecoration: "none",
-            width: "80px"
+            width: "96px",
+            borderRadius: "16px",
+            border: "1px solid",
+            transition: "all 0.3s",
+            padding: "5px 5px",
+            "&:hover ": {
+                backgroundColor: "black",
+                color: "white"
+            }
         },
         filter: {
             display: "flex",
@@ -54,6 +66,8 @@ const styles = () => {
         },
         filterProduct: {
             display: "flex",
+            alignItems : "center",
+            paddingTop: "5px",
             // fontFamily: " Consolas",
             "& > div": {
                 width: " calc(100%/4)",
@@ -68,6 +82,15 @@ const styles = () => {
             "& > a:hover": {
                 color: "black"
             }
+        },
+        login_cart : {
+            display : "flex",
+            justifyContent: "start-end",
+            alignItem : "center"
+        },
+        cart: {
+            cursor : "pointer",
+            marginTop: "5%"
         },
         dropbtn: {
             backgroundColor: "white",
@@ -104,6 +127,19 @@ const styles = () => {
                 display: "block"
             }
         },
+        FAQ: {
+            "& a": {
+                textDecoration : "none",
+                cursor: "pointer"
+            },
+            "& a:hover" : {
+                color : "black",
+                opacity : "0.5"
+            }
+        },
+        fas : {
+            paddingTop: "10px"
+        }
     }
 }
 
@@ -134,8 +170,8 @@ class LinkInfo extends Component {
 
 
     checkLoginLogOut() {
-        const { history, clearAuthReducer, authReducer } = this.props 
-        if(!authReducer) {
+        const { history, clearAuthReducer, authReducer } = this.props
+        if (!authReducer) {
             history.push("/login");
         } else {
             history.push('/')
@@ -167,7 +203,7 @@ class LinkInfo extends Component {
     render() {
         const { classes, VapeProducts, authReducer } = this.props
         console.log(authReducer)
-        if(!authReducer) {
+        if (!authReducer) {
             LoginLogOut = "Đăng nhập"
         } else {
             LoginLogOut = "Đăng xu"
@@ -203,30 +239,34 @@ class LinkInfo extends Component {
                                 <Link to={`/brand/Smoant`}>Smoant</Link>
                             </div>
                         </div>
-                        <div className={classes.link}>
-                            <Link to="/faq" className={classes.dropbtn}>FAQ</Link>
+                        <div className={classes.FAQ} >
+                            <Link className={classes.dropbtn} to="/faq">FAQ</Link>
                         </div>
                     </div>
                 </Cell>
 
                 <Cell col={5}>
                     <div className={classes.signUp}>
-                        <div className={classes.login} >
-                            <button className={classes.category} onClick={this.checkLoginLogOut}>{LoginLogOut}</button>
-                        </div>
-                        <div className={classes.shoppingCart}>
-                            <button className={classes.category} to='/shopping_cart' onClick={this.openModal} >Giỏ hàng</button>
-                            <Modal
-                                onRequestClose={() => this.setState({ modalIsOpen: false })}
-                                shouldCloseOnOverlayClick
-                                isOpen={this.state.modalIsOpen}
-                                style={customStyles}
-                            >
-                                <div>Bạn cần phải đăng nhập để sử dụng giỏ hàng</div>
-                                <button onClick={() => this.setState({ modalIsOpen: false })}>OK</button>
-                            </Modal>
-                        </div>
                         <SearchField />
+                        <div className= {classes.login_cart}>
+                            <div className={classes.login} >
+                                <button className={classes.category} onClick={this.checkLoginLogOut}>{LoginLogOut}</button>
+                            </div>
+                            <div className={classes.shoppingCart}>
+                                <a className={classes.cart} to='/shopping_cart' onClick={this.openModal} ><i className ={ classNames("fas", "fa-shopping-cart",classes.icon, classes.fas)}></i></a>
+                                <Modal
+                                    onRequestClose={() => this.setState({ modalIsOpen: false })} 
+                                    shouldCloseOnOverlayClick
+                                    isOpen={this.state.modalIsOpen}
+                                    style={customStyles}
+                                >
+                                    <div>Bạn cần phải đăng nhập để sử dụng giỏ hàng</div>
+                                    <button onClick={() => this.setState({ modalIsOpen: false })}>OK</button>
+                                </Modal>
+                            </div>
+                        </div>
+
+
                     </div>
                 </Cell>
 

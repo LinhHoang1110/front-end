@@ -29,11 +29,12 @@ const Styles = () => {
             justifyContent: "center"
         },
         btnPlus: {
-            // margin: "0 10px 0 0",
-            width: "39.11px",
-            height: "20px",
-            borderRadius: "99999999px",
-            padding: "0 0 25px 0 "
+            display: "flex",
+            justifyContent: "center",
+            alignItem: "center",
+            width: "30px",
+            height: "30px",
+            borderRadius: "50%"
         },
         number: {
             // margin: "15px 20px 0 12px",
@@ -41,11 +42,12 @@ const Styles = () => {
             fontSize: "15px"
         },
         btnMinus: {
-            // margin: "0 10px",
-            width: "39.11px",
-            height: "20px",
-            borderRadius: "99999999px",
-            padding: "0 0 25px 0 "
+            display: "flex",
+            justifyContent: "center",
+            alignItem: "center",
+            width: "30px",
+            height: "30px",
+            borderRadius: "50%"
         },
         guaranteeShip: {
             margin: "0 0 0 250px",
@@ -74,7 +76,7 @@ class CartItem extends Component {
     }
 
     render() {
-        const { classes, item, quantity, onChangeMessage , checkQuantity } = this.props;
+        const { classes, item, quantity, onChangeMessage, checkQuantity } = this.props;
         // const { dataDetail } = this.props
         // console.log(dataDetail)
         console.log(quantity)
@@ -82,51 +84,64 @@ class CartItem extends Component {
         // let { quantity } = item.quantity > 0 ? item : this.state;
         // console.log(quantity)
         console.log(item.price)
-        
+
         return (
 
-            <tr>
-                <td>
+            <tr style={{ marginRight: "10%" }}>
+                <td style={{ width: "10%" }} >
                     <div className={classes.imgInfor}>
                         { /* fake data nên image = imageUrl */}
                         <img style={{ width: '100% ' }} src={item.imgUrl}></img>
                     </div>
                 </td>
-                <td>
-                { /* fake data nên name = title */}
-                    <strong style={{ margin: "0 0 0 30px", fontFamily: "Consolas" }}>{item.name}</strong>
-                    <div>
-                        <a style={{ color: "red", cursor: "pointer" }} onClick={() => this.onDelete(item._id)} >Remove</a>
+                <td style={{}}>
+                    { /* fake data nên name = title */}
+                    <div style={{ marginTop: "30px" }}>
+                        <strong style={{}}>{item.name}</strong>
+                        <div>
+                            <a style={{ color: "red", cursor: "pointer" }} onClick={() => this.onDelete(item._id)} >Remove</a>
+                        </div>
                     </div>
-                </td>
-                <td>
-                    <div>
-                        - bảo hành 3 tháng
-                     </div>
-                    <div>
-                        - free ship toàn quốc
-                 </div>
-                </td>
-                <td>
-                { /* fake data nên price = view */}
-                    {parseInt(item.price).toLocaleString('us')}$
-                </td>
-                <td>
-                { /* fake data nên quantity = view */}
 
-                    <button className={classes.btnMinus} onClick={() => onChangeMessage(item._id, true)}>-</button>
-                    <p className={classes.number}>{checkQuantity(item, item._id)}</p>
-                    <button className={classes.btnPlus} onClick={() => onChangeMessage(item._id)}>+</button>
                 </td>
                 <td>
-                    {this.showSubTotal(item.price, this.props.quantity).toLocaleString('us')}$
+                    <div style={{ marginTop: "30px" }}>
+                        <div>
+                            - bảo hành 3 tháng
+                     </div>
+                        <div>
+                            - free ship toàn quốc
+                 </div>
+                    </div>
+
+                </td>
+                <td style={{ paddingLeft: "2%" }}>
+                    { /* fake data nên price = view */}
+                    <div style={{ marginTop: "30px" }}>
+                        {parseInt(item.price).toLocaleString('us')}$
+                </div>
+
+                </td>
+                <td style={{ paddingLeft: "2%"}}>
+                    { /* fake data nên quantity = view */}
+                    <div style={{display : "flex", marginTop: "30px"}}>
+                        <button className={classes.btnMinus} onClick={() => onChangeMessage(item._id, true)}>-</button>
+                        <p className={classes.number}>10{checkQuantity(item, item._id)}</p>
+                        <button className={classes.btnPlus} onClick={() => onChangeMessage(item._id)}>+</button>
+                    </div>
+
+                </td>
+                <td>
+                    <div style={{marginTop: "30px"}}>
+                        {this.showSubTotal(item.price, this.props.quantity).toLocaleString('us')}$
+                    </div>
                 </td>
             </tr>
         )
     }
 
     onDelete(_id) {
-        if(confirm(`Nỡ lòng nào bạn lại muốn xóa sản phẩm này sao :( `)) { // eslint-disable-line
+        if (confirm(`Nỡ lòng nào bạn lại muốn xóa sản phẩm này sao :( `)) { // eslint-disable-line
             this.props.onDelete(_id)
             let { onChangeMessage } = this.props;
             onChangeMessage(Message.MSG_DELETE_PRODUCT_IN_CART_SUCCESS);

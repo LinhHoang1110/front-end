@@ -9,18 +9,21 @@ import classNames from "classnames";
 const styles = () => {
     return {
         form: {
-            opacity: "0.4",
+            display: "flex",
+            justifyContent: "center",
+            alignItem : "center",
+            opacity: "0.5",
             position: "absolute",
-            top: "10%",
-            right: 100,
-            transition: "all 1s",
+            top: "12%",
+            right: "20%",
+            transition: "all 0.8s",
             width: "46px",
             height: "46px",
             background: "white",
             boxSizing: "border-box",
             borderRadius: "25px",
             border: "2px solid black",
-            padding: "5px",
+            padding: "4px",
             "&:hover": {
                 width: "200px",
                 cursor: "pointer"
@@ -34,9 +37,9 @@ const styles = () => {
             }
         },
         search: {
-            position: "absolute",
-            top: "-50",
-            left: "0",
+            // position: "absolute",
+            // top: "-50",
+            // right: "0",
             width: "60%",
             height: "35px",
             lineHeight: "30px",
@@ -48,16 +51,15 @@ const styles = () => {
             padding: "0 20px",
         },
         fa: {
-            // opacity: 1,
-            boxSizing: "border-box",
+
             padding: "10px",
-            width: "40.5px",
-            height: "40.5px",
+            width: "38.5px",
+            height: "37.5px",
             position: "absolute",
             top: "-10",
             right: "0",
             borderRadius: "50%",
-            color: "#07051a",
+            color: "black",
             textAlign: "center",
             fontSize: "1.2em",
             transition: "all 1s"

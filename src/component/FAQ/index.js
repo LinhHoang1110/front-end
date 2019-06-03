@@ -18,17 +18,18 @@ class FAQ extends Component {
     render() {
         const { classes } = this.props;
         return (
-            <div>
-                <h3>FAQ</h3>
+            <div className="container my-5">
+                <h3 style={{ textAlign: "center" }}>FAQ</h3>
+                <div><h4>Coil dùng để làm gì?</h4>
+                    <p><img style={{ float: "none", width: "15%", height: "15%", marginRight: "10px" }} src="https://bizweb.dktcdn.net/thumb/grande/100/278/585/products/claptoncoil-761.jpg?v=1514657079853" />
+                        Coil là một đoạn dây kim loại dẫn điện được quấn như lò xo, là một thành phần chính để tạo nhiệt. Chất liệu thường sẽ là Kanthal, Nichrome, Titanium.</p>
+                    <p>Đây là một phần cơ bản và quan trọng không thể thiếu để vape và quyết định khói và vị, bạn có thể tự build hoặc mua sẵn từ các nhà sản xuất (coil dùng một lần hoặc có thể build lại).</p>
+                    <p>Rebuildable: có thể build lại</p>
+                    <p>Replacement: coil dùng một lần</p></div>
 
-                <h4>Coil dùng để làm gì?</h4>
-                <p>Coil là một đoạn dây kim loại dẫn điện được quấn như lò xo, là một thành phần chính để tạo nhiệt. Chất liệu thường sẽ là Kanthal, Nichrome, Titanium.</p>
-                <p>Đây là một phần cơ bản và quan trọng không thể thiếu để vape và quyết định khói và vị, bạn có thể tự build hoặc mua sẵn từ các nhà sản xuất (coil dùng một lần hoặc có thể build lại).</p>
-                <p>Rebuildable: có thể build lại</p>
-                <p>Replacement: coil dùng một lần</p>
-
-                <h4>Ejuice là gì?</h4>
-                <p>Là chất được chuyển hóa thành hơi để hút. Gồm 4 thành phần VG, PG, hương liệu và Nicotine.</p>
+                <div><h4>Ejuice là gì?</h4>
+                    <p><img style={{ float: "none", width: "15%", height: "15%", marginRight: "10px" }} src="https://image.made-in-china.com/2f0j00DfEUvZHIJBbh/Salt-Nicotine-Solution-E-Juice-for-Pods-System-Ecig.jpg" />
+                        Là chất được chuyển hóa thành hơi để hút. Gồm 4 thành phần VG, PG, hương liệu và Nicotine.</p></div>
 
                 <h4>Tại sao trong coil lại có bông?</h4>
                 <p>Nhiệm vụ của coil là tạo nhiệt từ đó chuyển hóa tinh dầu thấm trong bông để bạn có thể cảm nhậm được hương vị yêu thích của mình.</p>
