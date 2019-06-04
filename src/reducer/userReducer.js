@@ -1,6 +1,10 @@
-export default (state = null, actions) => {
+import * as types from "../constants/ActionType"
+
+let initialState = []
+
+export default (state = initialState, actions) => {
     switch (actions.type) {
-        case "ADD_USER_LIST":
+        case types.COMMENT_USER:
             return actions.payload;
 
 

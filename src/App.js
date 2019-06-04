@@ -26,6 +26,7 @@ import BrandSmoant from "./views/Brand/BrandSmoant";
 import _ from "lodash";
 import { connect } from "react-redux"
 import { checkUserTokenStorage } from "./actions/vapeActions"
+import PaypalSuccess from "./component/PaypalSuccess"
 
 
 
@@ -67,6 +68,7 @@ class App extends React.Component {
               <Route path='/shopping_cart' component={propsRoute => <CartContainer {...propsRoute}/>}/>
               <Route path='/detal-products/:productid' component={propsRoute => <DeataiImage {...propsRoute}/>}/>
               <Route path='/faq' component={FAQ}/>
+              <Route path='/paypalSucces' component={PaypalSuccess}/>
               <Route path={`/caterory/vape`} component={CateroryVape} />
               <Route path={'/caterory/tinhdau'} component={CateroryTinhDauVape}/>
               <Route path={'/caterory/pods'} component={CateroryPod}/>

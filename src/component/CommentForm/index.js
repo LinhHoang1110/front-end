@@ -7,28 +7,47 @@ import * as Config from "../../constants/Config"
 import callApi from '../../utils/ApiCaller';
 import { connect } from "react-redux"
 import { actSearchProductId } from "../../actions/vapeActions"
+import Modal from 'react-modal';
 
 const styles = () => {
     return {
         containerForm: {
-            
+
         }
     }
 }
+
+
+const customStyles = {
+    content: {
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        marginRight: '-50%',
+        transform: 'translate(-50%, -50%)'
+    }
+};
 
 class CommentForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            commentString: ''
+            commentString: '',
+            modalIsOpen: false
         }
         this.handleChanged = this.handleChanged.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.afterOpenModal = this.afterOpenModal.bind(this);
+        this.closeModal = this.closeModal.bind(this);
     }
 
     componentDidMount() {
         const { VapeProducts, id } = this.props
-        this.props.actSearchProductId(VapeProducts, id)
+        // this.props.actSearchProductId(VapeProducts, id)
+        callApi('api/products/review', "GET", null).then( res=> {
+            console.log(res)
+        })
     }
 
     handleChanged(e) {
@@ -43,30 +62,70 @@ class CommentForm extends Component {
 
         callApi('api/products/review', "POST", {
             idProduct: VapeProducts._id,
-            username: authReducer.current.username,
+            username: authReducer.userLocal,
             idUser: authReducer._id,
             comment: this.state.commentString
         }).then(res => {
             // console.log(VapeProducts)
         })
+
+        const Token = localStorage.getItem("USER");
+        // console.log(Token)
+        if (!Token) {
+            this.setState({ modalIsOpen: true });
+            console.log("hi")
+        } 
+        // else {
+        //     // console.log(this.props);
+        //     this.props.history.push('/shopping_cart');
+        // }
+        }
+    
+    // openModal() {
+    //     const Token = localStorage.getItem("USER");
+    //     // console.log(Token)
+    //     if (!Token) {
+    //         this.setState({ modalIsOpen: true });
+    //         console.log("hi")
+    //     } else {
+    //         // console.log(this.props);
+    //         this.props.history.push('/shopping_cart');
+    //     }
+    // }
+
+    afterOpenModal() {
+        // references are now sync'd and can be accessed.
+        this.subtitle.style.color = '#f00';
+    }
+
+    closeModal() {
+        this.setState({ modalIsOpen: false });
     }
 
     renderForm() {
         const { authReducer } = this.props
         console.log(authReducer)
         return (
-            <form style={{marginTop: "20px"}}>
-                <div style= {{width: "50%",}}>
+            <form style={{ marginTop: "20px" }}>
+                <div style={{ width: "50%", }}>
                     <p style={{}}>Name</p>
-                    <input style={{marginBottom: "30px",width: "100%"}} type="text" value={authReducer.userLocal}/>
-                    <input style={{marginBottom: "30px",width: "100%"}} type="text" />
+                    <input style={{ marginBottom: "30px", width: "100%" }} type="text" value={authReducer.userLocal} />
                 </div>
                 <div>
                     <p>Comment</p>
-                    <input style={{width: "50%"}} type="text" onChange={this.handleChanged} />
+                    <input style={{ width: "50%" }} type="text" onChange={this.handleChanged} />
                 </div>
 
-                <button style={{backgroundColor: "black", color: "white",borderRadius: "99px",width: "141px", height:"30px",marginTop: "15px"}} type="submit" onClick={this.handleSubmit}>Submit</button>
+                <button style={{ backgroundColor: "black", color: "white", borderRadius: "99px", width: "141px", height: "30px", marginTop: "15px" }} type="submit" onClick={this.handleSubmit}>Submit</button>
+                <Modal
+                    onRequestClose={() => this.setState({ modalIsOpen: false })}
+                    shouldCloseOnOverlayClick
+                    isOpen={this.state.modalIsOpen}
+                    style={customStyles}
+                >
+                    <div>Comment thành công</div>
+                    <button onClick={() => this.setState({ modalIsOpen: false })}>OK</button>
+                </Modal>
             </form>
 
         )
@@ -83,8 +142,7 @@ class CommentForm extends Component {
         // console.log(this.state.commentString)
         return (
             <div className={classes.containerForm} >
-                <h3>Add a comment</h3>
-                { !authReducer ? this.renderButton() : this.renderForm()}
+                {!authReducer ? this.renderButton() : this.renderForm()}
                 {/* {this.renderForm()} */}
             </div>
         )
