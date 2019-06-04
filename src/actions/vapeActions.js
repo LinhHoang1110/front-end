@@ -4,7 +4,7 @@ import callApi from "../utils/ApiCaller"
 
 export const actFetchProducts = () => (dispatch) => {
     callApi("api/products", "GET", null).then(res => {
-        console.log(res)
+        // console.log(res)
         dispatch({
             type: types.FETCH_PRODUCTS,
             payload: res.data
@@ -35,7 +35,7 @@ export const actAddToCart = (product, quantity) => {
 }
 
 export const actChangeMessage = (message) => {
-    console.log(message)
+    // console.log(message)
     return {
         type: types.CHANGE_MESSAGE,
         message
@@ -43,7 +43,7 @@ export const actChangeMessage = (message) => {
 }
 
 export const actDeleteProductInCart = (product) => {
-    console.log(product)
+    // console.log(product)
     return {
         type: types.DELETE_PRODUCT_IN_CART,
         product
@@ -60,7 +60,7 @@ export const actUpdateProductInCart = (product, quantity) => {
 
 export const actSearchProductKey = (product, searchString) => dispatch => {
     callApi(`api/products?q=${searchString}`, "GET", null).then( res => {
-        console.log(res)
+        // console.log(res)
         dispatch({
             type: types.SEARCH_PRODUCT_KEY,
             payload: res.data, searchString
@@ -70,7 +70,7 @@ export const actSearchProductKey = (product, searchString) => dispatch => {
 
 export const actSearchProductCaterory = (product, caterory) => dispatch => {
     callApi(`api/products?category=${caterory}`, "GET", null).then( res => {
-        console.log(res)
+        // console.log(res)
         dispatch({
             type: types.SEARCH_PRODUCT_CATERORY,
             payload: res.data, caterory
@@ -80,7 +80,7 @@ export const actSearchProductCaterory = (product, caterory) => dispatch => {
 
 export const actSearchProductBrand = (product, brand) => dispatch => {
     callApi(`api/products?brand=${brand}`, "GET", null).then( res => {
-        console.log(res)
+        // console.log(res)
         dispatch({
             type: types.SEARCH_PRODUCT_BRAND,
             payload: res.data, brand
@@ -90,7 +90,7 @@ export const actSearchProductBrand = (product, brand) => dispatch => {
 
 export const actSearchProductId = (product, id) => dispatch => {
     callApi(`api/products/detail/${id}`, "GET", null).then( res => {
-        console.log(res)
+        // console.log(res)
         dispatch({
             type: types.SEARCH_PRODUCT_ID,
             payload: res.data, id
@@ -109,6 +109,13 @@ export const clearAuthReducer = () => dispatch => {
     dispatch({
         type: types.CLEAR_AUTH,
         payload: null
+    })
+}
+
+export const checkUserTokenStorage = (userLocal, tokenLocal) => dispatch => {
+    dispatch({
+        type: types.CHECK_USER_TOKEN_STORAGE,
+        payload: { userLocal, tokenLocal}
     })
 }
 

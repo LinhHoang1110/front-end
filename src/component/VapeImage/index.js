@@ -55,8 +55,8 @@ class VapeImage extends Component {
     render() {
         const { classes } = this.props;
         let { product } = this.props;
-        console.log(product)
-        console.log(this.props)
+        // console.log(product)
+        // console.log(this.props)
   
         return (
             <div className={classes.item}>
@@ -103,7 +103,7 @@ class VapeImage extends Component {
                 if (cart[i].product._id == product._id) {
                     cart[i].quantity += 1
                     cart[i].product.quantity -= 1;
-                    console.log(cart[i].product.quantity)
+                    // console.log(cart[i].product.quantity)
                     if(cart[i].product.quantity === 0) {
                         return alert("Tiếc thay là hết hàng r :(")
                     }

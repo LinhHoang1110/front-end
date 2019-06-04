@@ -97,7 +97,7 @@ class SearchField extends Component {
         //         img.name.includes(this.state.searchString)
         // )
 
-        console.log(searchString)
+        // console.log(searchString)
 
         return (
             <form className={classNames(classes.form, "col-3")}>

@@ -181,12 +181,12 @@ class LinkInfo extends Component {
 
     openModal() {
         const Token = localStorage.getItem("USER");
-        console.log(Token)
+        // console.log(Token)
         if (!Token) {
             this.setState({ modalIsOpen: true });
             console.log("hi")
         } else {
-            console.log(this.props);
+            // console.log(this.props);
             this.props.history.push('/shopping_cart');
         }
     }
@@ -202,14 +202,14 @@ class LinkInfo extends Component {
 
     render() {
         const { classes, VapeProducts, authReducer } = this.props
-        console.log(authReducer)
+        // console.log(authReducer)
         if (!authReducer) {
             LoginLogOut = "Đăng nhập"
         } else {
             LoginLogOut = "Đăng xuất"
         }
 
-        console.log(VapeProducts)
+        // console.log(VapeProducts)
         return (
 
             <div className={classes.filter}>

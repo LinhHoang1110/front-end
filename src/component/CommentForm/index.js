@@ -32,14 +32,14 @@ class CommentForm extends Component {
     }
 
     handleChanged(e) {
-        console.log(e);
+        // console.log(e);
         this.setState({ commentString: e.target.value })
     }
 
     handleSubmit(e) {
         const { VapeProducts, authReducer } = this.props
         e.preventDefault();
-        console.log(this.state.commentString)
+        // console.log(this.state.commentString)
 
         callApi('api/products/review', "POST", {
             idProduct: VapeProducts._id,
@@ -47,12 +47,13 @@ class CommentForm extends Component {
             idUser: authReducer._id,
             comment: this.state.commentString
         }).then(res => {
-            console.log(VapeProducts)
+            // console.log(VapeProducts)
         })
     }
 
     renderForm() {
         const { authReducer } = this.props
+        // console.log(authReducer)
         return (
             <form style={{marginTop: "20px"}}>
                 <div style= {{width: "50%",}}>
@@ -76,9 +77,9 @@ class CommentForm extends Component {
 
     render() {
         const { authReducer, VapeProducts, id, classes } = this.props
-        console.log(VapeProducts)
-        console.log(authReducer)
-        console.log(this.state.commentString)
+        // console.log(VapeProducts)
+        // console.log(authReducer)
+        // console.log(this.state.commentString)
         return (
             <div className={classes.containerForm} >
                 <h3>Add a comment</h3>

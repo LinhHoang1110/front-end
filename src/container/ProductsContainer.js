@@ -31,10 +31,10 @@ class ProductsContainer extends Component {
         const { classes, VapeProducts } = this.props;
         // const { VapeProducts } = this.props
         if(VapeProducts.length === 0) {
-            console.log('hiiiii')
+            // console.log('hiiiii')
             return <div>...Loading</div>
         }
-        console.log(VapeProducts)
+        // console.log(VapeProducts)
 
 
         // let { VapeProducts } = this.state
@@ -51,7 +51,7 @@ class ProductsContainer extends Component {
         // let { onAddToCart } = this.props
         if (VapeProducts.length > 0) {
             result = VapeProducts.map((product, index) => {
-                console.log(product)
+                // console.log(product)
                 return <VapeImage {...this.props} key={index} product={product} />
             })
         }

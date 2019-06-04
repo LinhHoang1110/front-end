@@ -76,14 +76,14 @@ class CartItem extends Component {
     }
 
     render() {
-        const { classes, item, quantity, onChangeMessage, checkQuantity } = this.props;
+        const { classes, item, quantity, changeQuantity, checkQuantity } = this.props;
         // const { dataDetail } = this.props
         // console.log(dataDetail)
-        console.log(quantity)
-        console.log(item);
-        // let { quantity } = item.quantity > 0 ? item : this.state;
         // console.log(quantity)
-        console.log(item.price)
+        // console.log(item);
+        // // let { quantity } = item.quantity > 0 ? item : this.state;
+        // // console.log(quantity)
+        // console.log(item.price)
 
         return (
 
@@ -125,9 +125,9 @@ class CartItem extends Component {
                 <td style={{ paddingLeft: "2%"}}>
                     { /* fake data nên quantity = view */}
                     <div style={{display : "flex", marginTop: "30px"}}>
-                        <button className={classes.btnMinus} onClick={() => onChangeMessage(item._id, true)}>-</button>
-                        <p className={classes.number}>10{checkQuantity(item, item._id)}</p>
-                        <button className={classes.btnPlus} onClick={() => onChangeMessage(item._id)}>+</button>
+                        <button className={classes.btnMinus} onClick={() => changeQuantity(item._id, true)}>-</button>
+                        <p className={classes.number}>{quantity}</p>
+                        <button className={classes.btnPlus} onClick={() => changeQuantity(item._id)}>+</button>
                     </div>
 
                 </td>
@@ -152,7 +152,7 @@ class CartItem extends Component {
     }
 
     showSubTotal = (price, quantity) => {
-        console.log(parseFloat(price) * quantity)
+        // console.log(parseFloat(price) * quantity)
         return parseInt(price) * quantity
     }
 }
