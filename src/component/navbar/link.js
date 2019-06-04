@@ -31,7 +31,7 @@ const styles = () => {
             // marginLeft: '150px',
             display: "flex",
             textDecoration: " none",
-            flexDirection : "row-reverse"
+            flexDirection: "row-reverse"
 
         },
         link: {
@@ -66,7 +66,7 @@ const styles = () => {
         },
         filterProduct: {
             display: "flex",
-            alignItems : "center",
+            alignItems: "center",
             paddingTop: "5px",
             // fontFamily: " Consolas",
             "& > div": {
@@ -83,13 +83,13 @@ const styles = () => {
                 color: "black"
             }
         },
-        login_cart : {
-            display : "flex",
+        login_cart: {
+            display: "flex",
             justifyContent: "start-end",
-            alignItem : "center"
+            alignItem: "center"
         },
         cart: {
-            cursor : "pointer",
+            cursor: "pointer",
             marginTop: "5%"
         },
         dropbtn: {
@@ -129,15 +129,15 @@ const styles = () => {
         },
         FAQ: {
             "& a": {
-                textDecoration : "none",
+                textDecoration: "none",
                 cursor: "pointer"
             },
-            "& a:hover" : {
-                color : "black",
-                opacity : "0.5"
+            "& a:hover": {
+                color: "black",
+                opacity: "0.5"
             }
         },
-        fas : {
+        fas: {
             paddingTop: "10px"
         }
     }
@@ -180,15 +180,7 @@ class LinkInfo extends Component {
     }
 
     openModal() {
-        const Token = localStorage.getItem("USER");
-        // console.log(Token)
-        if (!Token) {
-            this.setState({ modalIsOpen: true });
-            console.log("hi")
-        } else {
-            // console.log(this.props);
-            this.props.history.push('/shopping_cart');
-        }
+        this.props.history.push('/shopping_cart');
     }
 
     afterOpenModal() {
@@ -248,21 +240,12 @@ class LinkInfo extends Component {
                 <Cell col={5}>
                     <div className={classes.signUp}>
                         <SearchField />
-                        <div className= {classes.login_cart}>
+                        <div className={classes.login_cart}>
                             <div className={classes.login} >
                                 <button className={classes.category} onClick={this.checkLoginLogOut}>{LoginLogOut}</button>
                             </div>
                             <div className={classes.shoppingCart}>
-                                <a className={classes.cart} to='/shopping_cart' onClick={this.openModal} ><i className ={ classNames("fas", "fa-shopping-cart",classes.icon, classes.fas)}></i></a>
-                                <Modal
-                                    onRequestClose={() => this.setState({ modalIsOpen: false })} 
-                                    shouldCloseOnOverlayClick
-                                    isOpen={this.state.modalIsOpen}
-                                    style={customStyles}
-                                >
-                                    <div>Bạn cần phải đăng nhập để sử dụng giỏ hàng</div>
-                                    <button onClick={() => this.setState({ modalIsOpen: false })}>OK</button>
-                                </Modal>
+                                <a className={classes.cart} to='/shopping_cart' onClick={this.openModal} ><i className={classNames("fas", "fa-shopping-cart", classes.icon, classes.fas)}></i></a>
                             </div>
                         </div>
 

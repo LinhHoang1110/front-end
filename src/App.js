@@ -91,4 +91,4 @@ const action = {
   checkUserTokenStorage
 }
 
-export default withStyles(styles)(connect(Store, action)(App));
+export default withStyles(styles)(connect(null, action)(App));

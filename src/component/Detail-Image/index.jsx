@@ -69,6 +69,7 @@ class Detail_Vape extends Component {
 
     componentDidMount() {
         const { VapeProducts, id } = this.props
+        console.log('asfasgfasf')
         this.props.actSearchProductId(VapeProducts, id)
     }
 
@@ -111,7 +112,7 @@ class Detail_Vape extends Component {
         const { classes, img, id, VapeProducts } = this.props;
         // const { detailData } = this.state
         // console.log(detailData)
-        // console.log(id)
+        console.log(id)
         // console.log(VapeProducts)
         // console.log(this.props)
         if (_.isArray(VapeProducts)) {
@@ -173,7 +174,7 @@ class Detail_Vape extends Component {
 }
 
 
-const Store = (state) => state;
+const Store = ({ VapeProducts }) => ({ VapeProducts });
 const action = {
     actSearchProductId
 }
