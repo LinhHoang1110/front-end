@@ -63,7 +63,7 @@ class SignupForm extends Component {
                                     style={{ width: '141px', heigh: '30px', margin: 'auto', backgroundColor: "black", color: "white",borderRadius: "30px" }}
                                     onClick={handleSubmit}
                                 >
-                                    Signup
+                                    Signin
                                 </Button>
                                 <Link to='/register'>Not a memmber ? </Link>
                             </FormControl>

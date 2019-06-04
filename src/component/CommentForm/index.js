@@ -43,22 +43,28 @@ class CommentForm extends Component {
     }
 
     componentDidMount() {
-        const { VapeProducts, id } = this.props
+        const { VapeProducts, id , authReducer} = this.props
         // this.props.actSearchProductId(VapeProducts, id)
-        callApi('api/products/review', "GET", null).then( res=> {
-            console.log(res)
-        })
+        // callApi('api/products/review', "GET", {
+        //     idProduct: VapeProducts._id,
+        //     username: authReducer.userLocal,
+        //     idUser: authReducer._id,
+        //     comment: this.state.commentString
+        // }).then( res=> {
+        //     console.log(res)
+        // })
     }
 
     handleChanged(e) {
         // console.log(e);
-        // this.setState({ commentString: e.target.value })
+        this.setState({ commentString: e.target.value })
     }
 
     handleSubmit(e) {
         const { VapeProducts, authReducer } = this.props
         e.preventDefault();
         // console.log(this.state.commentString)
+        console.log(this.state.commentString)
 
         callApi('api/products/review', "POST", {
             idProduct: VapeProducts._id,
@@ -66,7 +72,7 @@ class CommentForm extends Component {
             idUser: authReducer._id,
             comment: this.state.commentString
         }).then(res => {
-            // console.log(VapeProducts)
+            console.log(res)
         })
 
         const Token = localStorage.getItem("USER");

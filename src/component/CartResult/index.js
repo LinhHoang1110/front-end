@@ -5,6 +5,7 @@ import PaypalExpressBtn from 'react-paypal-express-checkout';
 import { connect } from "react-redux"
 import * as Config from "../../constants/Config"
 import PaypalSuccess from ".././PaypalSuccess"
+import callApi from "../../utils/ApiCaller"
 
 
 const Styles = () => {
@@ -65,7 +66,11 @@ class CartResult extends Component {
         const onSuccess = (payment) => {
             // 1, 2, and ... Poof! You made it, everything's fine and dandy!
             console.log("Payment successful!", payment);
-            this.props.history.push("/paypalSucces")
+            callApi('api/products/addOrder', "POST", {
+                payment: payment
+            })
+            // this.props.history.push("/paypalSucces")
+            alert("Chào mừng đến với Smoking World :3 ")
             // You can bind the "payment" object's value to your state or props or whatever here, please see below for sample returned data
         }
 
