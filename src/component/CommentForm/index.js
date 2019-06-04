@@ -11,7 +11,7 @@ import { actSearchProductId } from "../../actions/vapeActions"
 const styles = () => {
     return {
         containerForm: {
-
+            
         }
     }
 }
@@ -53,11 +53,12 @@ class CommentForm extends Component {
 
     renderForm() {
         const { authReducer } = this.props
+        console.log(authReducer)
         return (
             <form style={{marginTop: "20px"}}>
                 <div style= {{width: "50%",}}>
                     <p style={{}}>Name</p>
-                    <input style={{marginBottom: "30px",width: "100%"}} type="text" value={authReducer.currentUser.username}/>
+                    <input style={{marginBottom: "30px",width: "100%"}} type="text" />
                 </div>
                 <div>
                     <p>Comment</p>
