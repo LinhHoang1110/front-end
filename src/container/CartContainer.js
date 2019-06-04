@@ -45,12 +45,12 @@ class CartContainer extends Component {
     onDelete = (_id) => {
         let { dataDetail } = this.state
         const fakeDataDetail = [...dataDetail].filter(el => el.product._id !== _id);
-        
+
         this.setState({
             dataDetail: fakeDataDetail
         })
         localStorage.setItem("CART-SHOPPING", JSON.stringify(fakeDataDetail))
-        console.log(fakeDataDetail, _id)
+        // console.log(fakeDataDetail, _id)
 
     }
 
@@ -64,7 +64,11 @@ class CartContainer extends Component {
                     }
                 }
                 else {
-                    dataDetail[i].quantity += 1
+                    if (dataDetail[i].product.quantity < dataDetail[i].quantity) {
+                        return alert("Số lượng sản phẩm bạn cần mua vượt quá số hàng còn trong kho ! Tạm mua từng này thôi nhé :3 ")
+                    } else {
+                        dataDetail[i].quantity += 1
+                    }
                 }
             }
         }
@@ -73,21 +77,11 @@ class CartContainer extends Component {
         localStorage.setItem("CART-SHOPPING", JSON.stringify(dataDetail))
     }
 
-    checkQuantity = (dataDetail, productId) => {
-        for (let i = 0; i < dataDetail.length; i++) {
-            if (productId == dataDetail[i].product._id) {
-                if(dataDetail[i].product.quantity > dataDetail[i].quantity) {
-                    return <div>Số lượng hàng bạn cần mua đã vượt quá hàng còn trong kho</div>
-                } else return console.log('success!!!')
-            }
-        }
-    }
-
     showCartItem = (dataDetail) => {
         let { onDeleteProductInCart, onChangeMessage, onUpdateProductInCart } = this.props
         let result = Message.MSG_CART_EMPTY;
         if (dataDetail.length > 0) {
-            console.log(dataDetail)
+            // console.log(dataDetail)
             return (
                 result = dataDetail.map((item, index) => {
                     return (
@@ -123,7 +117,7 @@ class CartContainer extends Component {
         const { dataDetail } = this.state;
         const { message } = cart;
 
-        console.log(dataDetail)
+        // console.log(dataDetail)
         // let { data } = this.state
         // console.log(cart);
         // console.log(message);

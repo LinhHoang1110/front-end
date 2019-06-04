@@ -1,13 +1,13 @@
 import * as types from "../constants/ActionType"
 let data = JSON.parse(localStorage.getItem("CART"));
-console.log(data);
+// console.log(data);
 let initialState = {
     data: data ? data : [],
     message: ""
 }
 
 const cart = (state = initialState, action) => {
-    console.log(action.type);
+    // console.log(action.type);
     let { product, quantity } = action;
     let index = -1; // không tìm thấy => index = -1
     switch (action.type) {
@@ -17,7 +17,7 @@ const cart = (state = initialState, action) => {
             if (index != -1) {
                 data[index].quantity += quantity
             } else {
-                console.log(product, quantity)
+                // console.log(product, quantity)
                 data = [...data, { product, quantity }]
             }
             localStorage.setItem("CART", JSON.stringify(data))
@@ -60,7 +60,7 @@ const cart = (state = initialState, action) => {
         case types.CHANGE_MESSAGE: 
             //  console.log(action)
             const { message } = action;
-            console.log(message);
+            // console.log(message);
             return {
                 ...state,
                 message

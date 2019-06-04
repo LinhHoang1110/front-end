@@ -75,7 +75,7 @@ class CartResult extends Component {
             // => sometimes it may take about 0.5 second for everything to get set, or for the button to appear
         }
 
-        console.log(item)
+        // console.log(item)
         return (
             <div>
                 <a className={classes.btnBack}><i class="fas fa-chevron-left"></i>&nbsp;&nbsp;Trở lại shop</a>

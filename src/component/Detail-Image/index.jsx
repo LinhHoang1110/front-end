@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { Grid, Cell } from 'react-mdl';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { withStyles } from '@material-ui/core/styles'
-import CommentBox from '../../views/UserComment';
 import { actSearchProductId } from "../../actions/vapeActions"
 import _ from "lodash";
 import { connect } from "react-redux";
@@ -113,9 +112,9 @@ class Detail_Vape extends Component {
         const { classes, img, id, VapeProducts } = this.props;
         // const { detailData } = this.state
         // console.log(detailData)
-        console.log(id)
-        console.log(VapeProducts)
-        console.log(this.props)
+        // console.log(id)
+        // console.log(VapeProducts)
+        // console.log(this.props)
         if (_.isArray(VapeProducts)) {
             return  <ReactLoading  color="#000000" />
 
@@ -171,7 +170,6 @@ class Detail_Vape extends Component {
                     />
                 </div>
 
-                {/* <CommentBox /> */}
             </div>
         )
     }
