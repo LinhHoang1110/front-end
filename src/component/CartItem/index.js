@@ -144,7 +144,7 @@ class CartItem extends Component {
         if (confirm(`Nỡ lòng nào bạn lại muốn xóa sản phẩm này sao :( `)) { // eslint-disable-line
             this.props.onDelete(_id)
             let { onChangeMessage } = this.props;
-            onChangeMessage(Message.MSG_DELETE_PRODUCT_IN_CART_SUCCESS);
+            // onChangeMessage(Message.MSG_DELETE_PRODUCT_IN_CART_SUCCESS);
         }
         // let { onDeleteProductInCart, onChangeMessage } = this.props;
         // onDeleteProductInCart(product);

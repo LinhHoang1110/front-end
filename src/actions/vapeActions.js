@@ -119,7 +119,12 @@ export const checkUserTokenStorage = (userLocal, tokenLocal) => dispatch => {
     })
 }
 
-// export const actCommentUser = (product, comment)
+export const actCommentUser = (product, comment) => dispatch => {
+    dispatch({
+        type: types.COMMENT_USER,
+        payload: { product, comment}
+    })
+}
 
 // export const getVapeList = () => dispatch => {
 //     axios.get("https://jsonplaceholder.typicode.com/todos").then(data => {

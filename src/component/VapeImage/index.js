@@ -69,7 +69,7 @@ class VapeImage extends Component {
 
                             <Link to={`/detal-products/${product.id}`}>{product.name}</Link>
                         </Link>
-                        <p>{product.price}</p>
+                        <p>{product.price}$</p>
                         {
                             product.quantity === 0 ? "Tiếc thay là hết hàng r :(": <button className={classes.btnAddCart} onClick={() => this.onAddToCart(product)}>Add to cart</button>
                         }

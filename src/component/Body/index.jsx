@@ -64,7 +64,6 @@ class Body extends Component {
             <div>
                 <h3 style={{textAlign : "center",fontFamily : "Montserrat, sans-serif",marginTop:"5%"}}>Sản phẩm của chúng tôi</h3>
                 <div className={classes.containerVape}>
-
                     {this.props.children}
                 </div>
             </div>
