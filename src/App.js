@@ -48,7 +48,7 @@ class App extends React.Component {
     const { checkUserTokenStorage } = props;
     const currentUserLocal = localStorage.getItem("USERLOCAL");
     const tokenLocal = localStorage.getItem("TOKENLOCAL");
-    if (!_.isEmpty(currentUserLocal) && !_.isEmpty(tokenLocal)) {
+    if !_.isEmpty(gitserLocal) && !_.isEmpty(tokenLocal)) {
       checkUserTokenStorage(currentUserLocal, tokenLocal);
     }
   }
