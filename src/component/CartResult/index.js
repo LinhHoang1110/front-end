@@ -93,7 +93,7 @@ class CartResult extends Component {
                                     currency={'USD'}
                                     total={this.showTotalAmout(item).toLocaleString('us')}
                                     onError={onError} onSuccess={onSuccess} onCancel={onCancel}
-                                /> : <span style={{width : "200px", fontSize: "1.5rem", lineHeight: "30px"}}><i class="fas fa-exclamation"></i> Xin quý khách vui lòng đăng nhập để thanh toán </span>
+                                /> : <span style={{width : "200px", fontSize: "1.5rem", lineHeight: "30px",color: "red"}}><i class="fas fa-exclamation"></i> Xin quý khách vui lòng đăng nhập để thanh toán </span>
                         }
                     </div>
                 </div>
