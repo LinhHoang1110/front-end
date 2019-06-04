@@ -4,6 +4,8 @@ import { withStyles } from '@material-ui/core/styles'
 import { actSearchProductKey } from "../../actions/vapeActions"
 import { connect } from "react-redux";
 import classNames from "classnames";
+import ReactLoading from "react-loading";
+
 
 
 const styles = () => {
@@ -88,7 +90,7 @@ class SearchField extends Component {
         const { searchString } = this.state
         // const { VapeProducts } = this.props
         if (!VapeProducts) {
-            return <div>...Loading</div>
+            return <ReactLoading style={{ margin:"300px 750px",width: "100px", height: "100px"}}  color="#000000" />
         }
 
         // VapeProducts.filter(

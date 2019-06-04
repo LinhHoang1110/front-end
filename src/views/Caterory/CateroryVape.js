@@ -4,6 +4,7 @@ import { withStyles } from "@material-ui/core/styles";
 import Body from "../../component/Body";
 import { connect } from "react-redux";
 import VapeImage from "../../component/VapeImage"
+import ReactLoading from "react-loading";
 
 class CateroryVape extends Component {
     constructor(props) {
@@ -16,9 +17,10 @@ class CateroryVape extends Component {
     }
     render() {
         let { VapeProducts } = this.props;
+        console.log(VapeProducts)
         if(VapeProducts.length === 0) {
             console.log("hiiiiii")
-            return <div>Loading....</div>
+            return <ReactLoading style={{ margin:"300px 750px",width: "100px", height: "100px"}}  color="#000000" />
         }
         console.log(VapeProducts)
         

@@ -64,7 +64,7 @@ class App extends React.Component {
               <Route exact path='/' component={propsRoute => <HomeScreen {...propsRoute}/>} />
               <Route path='/login' component={propsRoute => <Login {...propsRoute}/>} />
               <Route path='/register' component={propsRoute => <Register {...propsRoute}/>} />
-              <Route path='/shopping_cart' component={CartContainer}/>
+              <Route path='/shopping_cart' component={propsRoute => <CartContainer {...propsRoute}/>}/>
               <Route path='/detal-products/:productid' component={propsRoute => <DeataiImage {...propsRoute}/>}/>
               <Route path='/faq' component={FAQ}/>
               <Route path={`/caterory/vape`} component={CateroryVape} />

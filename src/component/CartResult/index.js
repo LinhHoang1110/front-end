@@ -3,6 +3,8 @@ import { withStyles } from "@material-ui/core";
 import { BrowserRouter as Router, Switch, Route, Redirect, Link } from 'react-router-dom'
 import PaypalExpressBtn from 'react-paypal-express-checkout';
 import { connect } from "react-redux"
+import * as Config from "../../constants/Config"
+
 
 const Styles = () => {
     return {
@@ -19,7 +21,7 @@ const Styles = () => {
             justifyContent: "center"
         },
         btnBack: {
-            position : "absolute",
+            position: "absolute",
             top: "90px",
             width: "300px",
             height: "30px",
@@ -49,6 +51,10 @@ class CartResult extends Component {
         super(props)
     }
 
+    backPage() {
+        this.props.history.push("/")
+    }
+
     render() {
         const { classes, item, authReducer } = this.props;
         const client = {
@@ -76,16 +82,19 @@ class CartResult extends Component {
         }
 
         // console.log(item)
+
+        console.log(this.props)
+
         return (
             <div>
-                <a className={classes.btnBack}><i class="fas fa-chevron-left"></i>&nbsp;&nbsp;Trở lại shop</a>
+                <a className={classes.btnBack} onClick={() => this.backPage()}><i class="fas fa-chevron-left"></i>&nbsp;&nbsp;Trở lại shop</a>
                 <div>
                     <strong className={classes.sum} >Tổng: {this.showTotalAmout(item).toLocaleString('us')}$</strong>
                     {/* <strong className={classes.sum} >Tổng: 10đ</strong> */}
                 </div>
                 <div style={{ margin: "0 30px" }}>
                     <div className={classes.btnBackPay}>
-                        
+
                         {
                             authReducer ?
                                 <PaypalExpressBtn
@@ -93,7 +102,7 @@ class CartResult extends Component {
                                     currency={'USD'}
                                     total={this.showTotalAmout(item).toLocaleString('us')}
                                     onError={onError} onSuccess={onSuccess} onCancel={onCancel}
-                                /> : <span style={{width : "200px", fontSize: "1.5rem", lineHeight: "30px",color: "red"}}><i class="fas fa-exclamation"></i> Xin quý khách vui lòng đăng nhập để thanh toán </span>
+                                /> : <span style={{ width: "200px", fontSize: "1.5rem", lineHeight: "30px", color: "red" }}><i class="fas fa-exclamation"></i> Xin quý khách vui lòng đăng nhập để thanh toán </span>
                         }
                     </div>
                 </div>

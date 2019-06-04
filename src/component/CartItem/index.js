@@ -126,7 +126,7 @@ class CartItem extends Component {
                     { /* fake data nên quantity = view */}
                     <div style={{display : "flex", marginTop: "30px"}}>
                         <button className={classes.btnMinus} onClick={() => changeQuantity(item._id, true)}>-</button>
-                        <p className={classes.number}>{quantity}</p>
+                        <p style={{margin:"0 5px"}} className={classes.number}>{quantity}</p>
                         <button className={classes.btnPlus} onClick={() => changeQuantity(item._id)}>+</button>
                     </div>
 

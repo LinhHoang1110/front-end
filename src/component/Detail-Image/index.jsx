@@ -6,6 +6,7 @@ import { actSearchProductId } from "../../actions/vapeActions"
 import _ from "lodash";
 import { connect } from "react-redux";
 import CommentForm from "../CommentForm"
+import ReactLoading from "react-loading";
 
 const styles = () => {
     return {
@@ -116,7 +117,9 @@ class Detail_Vape extends Component {
         // console.log(VapeProducts)
         // console.log(this.props)
         if (_.isArray(VapeProducts)) {
-            return <div>Loading...</div>
+            return  <ReactLoading style={{ margin:"300px 750px",width: "100px", height: "100px"}}  color="#000000" />
+
+            console.log("hiiiiiii")
         }
         
 

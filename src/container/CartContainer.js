@@ -107,7 +107,7 @@ class CartContainer extends Component {
     showTotalAmount = (dataDetail) => {
         let result = null;
         if (dataDetail.length > 0) {
-            result = <CartResult item={dataDetail} />
+            result = <CartResult {...this.props} item={dataDetail} />
         }
         return result
     }

@@ -5,6 +5,7 @@ import Body from "../component/Body";
 import VapeImage from "../component/VapeImage";
 import { actAddToCart, actFetchProducts } from "../actions/vapeActions"
 import callApi from "../utils/ApiCaller";
+import ReactLoading from "react-loading";
 
 const styles = () => {
     return {
@@ -32,7 +33,7 @@ class ProductsContainer extends Component {
         // const { VapeProducts } = this.props
         if(VapeProducts.length === 0) {
             // console.log('hiiiii')
-            return <div>...Loading</div>
+            return <ReactLoading style={{ margin:"300px 750px",width: "100px", height: "100px"}}  color="#000000" /> 
         }
         // console.log(VapeProducts)
 
