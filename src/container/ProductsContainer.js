@@ -20,43 +20,81 @@ const styles = () => {
 class ProductsContainer extends Component {
     constructor(props) {
         super(props);
+        this.state = ({
+            VapeSeller: []
+        })
     }
 
     //Get all images
     componentDidMount() {
-        this.props.actFetchProducts()
+        callApi("api/products/bestSeller", "GET", null).then(res => {
+            this.setState({
+                VapeSeller: res.data
+            })
+        });
+        this.props.actFetchProducts();
     }
 
+    showProducts(VapeProducts, VapeSeller) {
+        let result = null;
+
+        if (VapeProducts && VapeSeller.VapeSeller.length > 0) {
+            console.log("hiiiiii")
+            result = VapeProducts.map((product, index) => {
+                // console.log(product)
+                return <VapeImage {...this.props} key={index} product={product} />
+            })
+        } else {
+            return <ReactLoading style={{ margin: "300px 750px", width: "100px", height: "100px" }} color="#000000" />
+        }
+        return result
+
+    }
+
+    showBestSeller(VapeSeller) {
+        let result = null;
+
+        if (VapeSeller) {
+            return (
+                result = VapeSeller.VapeSeller.map((product, index) => {
+                    console.log(product)
+                    return <VapeImage {...this.props} key={index} product={product} />
+                })
+            )
+
+        }
+        return result
+
+    }
 
     render() {
         const { classes, VapeProducts } = this.props;
-        // const { VapeProducts } = this.props
-        if(VapeProducts.length === 0) {
-            // console.log('hiiiii')
-            return <ReactLoading style={{ margin:"300px 750px",width: "100px", height: "100px"}}  color="#000000" /> 
-        }
+        const VapeSeller = this.state;
+        console.log(VapeSeller.VapeSeller)
+
         // console.log(VapeProducts)
 
 
         // let { VapeProducts } = this.state
         // console.log(VapeProducts
-        return (
-            <Body>
-                {this.showProducts(VapeProducts)}
-            </Body>
-        )
-    }
 
-    showProducts(VapeProducts) {
-        let result = null;
-        // let { onAddToCart } = this.props
-        if (VapeProducts.length > 0) {
-            result = VapeProducts.map((product, index) => {
-                // console.log(product)
-                return <VapeImage {...this.props} key={index} product={product} />
-            })
+        if (VapeSeller.VapeSeller.length === 0) {
+            return <ReactLoading style={{ margin: "300px 750px", width: "100px", height: "100px" }} color="#000000" />
         }
-        return result
+
+        return (
+            <div>
+                <h3 style={{ textAlign: "center", fontFamily: "Montserrat, sans-serif", marginTop: "5%" }}>Sản phẩm bán chạy nhất của chúng tôi</h3>
+                <div className={classes.containerVape}>
+                    {this.showBestSeller(VapeSeller)}
+                </div>
+
+                <h3 style={{ textAlign: "center", fontFamily: "Montserrat, sans-serif", marginTop: "5%" }}>Sản phẩm của chúng tôi</h3>
+                <div className={classes.containerVape}>
+                    {this.showProducts(VapeProducts, VapeSeller)}
+                </div>
+            </div>
+        )
     }
 
 }
@@ -82,7 +120,7 @@ const mapDispatchToProps = (dispatch, props) => {
         // }
         fetchAllProducts: (VapeProducts) => {
             dispatch(actFetchProducts(VapeProducts))
-        } 
+        }
     }
 }
 

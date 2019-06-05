@@ -7,7 +7,6 @@ export default (state = initialState, actions) => {
         case types.COMMENT_USER:
             return actions.payload;
 
-
         default:
             return state;
     }

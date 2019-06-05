@@ -82,12 +82,14 @@ class SearchField extends Component {
         const { VapeProducts } = this.props;
         const { searchString } = this.state
         this.onSearchChanged(event.target.value)
-        this.props.actSearchProductKey(VapeProducts, event.target.value )
+        this.props.actSearchProductKey(VapeProducts, event.target.value)
     }
 
     render() {
         const { classes, VapeProducts } = this.props;
+        console.log(VapeProducts)
         const { searchString } = this.state
+        console.log(searchString)
         // const { VapeProducts } = this.props
         if (!VapeProducts) {
             return <ReactLoading style={{ margin:"300px 750px",width: "100px", height: "100px"}}  color="#000000" />

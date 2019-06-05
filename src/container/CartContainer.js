@@ -80,7 +80,7 @@ class CartContainer extends Component {
     showCartItem = (dataDetail) => {
         let { onDeleteProductInCart, onChangeMessage, onUpdateProductInCart } = this.props
         let result = Message.MSG_CART_EMPTY;
-        if (dataDetail.length > 0) {
+        if (dataDetail) {
             // console.log(dataDetail)
             return (
                 result = dataDetail.map((item, index) => {
@@ -106,7 +106,7 @@ class CartContainer extends Component {
 
     showTotalAmount = (dataDetail) => {
         let result = null;
-        if (dataDetail.length > 0) {
+        if (dataDetail) {
             result = <CartResult {...this.props} item={dataDetail} />
         }
         return result

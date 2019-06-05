@@ -185,7 +185,10 @@ class LinkInfo extends Component {
         const { classes, VapeProducts, authReducer } = this.props
         // console.log(authReducer)
         if (!authReducer) {
-            LoginLogOut = "Đăng nhập"
+            LoginLogOut = "Đăng nhập";
+            localStorage.setItem("CART-SHOPPING", null);
+            localStorage.setItem("TOKENLOCAL", null);
+            localStorage.setItem("USERLOCAL", null)
         } else {
             LoginLogOut = "Đăng xuất"
         }

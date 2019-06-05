@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { actSearchProductCaterory }from "../../actions/vapeActions"
+import { actSearchProductCaterory } from "../../actions/vapeActions"
 import { withStyles } from "@material-ui/core/styles";
 import Body from "../../component/Body";
 import { connect } from "react-redux";
@@ -19,13 +19,12 @@ class CateroryTankVape extends Component {
     render() {
         let { VapeProducts } = this.props;
 
-        if(VapeProducts.length === 0) {
-            console.log("hiiiiii")
-            return <ReactLoading style={{ margin:"300px 750px",width: "100px", height: "100px"}}  color="#000000" />
+        if (VapeProducts.length === 0) {
+            return <div>Úi ko có sản phẩm này r :( </div>
         }
-        
+
         console.log(VapeProducts)
-        
+
         return (
             <Body>
                 {this.showProducts(VapeProducts)}
@@ -33,7 +32,7 @@ class CateroryTankVape extends Component {
         )
     }
 
-    
+
     showProducts(VapeProducts) {
         let result = null;
         if (VapeProducts.length > 0) {

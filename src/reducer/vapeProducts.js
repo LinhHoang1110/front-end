@@ -42,9 +42,6 @@ const VapeProducts = (state = initialState, action) => {
         case types.SEARCH_PRODUCT_ID: 
             // console.log(action)
             return action.payload
-        
-        case types.COMMENT_USER:
-            return action.payload
 
         default: return state;
     }

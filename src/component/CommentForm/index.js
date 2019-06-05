@@ -6,7 +6,7 @@ import { withStyles } from '@material-ui/core/styles';
 import * as Config from "../../constants/Config"
 import callApi from '../../utils/ApiCaller';
 import { connect } from "react-redux"
-import { actSearchProductId } from "../../actions/vapeActions"
+import { actCommentUser } from "../../actions/userActions"
 import Modal from 'react-modal';
 
 const styles = () => {
@@ -42,18 +42,11 @@ class CommentForm extends Component {
         this.closeModal = this.closeModal.bind(this);
     }
 
-    componentDidMount() {
-        const { VapeProducts, id , authReducer} = this.props
-        // this.props.actSearchProductId(VapeProducts, id)
-        // callApi('api/products/review', "GET", {
-        //     idProduct: VapeProducts._id,
-        //     username: authReducer.userLocal,
-        //     idUser: authReducer._id,
-        //     comment: this.state.commentString
-        // }).then( res=> {
-        //     console.log(res)
-        // })
-    }
+    // componentDidMount() {
+    //     const { VapeProducts, id , authReducer } = this.props;
+    //     const { commentString } = this.state.commentString
+    //     this.props.actCommentUser(VapeProducts, commentString )
+    // }
 
     handleChanged(e) {
         // console.log(e);
@@ -149,7 +142,6 @@ class CommentForm extends Component {
         return (
             <div className={classes.containerForm} >
                 {!authReducer ? this.renderButton() : this.renderForm()}
-                {/* {this.renderForm()} */}
             </div>
         )
     }
@@ -158,7 +150,7 @@ class CommentForm extends Component {
 
 const Store = state => state
 const action = {
-    actSearchProductId
+    actCommentUser
 }
 
 export default withStyles(styles)(connect(Store, action)(CommentForm))

@@ -19,18 +19,15 @@ class BrandJoyetech extends Component {
     render() {
         let { VapeProducts } = this.props;
 
-        if(VapeProducts.length === 0) {
-            console.log("hiiiiii")
-            return <ReactLoading style={{ margin:"300px 750px",width: "100px", height: "100px"}}  color="#000000" />
+        if (VapeProducts.length === 0) {
+            return <div>Úi ko có sản phẩm này r :( </div>
         }
-
+        
         console.log(this.showProducts(VapeProducts))
         
         return (
             <Body>
-                {
-                    VapeProducts[0].brand === null ? "Không tìm thấy sản phẩm" : this.showProducts(VapeProducts)
-                }
+                {this.showProducts(VapeProducts)}
             </Body>
         )
     }

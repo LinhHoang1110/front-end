@@ -93,7 +93,7 @@ const Register = withFormik({
         username: Yup.string()
             .required('Username is required')
             .min(5, 'Username must have min 5 characters')
-            .max(10, 'Username have max 10 characters'),
+            .max(15, 'Username have max 15 characters'),
         password: Yup.string()
             .required('Password is required')
             .min(8, 'Password must have min characters'),

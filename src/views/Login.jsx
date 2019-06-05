@@ -90,6 +90,7 @@ const Login = withFormik({
             localStorage.setItem("TOKENLOCAL", res.data.token);
             localStorage.setItem("USERLOCAL", res.data.userFound.username)
             console.log(res)
+            console.log(values)
             props.checkAuth(res.data.token, res.data.userFound)
             props.history.push("/")
         })

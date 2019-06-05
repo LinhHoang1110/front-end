@@ -55,7 +55,7 @@ class VapeImage extends Component {
     render() {
         const { classes } = this.props;
         let { product } = this.props;
-        // console.log(product)
+        console.log(product)
         // console.log(this.props)
   
         return (
@@ -71,7 +71,9 @@ class VapeImage extends Component {
                         </Link>
                         <p>{product.price}$</p>
                         {
-                            product.quantity === 0 ? "Tiếc thay là hết hàng r :(": <button className={classes.btnAddCart} onClick={() => this.onAddToCart(product)}>Add to cart</button>
+                            product.quantity === 0 ? 
+                            "Tiếc thay là hết hàng r :(" : 
+                            <button className={classes.btnAddCart} onClick={() => this.onAddToCart(product)}>Add to cart</button>
                         }
                         
                     </div>
@@ -105,14 +107,13 @@ class VapeImage extends Component {
                     cart[i].product.quantity -= 1;
                     // console.log(cart[i].product.quantity)
                     if(cart[i].product.quantity === 0) {
-                        return alert("Tiếc thay là hết hàng r :(")
+                        return alert("Số lượng bạn thêm vào vượt quá kho hàng, chịu khó đợi chút nhé :3 ")
                     }
                 }
             }
         }
 
         localStorage.setItem("CART-SHOPPING", JSON.stringify(cart));
-        this.props.history.push("/shopping_cart")
     }
 
 }
