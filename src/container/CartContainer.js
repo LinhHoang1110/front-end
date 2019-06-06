@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import CartItem from "../component/CartItem";
 import Cart from "../component/Cart";
 import CartResult from "../component/CartResult"
-import * as Message from "../constants/Message";
 import { actDeleteProductInCart, actChangeMessage, actUpdateProductInCart } from "../actions/vapeActions"
 import callApi from "../utils/ApiCaller"
 
@@ -79,7 +78,7 @@ class CartContainer extends Component {
 
     showCartItem = (dataDetail) => {
         let { onDeleteProductInCart, onChangeMessage, onUpdateProductInCart } = this.props
-        let result = Message.MSG_CART_EMPTY;
+        let result = null;
         if (dataDetail) {
             // console.log(dataDetail)
             return (

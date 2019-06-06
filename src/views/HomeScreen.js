@@ -10,7 +10,6 @@ import { connect } from "react-redux";
 import { getVapeList, deteleVapeList, addVapelist } from "../actions/vapeActions";
 import { addUserList } from "../actions/userActions";
 import ProductsContainer from "../container/ProductsContainer";
-import MessageContainer from '../container/MessageContainer';
 
 class HomeScreen extends Component {
     // constructor(props) {
@@ -45,7 +44,6 @@ class HomeScreen extends Component {
                     <button onClick={() => { this.props.addVapelist() }}>AddvapeList</button>
                     <button onClick={() => { this.props.addUserList() }}>AddUserList</button>
                 </div> */}
-                <MessageContainer/>
                 {/* <CartContainer/> */}
             </Fragment>
         )

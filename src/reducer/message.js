@@ -1,5 +1,4 @@
 import * as types from "../constants/ActionType"
-import * as Message from "../constants/Message"
 
 let initialState = ""
 

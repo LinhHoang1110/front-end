@@ -116,11 +116,11 @@ class Detail_Vape extends Component {
         console.log(id)
         console.log(VapeProducts)
         // console.log(this.props)
-        if (_.isArray(VapeProducts)) {
-            return  <ReactLoading style={{ margin:"300px 750px",width: "100px", height: "100px"}}  color="#000000" />
+        // if (_.isArray(VapeProducts)) {
+        //     return  <ReactLoading style={{ margin:"300px 750px",width: "100px", height: "100px"}}  color="#000000" />
 
-            console.log("hiiiiiii")
-        }
+        //     console.log("hiiiiiii")
+        // }
         
 
         return (

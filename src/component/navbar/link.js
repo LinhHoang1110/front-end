@@ -236,7 +236,11 @@ class LinkInfo extends Component {
                             <div className={classes.shoppingCart}>
                                 <a className={classes.cart} to='/shopping_cart' onClick={this.openModal} ><i className={classNames("fas", "fa-shopping-cart", classes.icon, classes.fas)}></i></a>
                             </div>
-                            <span>{User}</span>
+                            <span>
+                                {
+                                    User === "null" ? " " : User 
+                                }
+                            </span>
                         </div>
 
 

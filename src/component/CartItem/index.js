@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { withStyles } from '@material-ui/core';
-import * as Message from "../../constants/Message";
 import * as Config from "../../constants/Config"
 import callApi from "../../utils/ApiCaller";
 

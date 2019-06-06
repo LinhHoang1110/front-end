@@ -1,18 +1,31 @@
 import React, { Component } from "react";
 import { withStyles } from "@material-ui/core";
 import CartItem from "../CartItem";
+import _ from "lodash"
 
 
 class Cart extends Component {
     constructor(props) {
-        super(props)
+        super(props);
+        this.state = {
+            Message: ""
+        }
     }
 
     render() {
         const { children } = this.props;
+        const Addvertise = localStorage.getItem("CART-SHOPPING")
+        console.log(typeof(Addvertise))
 
         return (
             <div style = {{margin: "5% 10%"}}>
+                <h3>
+                    <span className="badge amber darken-2">
+                    {
+                        Addvertise === "[]" ? "Không có sản phẩm nào trong giỏ hàng" : ""
+                        }
+                    </span>
+                </h3>
                 <div className="table-responsive">
                     <table className="table
                     ">
