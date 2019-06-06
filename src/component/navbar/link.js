@@ -183,7 +183,7 @@ class LinkInfo extends Component {
 
     render() {
         const { classes, VapeProducts, authReducer } = this.props
-        const Token = localStorage.getItem("TOKENLOCAL")
+        // const Token = localStorage.getItem("TOKENLOCAL")
         console.log(typeof(Token))
         // console.log(authReducer)
         if (!authReducer) {
@@ -192,7 +192,7 @@ class LinkInfo extends Component {
             localStorage.setItem("TOKENLOCAL", null);
             localStorage.setItem("USERLOCAL", null)
         } 
-        else if (authReducer) {
+        else  {
             LoginLogOut = "Đăng xuất"
         }
 

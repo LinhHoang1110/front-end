@@ -31,10 +31,10 @@ import PaypalSuccess from "./component/PaypalSuccess"
 
 
 const styles = () => ({
-  wrapper: { 
+  wrapper: {
     minHeight: "100vh",
     position: "relative",
-    fontFamily : "Montserrat,sans-serif"
+    fontFamily: "Montserrat,sans-serif"
   },
   body: {
     paddingBottom: "20%",
@@ -48,36 +48,40 @@ class App extends React.Component {
     const { checkUserTokenStorage } = props;
     const currentUserLocal = localStorage.getItem("USERLOCAL");
     const tokenLocal = localStorage.getItem("TOKENLOCAL");
+    console.log(currentUserLocal);
+    console.log(tokenLocal);
     if (!_.isEmpty(currentUserLocal) && !_.isEmpty(tokenLocal)) {
-      checkUserTokenStorage(currentUserLocal, tokenLocal);
+      if (currentUserLocal !== "null" && tokenLocal !== "null") {
+        checkUserTokenStorage(currentUserLocal, tokenLocal);
+      }
     }
   }
 
   render() {
     const { classes } = this.props;
-    
+
     return (
       <Router>
-        <div style={{fontFamily: "Montserrat,sans-serif"}} className={classes.wrapper}>
+        <div style={{ fontFamily: "Montserrat,sans-serif" }} className={classes.wrapper}>
           <NavBar />
           <div className={classes.body}>
             <Switch>
-              <Route exact path='/' component={propsRoute => <HomeScreen {...propsRoute}/>} />
-              <Route path='/login' component={propsRoute => <Login {...propsRoute}/>} />
-              <Route path='/register' component={propsRoute => <Register {...propsRoute}/>} />
-              <Route path='/shopping_cart' component={propsRoute => <CartContainer {...propsRoute}/>}/>
-              <Route path='/detal-products/:productid' component={propsRoute => <DeataiImage {...propsRoute}/>}/>
-              <Route path='/faq' component={FAQ}/>
-              <Route path='/paypalSucces' component={PaypalSuccess}/>
+              <Route exact path='/' component={propsRoute => <HomeScreen {...propsRoute} />} />
+              <Route path='/login' component={propsRoute => <Login {...propsRoute} />} />
+              <Route path='/register' component={propsRoute => <Register {...propsRoute} />} />
+              <Route path='/shopping_cart' component={propsRoute => <CartContainer {...propsRoute} />} />
+              <Route path='/detal-products/:productid' component={propsRoute => <DeataiImage {...propsRoute} />} />
+              <Route path='/faq' component={FAQ} />
+              <Route path='/paypalSucces' component={PaypalSuccess} />
               <Route path={`/caterory/vape`} component={CateroryVape} />
-              <Route path={'/caterory/tinhdau'} component={CateroryTinhDauVape}/>
-              <Route path={'/caterory/pods'} component={CateroryPod}/>
-              <Route path={'/caterory/tankVape'} component={CateroryTankVape}/>
-              <Route path={'/caterory/phuKien'} component={CateroryPhuKien}/>
-              <Route path={'/brand/Joyetech'} component={BrandJoyetech}/>
-              <Route path={'/brand/Eleaf'} component={BrandEleaf}/>
-              <Route path={'/brand/Widmec'} component={BrandWidmec}/>
-              <Route path={'/brand/Smoant'} component={BrandSmoant}/>
+              <Route path={'/caterory/tinhdau'} component={CateroryTinhDauVape} />
+              <Route path={'/caterory/pods'} component={CateroryPod} />
+              <Route path={'/caterory/tankVape'} component={CateroryTankVape} />
+              <Route path={'/caterory/phuKien'} component={CateroryPhuKien} />
+              <Route path={'/brand/Joyetech'} component={BrandJoyetech} />
+              <Route path={'/brand/Eleaf'} component={BrandEleaf} />
+              <Route path={'/brand/Widmec'} component={BrandWidmec} />
+              <Route path={'/brand/Smoant'} component={BrandSmoant} />
             </Switch>
           </div>
           <Footer />

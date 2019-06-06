@@ -5,6 +5,7 @@ import Body from "../component/Body";
 import VapeImage from "../component/VapeImage";
 import { actAddToCart, actFetchProducts } from "../actions/vapeActions"
 import callApi from "../utils/ApiCaller";
+import _ from "lodash";
 import ReactLoading from "react-loading";
 
 const styles = () => {
@@ -38,7 +39,7 @@ class ProductsContainer extends Component {
     showProducts(VapeProducts, VapeSeller) {
         let result = null;
 
-        if (VapeProducts) {
+        if (_.isArray(VapeProducts)) {
             console.log(VapeProducts)
             result = VapeProducts.map((product, index) => {
                 // console.log(product)
@@ -57,7 +58,7 @@ class ProductsContainer extends Component {
         if (VapeSeller) {
             return (
                 result = VapeSeller.VapeSeller.map((product, index) => {
-                    console.log(product)
+                    // console.log(product)
                     return <VapeImage {...this.props} key={index} product={product} />
                 })
             )
@@ -70,9 +71,9 @@ class ProductsContainer extends Component {
     render() {
         const { classes, VapeProducts } = this.props;
         const VapeSeller = this.state;
-        console.log(VapeSeller.VapeSeller)
+        // console.log(VapeSeller.VapeSeller)
 
-        console.log(VapeProducts)
+        // console.log(VapeProducts)
 
 
         // let { VapeProducts } = this.state

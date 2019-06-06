@@ -24,7 +24,7 @@ import { connect } from "react-redux"
 class SignupForm extends Component {
 
     render() {
-        const { handleSubmit } = this.props;
+        const { handleSubmit, values, setFieldValue } = this.props;
         console.log(this.props)
 
         return (
@@ -56,6 +56,9 @@ class SignupForm extends Component {
                                     )}
                                 />
                             </FormControl>
+                            <FormControl>
+                                Remember <input type="checkbox" checked={values.remember} onChange={e => setFieldValue('remember', e.target.checked)} />
+                            </FormControl>
                             <FormControl fullWidth margin='normal'>
                                 <Button
                                     // variant='extendedFab'
@@ -79,21 +82,29 @@ const Login = withFormik({
     mapPropsToValues() {
         return {
             username: '',
-            password: ''
+            password: '',
+            remember: false,
         }
     },
+
+    // thế anh ơi đoạn kia check nó là true mới push đúng ko
+    // uncomment di het di
     handleSubmit: (values, { props }) => {
-        callApi("api/auth/login", "POST", {
-            username: values.username,
-            password: values.password,
+        const { remember } = values;
+
+       callApi("api/auth/login", "POST", {
+           username: values.username,
+           password: values.password,
         }).then(res => {
-            localStorage.setItem("TOKENLOCAL", res.data.token);
-            localStorage.setItem("USERLOCAL", res.data.userFound.username)
+            if (remember) {
+                 localStorage.setItem("TOKENLOCAL", res.data.token);
+                localStorage.setItem("USERLOCAL", res.data.userFound.username)
+            }
             console.log(res)
             console.log(values)
             props.checkAuth(res.data.token, res.data.userFound)
             props.history.push("/")
-        })
+       })
     }
 })(SignupForm)
 

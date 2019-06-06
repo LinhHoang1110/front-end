@@ -55,7 +55,7 @@ class VapeImage extends Component {
     render() {
         const { classes } = this.props;
         let { product } = this.props;
-        console.log(product)
+        // console.log(product)
         // console.log(this.props)
   
         return (
