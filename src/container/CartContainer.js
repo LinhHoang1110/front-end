@@ -26,7 +26,7 @@ class CartContainer extends Component {
         try {
             dataDetail = JSON.parse(localStorage.getItem('CART-SHOPPING'));
         } catch (error) {
-
+            console.log(error)
         }
 
         this.state = {
@@ -117,7 +117,7 @@ class CartContainer extends Component {
         const { dataDetail } = this.state;
         const { message } = cart;
 
-        // console.log(dataDetail)
+        console.log(dataDetail)
         // let { data } = this.state
         // console.log(cart);
         // console.log(message);

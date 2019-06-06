@@ -6,7 +6,8 @@ import { connect } from "react-redux"
 import searchField from './searchField';
 import Modal from 'react-modal';
 import { withRouter } from "react-router-dom";
-import SearchField from "./searchField"
+import SearchField from "./searchField";
+import _ from "lodash";
 import { clearAuthReducer } from "../../actions/vapeActions";
 import classNames from "classnames";
 
@@ -143,13 +144,11 @@ const styles = () => {
     }
 }
 
-let LoginLogOut = ''
-
 class LinkInfo extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            modalIsOpen: false
+            modalIsOpen: false,
         };
         this.openModal = this.openModal.bind(this);
         this.afterOpenModal = this.afterOpenModal.bind(this);
@@ -160,11 +159,16 @@ class LinkInfo extends Component {
 
     checkLoginLogOut() {
         const { history, clearAuthReducer, authReducer } = this.props
-        if (!authReducer) {
-            history.push("/login");
-        } else {
-            history.push('/')
+        if (authReducer) {
             clearAuthReducer();
+            history.push('/')
+            console.log("Sign in")
+        } else {
+            localStorage.setItem("CART-SHOPPING", null);
+            localStorage.setItem("TOKENLOCAL", null);
+            localStorage.setItem("USERLOCAL", null);
+            history.push("/login");
+            console.log("Sign up")
         }
     }
 
@@ -184,17 +188,7 @@ class LinkInfo extends Component {
     render() {
         const { classes, VapeProducts, authReducer } = this.props
         // const Token = localStorage.getItem("TOKENLOCAL")
-        console.log(typeof(Token))
-        // console.log(authReducer)
-        if (!authReducer) {
-            LoginLogOut = "Đăng nhập";
-            localStorage.setItem("CART-SHOPPING", null);
-            localStorage.setItem("TOKENLOCAL", null);
-            localStorage.setItem("USERLOCAL", null)
-        } 
-        else  {
-            LoginLogOut = "Đăng xuất"
-        }
+        console.log(authReducer)
 
         // console.log(VapeProducts)
         return (
@@ -237,7 +231,7 @@ class LinkInfo extends Component {
                         <SearchField />
                         <div className={classes.login_cart}>
                             <div className={classes.login} >
-                                <button className={classes.category} onClick={this.checkLoginLogOut}>{LoginLogOut}</button>
+                                <button className={classes.category} onClick={this.checkLoginLogOut}>{_.isEmpty(authReducer) ? 'Dang nhap' : 'Dang xuat'}</button>
                             </div>
                             <div className={classes.shoppingCart}>
                                 <a className={classes.cart} to='/shopping_cart' onClick={this.openModal} ><i className={classNames("fas", "fa-shopping-cart", classes.icon, classes.fas)}></i></a>
