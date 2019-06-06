@@ -160,13 +160,13 @@ class LinkInfo extends Component {
     checkLoginLogOut() {
         const { history, clearAuthReducer, authReducer } = this.props
         if (authReducer) {
+            localStorage.setItem("CART-SHOPPING", null);
+            localStorage.setItem("TOKENLOCAL", null);
+            localStorage.setItem("USERLOCAL", null);
             clearAuthReducer();
             history.push('/')
             console.log("Sign in")
         } else {
-            localStorage.setItem("CART-SHOPPING", null);
-            localStorage.setItem("TOKENLOCAL", null);
-            localStorage.setItem("USERLOCAL", null);
             history.push("/login");
             console.log("Sign up")
         }
@@ -187,7 +187,7 @@ class LinkInfo extends Component {
 
     render() {
         const { classes, VapeProducts, authReducer } = this.props
-        // const Token = localStorage.getItem("TOKENLOCAL")
+        const User = localStorage.getItem("USERLOCAL")
         console.log(authReducer)
 
         // console.log(VapeProducts)
@@ -236,6 +236,7 @@ class LinkInfo extends Component {
                             <div className={classes.shoppingCart}>
                                 <a className={classes.cart} to='/shopping_cart' onClick={this.openModal} ><i className={classNames("fas", "fa-shopping-cart", classes.icon, classes.fas)}></i></a>
                             </div>
+                            <span>{User}</span>
                         </div>
 
 

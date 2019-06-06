@@ -114,6 +114,7 @@ class VapeImage extends Component {
         }
 
         localStorage.setItem("CART-SHOPPING", JSON.stringify(cart));
+        alert("Thêm sản phẩm thành công")
     }
 
 }

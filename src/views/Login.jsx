@@ -63,7 +63,7 @@ class SignupForm extends Component {
                                 <Button
                                     // variant='extendedFab'
                                     type='submit'
-                                    style={{ width: '141px', heigh: '30px', margin: 'auto', backgroundColor: "black", color: "white",borderRadius: "30px" }}
+                                    style={{ width: '141px', heigh: '30px', margin: 'auto', backgroundColor: "black", color: "white", borderRadius: "30px" }}
                                     onClick={handleSubmit}
                                 >
                                     Signin
@@ -92,19 +92,26 @@ const Login = withFormik({
     handleSubmit: (values, { props }) => {
         const { remember } = values;
 
-       callApi("api/auth/login", "POST", {
-           username: values.username,
-           password: values.password,
+        callApi("api/auth/login", "POST", {
+            username: values.username,
+            password: values.password,
         }).then(res => {
-            if (remember) {
-                 localStorage.setItem("TOKENLOCAL", res.data.token);
-                localStorage.setItem("USERLOCAL", res.data.userFound.username)
+            if (res) {
+                if (remember) {
+                    localStorage.setItem("TOKENLOCAL", res.data.token);
+                    localStorage.setItem("USERLOCAL", res.data.userFound.username)
+                }
+                console.log(res)
+                console.log(values)
+                console.log(remember)
+                props.checkAuth(res.data.token, res.data.userFound)
+                props.history.push("/")
+            } 
+            else {
+                console.log(remember)
+                alert("Thí chủ đang high phải ko vì mật khẩu với password thí chủ nhập vào ko đúng r !!!! ")
             }
-            console.log(res)
-            console.log(values)
-            props.checkAuth(res.data.token, res.data.userFound)
-            props.history.push("/")
-       })
+        })
     }
 })(SignupForm)
 
