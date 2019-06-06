@@ -101,12 +101,14 @@ const Login = withFormik({
                     localStorage.setItem("TOKENLOCAL", res.data.token);
                     localStorage.setItem("USERLOCAL", res.data.userFound.username)
                 }
+                localStorage.setItem("TOKENLOCAL", res.data.token);
+                localStorage.setItem("USERLOCAL", res.data.userFound.username)
                 console.log(res)
                 console.log(values)
                 console.log(remember)
                 props.checkAuth(res.data.token, res.data.userFound)
                 props.history.push("/")
-            } 
+            }
             else {
                 console.log(remember)
                 alert("Thí chủ đang high phải ko vì mật khẩu với password thí chủ nhập vào ko đúng r !!!! ")
