@@ -38,8 +38,8 @@ class ProductsContainer extends Component {
     showProducts(VapeProducts, VapeSeller) {
         let result = null;
 
-        if (VapeProducts && VapeSeller.VapeSeller.length > 0) {
-            console.log("hiiiiii")
+        if (VapeProducts) {
+            console.log(VapeProducts)
             result = VapeProducts.map((product, index) => {
                 // console.log(product)
                 return <VapeImage {...this.props} key={index} product={product} />
@@ -72,7 +72,7 @@ class ProductsContainer extends Component {
         const VapeSeller = this.state;
         console.log(VapeSeller.VapeSeller)
 
-        // console.log(VapeProducts)
+        console.log(VapeProducts)
 
 
         // let { VapeProducts } = this.state
