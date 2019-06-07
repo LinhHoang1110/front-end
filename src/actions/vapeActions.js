@@ -59,7 +59,7 @@ export const actUpdateProductInCart = (product, quantity) => {
 
 export const actSearchProductKey = (product, searchString) => dispatch => {
     callApi(`api/products?q=${searchString}`, "GET", null).then( res => {
-        // console.log(res)
+        console.log(res)
         dispatch({
             type: types.SEARCH_PRODUCT_KEY,
             payload: res.data, searchString

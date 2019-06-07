@@ -55,7 +55,14 @@ class ProductsContainer extends Component {
                 // console.log(product)
                 return <VapeImage {...this.props} key={index} product={product} />
             })
-        } else {
+        } 
+        else if(_.isArray(VapeProducts.message)) {
+            result = VapeProducts.message.map((product, index) => {
+                // console.log(product)
+                return <VapeImage {...this.props} key={index} product={product} />
+            })
+        }
+        else {
             return <ReactLoading style={{ margin: "300px 750px", width: "100px", height: "100px" }} color="#000000" />
         }
         return result
