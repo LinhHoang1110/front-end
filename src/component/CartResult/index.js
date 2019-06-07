@@ -6,7 +6,8 @@ import { connect } from "react-redux"
 import * as Config from "../../constants/Config"
 import PaypalSuccess from ".././PaypalSuccess"
 import callApi from "../../utils/ApiCaller"
-
+import { actOrderList } from "../../actions/orderAction"
+import { actTotal } from "../../actions/totalAction"
 
 const Styles = () => {
     return {
@@ -50,7 +51,7 @@ const Styles = () => {
 
 class CartResult extends Component {
     constructor(props) {
-        super(props)
+        super(props);
     }
 
     backPage() {
@@ -58,19 +59,35 @@ class CartResult extends Component {
     }
 
     render() {
-        const { classes, item, authReducer } = this.props;
+        const { classes, item, authReducer, actTotal, totalAll } = this.props;
+        const total = localStorage.getItem("TOTAL")
+        // actTotal(this.showTotalAmout(item).toLocaleString('us'))
         const client = {
             sandbox: 'Ab08l9Y7JSilOoLFLR7eoYuIux9YiA9zpIJue_AWMFTb2dI2eXh29VDvLlepOIRCKyD_9U2k2EyFrPVl',
             production: 'Ab08l9Y7JSilOoLFLR7eoYuIux9YiA9zpIJue_AWMFTb2dI2eXh29VDvLlepOIRCKyD_9U2k2EyFrPVl',
         }
+
         const onSuccess = (payment) => {
             // 1, 2, and ... Poof! You made it, everything's fine and dandy!
             console.log("Payment successful!", payment);
             callApi('api/products/addOrder', "POST", {
-                payment: payment
+                payment: { payment, item}
+            }).then(res => {
+                this.props.actOrderList(res)
+                console.log(res.data.message)
+                localStorage.setItem("ORDER-CITY", res.data.message.address.city )
+                localStorage.setItem("ORDER-USERNAME", res.data.message.address.recipient_name)
+                localStorage.setItem("ORDER-EMAIL", res.data.message.email)
+
+                let orderProducts = []
+                orderProducts.push(res.data.message.products)
+                
+                console.log(orderProducts)
+    
+                localStorage.setItem("ORDER-PRODUCTS", orderProducts)
             })
-            // this.props.history.push("/paypalSucces")
-            alert("Chào mừng đến với Smoking World :3 ")
+            this.props.history.push("/paypalSucces")
+            // alert("Chào mừng đến với Smoking World :3 ")
             // You can bind the "payment" object's value to your state or props or whatever here, please see below for sample returned data
         }
 
@@ -95,18 +112,17 @@ class CartResult extends Component {
             <div>
                 <a className={classes.btnBack} onClick={() => this.backPage()}><i class="fas fa-chevron-left"></i>&nbsp;&nbsp;Trở lại shop</a>
                 <div>
-                    <strong className={classes.sum} >Tổng: {this.showTotalAmout(item).toLocaleString('us')}$</strong>
+                    <strong className={classes.sum} >Tổng: {total.toLocaleString('us')}$</strong>
                     {/* <strong className={classes.sum} >Tổng: 10đ</strong> */}
                 </div>
                 <div style={{ margin: "0 30px" }}>
                     <div className={classes.btnBackPay}>
-
                         {
                             authReducer ?
                                 <PaypalExpressBtn
                                     client={client}
                                     currency={'USD'}
-                                    total={this.showTotalAmout(item).toLocaleString('us')}
+                                    total={total.toLocaleString('us')}
                                     onError={onError} onSuccess={onSuccess} onCancel={onCancel}
                                 /> : <span style={{ width: "200px", fontSize: "1.5rem", lineHeight: "30px", color: "red" }}><i class="fas fa-exclamation"></i> Xin quý khách vui lòng đăng nhập để thanh toán </span>
                         }
@@ -128,5 +144,9 @@ class CartResult extends Component {
 }
 
 const Store = state => state
+const action = {
+    actOrderList, 
+    // actTotal
+}
 
-export default withStyles(Styles)(connect(Store, null)(CartResult))
+export default withStyles(Styles)(connect(Store, action)(CartResult))

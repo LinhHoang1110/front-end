@@ -2,13 +2,13 @@ import * as types from "../constants/ActionType"
 
 let initialState = []
 
-const commentUser = (state = initialState, action) => {
+const totalAll = (state = initialState, action) => {
     switch(action.type) {
-        case types.COMMENT_USER: 
+        case types.TOTAL: 
             return action.payload;
        
         default: return state;
     }
 }
 
-export default commentUser
+export default totalAll

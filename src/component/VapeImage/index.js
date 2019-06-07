@@ -5,8 +5,8 @@ import DeataiImage from '../../views/DetailScreen';
 import { withStyles } from '@material-ui/core/styles';
 import * as Config from "../../constants/Config"
 import callApi from '../../utils/ApiCaller';
-
-
+import { connect } from "react-redux"
+import { actProductQuantity } from "../../actions/quantityAction"
 
 const styles = () => {
     return {
@@ -50,12 +50,16 @@ const styles = () => {
 class VapeImage extends Component {
     constructor(props) {
         super(props);
+        this.state = ({
+            productQuantity: 0
+        })
     }
 
     render() {
         const { classes } = this.props;
-        let { product } = this.props;
-        // console.log(product)
+        let { product, quantityProduct } = this.props;
+        // console.log(quantityProduct)
+        console.log(product)
         // console.log(this.props)
   
         return (
@@ -115,8 +119,16 @@ class VapeImage extends Component {
 
         localStorage.setItem("CART-SHOPPING", JSON.stringify(cart));
         alert("Thêm sản phẩm thành công")
+        const shoppingCart =  JSON.parse(localStorage.getItem("CART-SHOPPING"))
+        this.setState({
+            productQuantity: shoppingCart.length
+        })
+        this.props.actProductQuantity(shoppingCart.length)
     }
-
 }
 
-export default withStyles(styles)(VapeImage)
+const Store = (state) => state
+const action = {
+    actProductQuantity
+}
+export default withStyles(styles)(connect(Store, action)(VapeImage))

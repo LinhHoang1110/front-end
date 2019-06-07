@@ -6,6 +6,7 @@ import Cart from "../component/Cart";
 import CartResult from "../component/CartResult"
 import { actDeleteProductInCart, actChangeMessage, actUpdateProductInCart } from "../actions/vapeActions"
 import callApi from "../utils/ApiCaller"
+import { actTotal } from "../actions/totalAction"
 
 const styles = () => {
     return {
@@ -30,6 +31,7 @@ class CartContainer extends Component {
 
         this.state = {
             dataDetail,
+            totalProducts: 0
         }
     }
 
@@ -55,6 +57,8 @@ class CartContainer extends Component {
 
     changeQuantity = (productId, minus) => {
         const { dataDetail } = this.state;
+        let total = 0
+
         for (let i = 0; i < dataDetail.length; i++) {
             if (productId == dataDetail[i].product._id) {
                 if (minus) {
@@ -66,19 +70,28 @@ class CartContainer extends Component {
                     if (dataDetail[i].product.quantity < dataDetail[i].quantity) {
                         return alert("Số lượng sản phẩm bạn cần mua vượt quá số hàng còn trong kho ! Tạm mua từng này thôi nhé :3 ")
                     } else {
-                        dataDetail[i].quantity += 1
+                        dataDetail[i].quantity += 1;
                     }
                 }
             }
+            total += dataDetail[i].quantity * dataDetail[i].product.price
         }
 
-        this.setState({ dataDetail })
+        this.setState({
+            dataDetail,
+            totalProducts: total
+        })
         localStorage.setItem("CART-SHOPPING", JSON.stringify(dataDetail))
+        // this.props.actTotal(totalProducts)
+        localStorage.setItem("TOTAL", total)
+        console.log(this.state.totalProducts)
     }
 
-    showCartItem = (dataDetail) => {
-        let { onDeleteProductInCart, onChangeMessage, onUpdateProductInCart } = this.props
+    showCartItem = (dataDetail, totalProducts) => {
+        let { onDeleteProductInCart, onChangeMessage, onUpdateProductInCart, showTotalProduct } = this.props
         let result = null;
+        console.log(onDeleteProductInCart)
+        console.log(actTotal)
         if (dataDetail) {
             // console.log(dataDetail)
             return (
@@ -94,7 +107,7 @@ class CartContainer extends Component {
                             dataDetail={dataDetail}
                             changeQuantity={this.changeQuantity}
                             checkQuantity={this.checkQuantity}
-
+                            total={totalProducts}
                         />
                     )
                 })
@@ -103,18 +116,29 @@ class CartContainer extends Component {
         return result
     }
 
-    showTotalAmount = (dataDetail) => {
+    showTotalAmount = (dataDetail, totalProducts) => {
+        
         let result = null;
         if (dataDetail) {
-            result = <CartResult {...this.props} item={dataDetail} />
+            // let total = 0
+            // for (let i = 0; i < dataDetail.length; i++) {
+            //     total += dataDetail[i].quantity * dataDetail[i].product.price
+            // }
+            // this.setState({
+            //     totalProducts: total
+            // })
+
+            result = <CartResult {...this.props} item={dataDetail} total={totalProducts} />
         }
         return result
     }
 
     render() {
-        const { classes, cart } = this.props;
-        const { dataDetail } = this.state;
+        const { classes, cart, totalAll } = this.props;
+        const { dataDetail, totalProducts } = this.state;
         const { message } = cart;
+
+        console.log(totalAll)
 
         console.log(dataDetail)
         // let { data } = this.state
@@ -126,8 +150,8 @@ class CartContainer extends Component {
             <Fragment>
                 <div>{message}</div>
                 <Cart>
-                    {this.showCartItem(dataDetail)}
-                    {this.showTotalAmount(dataDetail)}
+                    {this.showCartItem(dataDetail, totalProducts)}
+                    {this.showTotalAmount(dataDetail, totalProducts)}
                 </Cart>
             </Fragment>
         )
@@ -137,11 +161,7 @@ class CartContainer extends Component {
 
 }
 
-const mapStateToProps = state => {
-    return {
-        cart: state.cart
-    }
-}
+const Store = (state) => state
 
 const mapDispatchToProps = (dispatch, props) => {
     return {
@@ -153,8 +173,12 @@ const mapDispatchToProps = (dispatch, props) => {
         },
         onUpdateProductInCart: (item, quantity) => {
             dispatch(actUpdateProductInCart(item, quantity))
-        }
+        },
     }
 }
 
-export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(CartContainer));
+const action = {
+    actTotal
+}
+
+export default withStyles(styles)(connect(Store, mapDispatchToProps)(CartContainer));

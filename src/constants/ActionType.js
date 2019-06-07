@@ -11,3 +11,6 @@ export const CHECK_AUTH = "CHECK_AUTH"
 export const CLEAR_AUTH = "CLEAR_AUTH"
 export const CHECK_USER_TOKEN_STORAGE ="CHECK_USER_TOKEN_STORAGE"
 export const COMMENT_USER = "COMMENT_USER"
+export const PROUDCT_QUANTITY = 'PROUDCT_QUANTITY'
+export const ORDER_LIST = "ORDER_LIST"
+export const TOTAL = "TOTAL"

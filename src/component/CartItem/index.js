@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { withStyles } from '@material-ui/core';
 import * as Config from "../../constants/Config"
 import callApi from "../../utils/ApiCaller";
-
+import { connect } from "react-redux"
+import { actProductQuantity } from "../../actions/quantityAction"
 
 const Styles = () => {
     return {
@@ -72,14 +73,17 @@ const Styles = () => {
 class CartItem extends Component {
     constructor(props) {
         super(props);
+        this.state = ({
+            productQuantity: 0
+        })
     }
 
     render() {
-        const { classes, item, quantity, changeQuantity, checkQuantity } = this.props;
+        const { classes, item, quantity, changeQuantity, checkQuantity, total } = this.props;
         // const { dataDetail } = this.props
         // console.log(dataDetail)
         // console.log(quantity)
-        // console.log(item);
+        console.log(item);
         // // let { quantity } = item.quantity > 0 ? item : this.state;
         // // console.log(quantity)
         // console.log(item.price)
@@ -121,17 +125,17 @@ class CartItem extends Component {
                 </div>
 
                 </td>
-                <td style={{ paddingLeft: "2%"}}>
+                <td style={{ paddingLeft: "2%" }}>
                     { /* fake data nên quantity = view */}
-                    <div style={{display : "flex", marginTop: "30px"}}>
+                    <div style={{ display: "flex", marginTop: "30px" }}>
                         <button className={classes.btnMinus} onClick={() => changeQuantity(item._id, true)}>-</button>
-                        <p style={{margin:"0 5px"}} className={classes.number}>{quantity}</p>
+                        <p style={{ margin: "0 5px" }} className={classes.number}>{quantity}</p>
                         <button className={classes.btnPlus} onClick={() => changeQuantity(item._id)}>+</button>
                     </div>
 
                 </td>
                 <td>
-                    <div style={{marginTop: "30px"}}>
+                    <div style={{ marginTop: "30px" }}>
                         {this.showSubTotal(item.price, this.props.quantity).toLocaleString('us')}$
                     </div>
                 </td>
@@ -141,8 +145,20 @@ class CartItem extends Component {
 
     onDelete(_id) {
         if (confirm(`Nỡ lòng nào bạn lại muốn xóa sản phẩm này sao :( `)) { // eslint-disable-line
+            const { total, item , quantity} = this.props
             this.props.onDelete(_id)
-            let { onChangeMessage } = this.props;
+            const shoppingCart = JSON.parse(localStorage.getItem("CART-SHOPPING"))
+            this.setState({
+                productQuantity: shoppingCart.length
+            })
+            this.props.actProductQuantity(shoppingCart.length)
+
+            let newTotal = total
+
+            newTotal -= item.price * quantity
+
+            total = newTotal
+            
             // onChangeMessage(Message.MSG_DELETE_PRODUCT_IN_CART_SUCCESS);
         }
         // let { onDeleteProductInCart, onChangeMessage } = this.props;
@@ -156,4 +172,10 @@ class CartItem extends Component {
     }
 }
 
-export default withStyles(Styles)(CartItem)
+const Store = (state) => state
+
+const action = {
+    actProductQuantity
+}
+
+export default withStyles(Styles)(connect(Store, action)(CartItem))

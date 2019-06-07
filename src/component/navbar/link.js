@@ -186,8 +186,10 @@ class LinkInfo extends Component {
     }
 
     render() {
-        const { classes, VapeProducts, authReducer } = this.props
+        const { classes, VapeProducts, authReducer, quantityProduct } = this.props
         const User = localStorage.getItem("USERLOCAL")
+        const shoppingCart =  JSON.parse(localStorage.getItem("CART-SHOPPING"))
+        console.log(quantityProduct);
         console.log(authReducer)
 
         // console.log(VapeProducts)
@@ -235,7 +237,11 @@ class LinkInfo extends Component {
                             </div>
                             <div className={classes.shoppingCart}>
                                 <a className={classes.cart} to='/shopping_cart' onClick={this.openModal} ><i className={classNames("fas", "fa-shopping-cart", classes.icon, classes.fas)}></i></a>
+                                <div>{
+                                    shoppingCart ? shoppingCart.length : ''
+                                    }</div>
                             </div>
+                            
                             <span>
                                 {
                                     User === "null" ? " " : User 

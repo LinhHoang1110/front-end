@@ -109,12 +109,29 @@ class Detail_Vape extends Component {
         
     }
 
+    showCommentUser(listComment) {
+            const orderUsername = localStorage.getItem("USERLOCAL");
+            let result = null;
+            console.log(listComment)
+            if (listComment) {
+                result = listComment.map((comment) => {
+                    return (
+                        <ul>
+                            <li>{orderUsername}</li>
+                            <li>{comment.comment}</li>
+                        </ul>
+                    )
+                })
+            }
+            return result
+        }
+
     render() {
         const { classes, img, id, VapeProducts } = this.props;
         // const { detailData } = this.state
         // console.log(detailData)
         console.log(id)
-        console.log(VapeProducts)
+        console.log(VapeProducts.review)
         // console.log(this.props)
         // if (_.isArray(VapeProducts)) {
         //     return  <ReactLoading style={{ margin:"300px 750px",width: "100px", height: "100px"}}  color="#000000" />
@@ -138,8 +155,11 @@ class Detail_Vape extends Component {
                             <p style={{color: "red", paddingLeft: "30px",fontSize: "20px"}}>{VapeProducts.price}$</p>
                             <ul>
                                 <li>{VapeProducts.description}</li>
-
                             </ul>
+
+                            {/* <p>Đánh giá khách hàng</p> */}
+
+                            {/* {this.showCommentUser(VapeProducts.review)} */}
                         </div>
                         <div className={classes.addCartContainer}>
                             {

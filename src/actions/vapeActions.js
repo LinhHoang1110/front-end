@@ -1,9 +1,9 @@
 import * as types from "../constants/ActionType"
 import callApi from "../utils/ApiCaller"
 
-export const actFetchProducts = () => (dispatch) => {
-    callApi("api/products", "GET", null).then(res => {
-        // console.log(res)
+export const actFetchProducts = (pageNumber) => (dispatch) => {
+    callApi(`api/products/paginate?page=${pageNumber}`, "GET", null).then(res => {
+        console.log(res.data)
         dispatch({
             type: types.FETCH_PRODUCTS,
             payload: res.data
