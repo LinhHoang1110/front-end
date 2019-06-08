@@ -244,7 +244,7 @@ class LinkInfo extends Component {
                             <div className={classes.shoppingCart}>
                                 <a className={classes.cart} to='/shopping_cart' onClick={this.openModal} ><i className={classNames("fas", "fa-shopping-cart", classes.icon, classes.fas)}></i></a>
                                 {
-                                    shoppingCart.length  ? <div style={{position: "absolute",right: "5%",top: "20%",width: "20px",height:"20px",backgroundColor: "black",color: "white",textAlign: "center",borderRadius: "50%"}}>
+                                    shoppingCart ? <div style={{position: "absolute",right: "5%",top: "20%",width: "20px",height:"20px",backgroundColor: "black",color: "white",textAlign: "center",borderRadius: "50%"}}>
                                         { 
                                          shoppingCart.length 
                                         }</div> : ""
