@@ -25,7 +25,7 @@ class BrandJoyetech extends Component {
             if (_.isArray(VapeProducts.message)) {
                 if (VapeProducts.message.length === 0) {
                     console.log("haahahah")
-                    return <div>Úi ko có sản phẩm này r :( </div>
+                    return <div style={{position: "absolute", top: "20%",left: "32%",fontSize: "50px"}}>Úi ko có sản phẩm này r :( </div>
                 }
             }
 
