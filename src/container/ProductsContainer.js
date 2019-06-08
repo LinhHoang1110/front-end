@@ -130,7 +130,7 @@ class ProductsContainer extends Component {
         let listEmpty = [];
         for (let i = 0; i < totalPage; i++) {
             console.log(listEmpty)
-            listEmpty = [...listEmpty, <button onClick={() => this.changePage(i)}>page {i + 1}</button>]
+            listEmpty = [...listEmpty, <a style={{fontSize: "1.5rem",cursor: "pointer"}} onClick={() => this.changePage(i)}>{i + 1}..&nbsp;&nbsp;</a>]
         }
         return listEmpty;
     }
@@ -163,8 +163,8 @@ class ProductsContainer extends Component {
                 <div className={classes.containerVape}>
                     {this.showProducts(VapeProducts)}
                 </div>
-                <div>
-                    {this.showPage(VapeProducts.total).map(el => el)}
+                <div style={{textAlign: "center", marginTop: "20px"}}>
+                    <span style={{fontSize: "1.5rem"}}>Page:&nbsp;&nbsp;</span> {this.showPage(VapeProducts.total).map(el => el)}
                 </div>
             </div>
         )
