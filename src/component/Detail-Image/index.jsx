@@ -18,18 +18,22 @@ const styles = () => {
         addCartContainer: {
             display: "flex",
             paddingRight: "10px",
+            marginLeft: "25px"
         },
         detailInfor: {
             margin: "0",
         },
         btnPlus: {
-            margin: "0 10px 0 0",
+            // margin: "5px 10px 0 0",
+            marginLeft: "5px",
+            marginRight: "10px",
             width: "50px",
             height: "50px",
-            borderRadius: "50%"
-
+            borderRadius: "50%",
+            outline: "none"
         },
         number: {
+            minWidth: "17px" ,
             margin: "15px 14px 0 12px",
             textAlign: "center",
             fontSize: "24px"
@@ -38,15 +42,17 @@ const styles = () => {
             margin: "0 10px 0 0",
             width: "50px",
             height: "50px",
-            borderRadius: "50%"
+            borderRadius: "50%",
+            outline: "none"
         },
         addItem: {
             margin: "10px 10px",
+            paddingTop: "2px",
             color: "white",
             backgroundColor: "black",
             width: "141px",
             height: "30px",
-            borderRadius: "30px"
+            borderRadius: "30px",
         },
         detailImg: {
             display: "flex",
@@ -102,7 +108,7 @@ class Detail_Vape extends Component {
             localStorage.setItem("CART-SHOPPING", JSON.stringify([...listFromLocal, { product: VapeProducts, quantity }]));
             this.props.history.push('/shopping_cart')
         } else {
-            listFromLocal[indexOfVapeProducts].quantity += 1;
+            listFromLocal[indexOfVapeProducts].quantity += quantity;
             localStorage.setItem("CART-SHOPPING", JSON.stringify(listFromLocal));
             this.props.history.push('/shopping_cart')
         }
@@ -151,7 +157,7 @@ class Detail_Vape extends Component {
                     </Cell>
                     <Cell style={{marginLeft: "100px", marginTop: "30px"}} col={6}>
                         <div className={classes.detailInfor}>
-                            <p style = {{fontWeight: "bold", fontSize: "30px"}}>{VapeProducts.name}</p>
+                            <p style = {{fontWeight: "bold", fontSize: "30px",textAlign: "center",marginBottom: "30px"}}>{VapeProducts.name}</p>
                             <p style={{color: "red", paddingLeft: "30px",fontSize: "20px"}}>{VapeProducts.price}$</p>
                             <ul>
                                 <li>{VapeProducts.description}</li>
@@ -163,7 +169,7 @@ class Detail_Vape extends Component {
                         </div>
                         <div className={classes.addCartContainer}>
                             {
-                                VapeProducts.quantity === 0 ? " " : <button className={classes.btnMinus} onClick={this.minus.bind(this)}>-</button>
+                                VapeProducts.quantity === 0 ? " " : <button style={{outline: "none"}} className={classes.btnMinus} onClick={this.minus.bind(this)}>-</button>
                             }
                             
                             {
@@ -171,11 +177,11 @@ class Detail_Vape extends Component {
                             }
 
                             {
-                                VapeProducts.quantity === 0 ? " " : <button className={classes.btnPlus} onClick={this.plus.bind(this)}>+</button>
+                                VapeProducts.quantity === 0 ? " " : <button style={{outline: "none"}} className={classes.btnPlus} onClick={this.plus.bind(this)}>+</button>
                             }
                             
                             {
-                                VapeProducts.quantity === 0 ? "Tiếc thay là hết hàng r :(" :  <button className={classes.addItem} onClick={() => this.ThemVaoGio()}>THÊM VÀO GIỎ</button>
+                                VapeProducts.quantity === 0 ? "Tiếc thay là hết hàng r :(" :  <button style={{outline: "none"}} className={classes.addItem} onClick={() => this.ThemVaoGio()}>THÊM VÀO GIỎ</button>
                             }
                         </div>
                     </Cell>

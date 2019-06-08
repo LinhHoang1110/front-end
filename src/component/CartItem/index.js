@@ -108,7 +108,7 @@ class CartItem extends Component {
 
                 </td>
                 <td>
-                    <div style={{ marginTop: "30px" }}>
+                    <div style={{marginTop: "30px" }}>
                         <div>
                             - bảo hành 3 tháng
                      </div>
@@ -118,23 +118,24 @@ class CartItem extends Component {
                     </div>
 
                 </td>
-                <td style={{ paddingLeft: "2%" }}>
+                <td style={{  width:"20%",}}>
                     { /* fake data nên price = view */}
                     <div style={{ marginTop: "30px" }}>
                         {parseInt(item.price).toLocaleString('us')}$
                 </div>
 
                 </td>
-                <td style={{ paddingLeft: "2%" }}>
+                <td style={{  width:"20%",marginRight: "20px",maxWidth: "268px" }}>
                     { /* fake data nên quantity = view */}
-                    <div style={{ display: "flex", marginTop: "30px" }}>
-                        <button className={classes.btnMinus} onClick={() => changeQuantity(item._id, true)}>-</button>
-                        <p style={{ margin: "0 5px" }} className={classes.number}>{quantity}</p>
-                        <button className={classes.btnPlus} onClick={() => changeQuantity(item._id)}>+</button>
+                    <div style={{ display: "flex",width: "100%", marginTop: "30px" }}>
+                        
+                        <button style={{   width: "30px",marginRight:"10px",minWidth: "30px"}} className={classes.btnMinus} onClick={() => changeQuantity(item._id, true)}>-</button>
+                        <p style={{ margin: "0 15px", minWidth: "2px",maxWidth: "2px" }} className={classes.number}>{quantity}</p>
+                        <button style={{marginLeft:"10px",minWidth: "30px",width: "30px"}} className={classes.btnPlus} onClick={() => changeQuantity(item._id)}>+</button>
                     </div>
 
                 </td>
-                <td>
+                <td style={{marginLeft: "20px"}}>
                     <div style={{ marginTop: "30px" }}>
                         {this.showSubTotal(item.price, this.props.quantity).toLocaleString('us')}$
                     </div>
@@ -152,12 +153,6 @@ class CartItem extends Component {
                 productQuantity: shoppingCart.length
             })
             this.props.actProductQuantity(shoppingCart.length)
-
-            let newTotal = total
-
-            newTotal -= item.price * quantity
-
-            total = newTotal
             
             // onChangeMessage(Message.MSG_DELETE_PRODUCT_IN_CART_SUCCESS);
         }

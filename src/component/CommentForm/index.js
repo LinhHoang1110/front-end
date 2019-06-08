@@ -122,22 +122,22 @@ class CommentForm extends Component {
                 {/* { this.showCommentUser()} */}
                 <form style={{ marginTop: "20px" }}>
                     <div style={{ width: "50%", }}>
-                        <p style={{}}>Name</p>
+                        <p style={{}}>Tên</p>
                         <input style={{ marginBottom: "30px", width: "100%" }} type="text" value={authReducer.userLocal} />
                     </div>
                     <div>
-                        <p>Comment</p>
-                        <input style={{ width: "50%" }} type="text" onChange={this.handleChanged} />
+                        <p>Bình luận</p>
+                        <textarea style={{ width: "50%" }} type="text" onChange={this.handleChanged} />
                     </div>
 
-                    <button style={{ backgroundColor: "black", color: "white", borderRadius: "99px", width: "141px", height: "30px", marginTop: "15px" }} type="submit" onClick={this.handleSubmit}>Submit</button>
+                    <button style={{ backgroundColor: "black", color: "white", borderRadius: "99px", width: "141px", height: "30px", marginTop: "15px" }} type="submit" onClick={this.handleSubmit}>Gửi</button>
                     <Modal
                         onRequestClose={() => this.setState({ modalIsOpen: false })}
                         shouldCloseOnOverlayClick
                         isOpen={this.state.modalIsOpen}
                         style={customStyles}
                     >
-                        <div>Comment thành công</div>
+                        <div>Bình luận thành công</div>
                         <button onClick={() => this.setState({ modalIsOpen: false })}>OK</button>
                     </Modal>
                 </form>

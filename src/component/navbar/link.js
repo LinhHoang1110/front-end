@@ -49,6 +49,8 @@ const styles = () => {
             transition: "all 1s",
         },
         category: {
+            position: "absolute",
+            right: "15%",
             textDecoration: "none",
             width: "96px",
             borderRadius: "16px",
@@ -139,7 +141,11 @@ const styles = () => {
             }
         },
         fas: {
-            paddingTop: "10px"
+            position: "absolute",
+            top: "15%",
+            // right: "15%",
+            paddingTop: "10px",
+            fontSize: "25px"
         }
     }
 }
@@ -233,16 +239,20 @@ class LinkInfo extends Component {
                         <SearchField />
                         <div className={classes.login_cart}>
                             <div className={classes.login} >
-                                <button className={classes.category} onClick={this.checkLoginLogOut}>{_.isEmpty(authReducer) ? 'Dang nhap' : 'Dang xuat'}</button>
+                                <button className={classes.category} onClick={this.checkLoginLogOut}>{_.isEmpty(authReducer) ? 'Đăng Nhập' : 'Đăng Xuất'}</button>
                             </div>
                             <div className={classes.shoppingCart}>
                                 <a className={classes.cart} to='/shopping_cart' onClick={this.openModal} ><i className={classNames("fas", "fa-shopping-cart", classes.icon, classes.fas)}></i></a>
-                                <div>{
-                                    shoppingCart ? shoppingCart.length : ''
-                                    }</div>
+                                {
+                                    shoppingCart.length  ? <div style={{position: "absolute",right: "5%",top: "20%",width: "20px",height:"20px",backgroundColor: "black",color: "white",textAlign: "center",borderRadius: "50%"}}>
+                                        { 
+                                         shoppingCart.length 
+                                        }</div> : ""
+                                }
+                                
                             </div>
                             
-                            <span>
+                            <span style={{position: "absolute", top: "30%" }}>
                                 {
                                     User === "null" ? " " : User 
                                 }

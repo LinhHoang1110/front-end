@@ -17,7 +17,7 @@ const styles = () => {
             opacity: "0.5",
             position: "absolute",
             top: "12%",
-            right: "20%",
+            right: "30%",
             transition: "all 0.8s",
             width: "46px",
             height: "46px",

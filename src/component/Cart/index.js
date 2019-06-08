@@ -34,7 +34,7 @@ class Cart extends Component {
                                 <th></th>
                                 <th>Sản phẩm</th>
                                 <th>Thông tin bảo hành</th>
-                                <th>Giá(VNĐ)</th>
+                                <th>Giá(USD)</th>
                                 <th>Số lượng</th>
                                 <th>Tổng</th>
                             </tr>

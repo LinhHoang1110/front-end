@@ -70,7 +70,7 @@ class SignupForm extends Component {
                                 >
                                     Signup
                                 </Button>
-                                <Link to='/login'>Already a member</Link>
+                                <Link style={{color: "blue"}} to='/login'>Already a member</Link>
                             </FormControl>
                         </Paper>
                     </Grid>

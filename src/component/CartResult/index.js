@@ -59,8 +59,9 @@ class CartResult extends Component {
     }
 
     render() {
-        const { classes, item, authReducer, actTotal, totalAll } = this.props;
-        const total = localStorage.getItem("TOTAL")
+        const { classes, item, authReducer, actTotal, total} = this.props;
+        // let total = JSON.parse(localStorage.getItem("TOTAL"))
+
         // actTotal(this.showTotalAmout(item).toLocaleString('us'))
         const client = {
             sandbox: 'Ab08l9Y7JSilOoLFLR7eoYuIux9YiA9zpIJue_AWMFTb2dI2eXh29VDvLlepOIRCKyD_9U2k2EyFrPVl',
@@ -120,6 +121,7 @@ class CartResult extends Component {
                         {
                             authReducer ?
                                 <PaypalExpressBtn
+
                                     client={client}
                                     currency={'USD'}
                                     total={total.toLocaleString('us')}

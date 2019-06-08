@@ -48,7 +48,7 @@ class SignupForm extends Component {
                             </FormControl>
 
                             <FormControl fullWidth margin='normal'>
-                                <InputLabel>Password</InputLabel>
+                                <InputLabel>Mật khẩu</InputLabel>
                                 <Field
                                     name='password'
                                     render={({ field }) => (
@@ -56,7 +56,7 @@ class SignupForm extends Component {
                                     )}
                                 />
                             </FormControl>
-                            <FormControl>
+                            <FormControl style={{marginTop: "5px", marginBottom: "5px"}}>
                                 Remember <input type="checkbox" checked={values.remember} onChange={e => setFieldValue('remember', e.target.checked)} />
                             </FormControl>
                             <FormControl fullWidth margin='normal'>
@@ -66,9 +66,9 @@ class SignupForm extends Component {
                                     style={{ width: '141px', heigh: '30px', margin: 'auto', backgroundColor: "black", color: "white", borderRadius: "30px" }}
                                     onClick={handleSubmit}
                                 >
-                                    Signin
+                                    Đăng nhập
                                 </Button>
-                                <Link to='/register'>Not a memmber ? </Link>
+                                <Link style={{color: "blue"}} to='/register'>Not a memmber ? </Link>
                             </FormControl>
                         </Paper>
                     </Grid>
@@ -97,6 +97,7 @@ const Login = withFormik({
             password: values.password,
         }).then(res => {
             if (res) {
+                console.log(res)
                 if (remember) {
                     localStorage.setItem("TOKENLOCAL", res.data.token);
                     localStorage.setItem("USERLOCAL", res.data.userFound.username)
