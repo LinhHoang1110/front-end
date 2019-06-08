@@ -102,7 +102,7 @@ class Detail_Vape extends Component {
             localStorage.setItem("CART-SHOPPING", JSON.stringify([...listFromLocal, { product: VapeProducts, quantity }]));
             this.props.history.push('/shopping_cart')
         } else {
-            listFromLocal[indexOfVapeProducts].quantity += 1;
+            listFromLocal[indexOfVapeProducts].quantity += quantity;
             localStorage.setItem("CART-SHOPPING", JSON.stringify(listFromLocal));
             this.props.history.push('/shopping_cart')
         }

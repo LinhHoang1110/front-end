@@ -5,5 +5,4 @@ export const actTotal = (total) => dispatch => {
         type: types.TOTAL,
         payload: { total }
     })
-
 }

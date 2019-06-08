@@ -31,7 +31,7 @@ class CartContainer extends Component {
 
         this.state = {
             dataDetail,
-            totalProducts: 0
+            totalProducts: JSON.parse(localStorage.getItem('TOTAL'))
         }
     }
 
@@ -44,19 +44,24 @@ class CartContainer extends Component {
     // }
 
     onDelete = (_id) => {
-        let { dataDetail } = this.state
+        let total = JSON.parse(localStorage.getItem("TOTAL"))
+        let { dataDetail, totalProducts } = this.state
+        const totalData = [...dataDetail].filter(el => el.product._id === _id)
+        console.log((totalData[0].product.price * totalData[0].quantity))
+        
         const fakeDataDetail = [...dataDetail].filter(el => el.product._id !== _id);
 
         this.setState({
-            dataDetail: fakeDataDetail
+            dataDetail: fakeDataDetail,
         })
-        localStorage.setItem("CART-SHOPPING", JSON.stringify(fakeDataDetail))
-        // console.log(fakeDataDetail, _id)
 
+        localStorage.setItem("CART-SHOPPING", JSON.stringify(fakeDataDetail))
+        localStorage.setItem("TOTAL", total-=(totalData[0].product.price * totalData[0].quantity))
+        console.log(fakeDataDetail)
     }
 
     changeQuantity = (productId, minus) => {
-        const { dataDetail } = this.state;
+        const { dataDetail, totalProducts } = this.state;
         let total = 0
 
         for (let i = 0; i < dataDetail.length; i++) {
@@ -81,9 +86,10 @@ class CartContainer extends Component {
             dataDetail,
             totalProducts: total
         })
-        localStorage.setItem("CART-SHOPPING", JSON.stringify(dataDetail))
-        // this.props.actTotal(totalProducts)
-        localStorage.setItem("TOTAL", total)
+        console.log(dataDetail);
+        localStorage.setItem("CART-SHOPPING", JSON.stringify(dataDetail));
+        console.log(this.state.totalProducts)
+        localStorage.setItem("TOTAL", totalProducts)
         console.log(this.state.totalProducts)
     }
 

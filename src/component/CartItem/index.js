@@ -152,12 +152,6 @@ class CartItem extends Component {
                 productQuantity: shoppingCart.length
             })
             this.props.actProductQuantity(shoppingCart.length)
-
-            let newTotal = total
-
-            newTotal -= item.price * quantity
-
-            total = newTotal
             
             // onChangeMessage(Message.MSG_DELETE_PRODUCT_IN_CART_SUCCESS);
         }

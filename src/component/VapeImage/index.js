@@ -95,13 +95,18 @@ class VapeImage extends Component {
         // })
 
         let cart = [];
+        let total = JSON.parse(localStorage.getItem("TOTAL"))
         try {
             cart = JSON.parse(localStorage.getItem("CART-SHOPPING")) || [];
         } catch (error) {
 
         }
 
+        
+
         if (cart.filter(item => item.product._id == product._id).length == 0) {
+            localStorage.setItem("TOTAL", total += product.price)
+            console.log(product)
             cart.push({ product, quantity: 1 });
         } else {
 
@@ -110,6 +115,7 @@ class VapeImage extends Component {
                     cart[i].quantity += 1
                     cart[i].product.quantity -= 1;
                     // console.log(cart[i].product.quantity)
+                    localStorage.setItem("TOTAL", total += (cart[i].product.price + cart[i].quantity))
                     if(cart[i].product.quantity === 0) {
                         return alert("Số lượng bạn thêm vào vượt quá kho hàng, chịu khó đợi chút nhé :3 ")
                     }

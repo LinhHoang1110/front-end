@@ -5,6 +5,7 @@ import Body from "../../component/Body";
 import { connect } from "react-redux";
 import VapeImage from "../../component/VapeImage"
 import ReactLoading from "react-loading";
+import _ from "lodash"
 
 
 class CateroryTankVape extends Component {
@@ -19,15 +20,20 @@ class CateroryTankVape extends Component {
     render() {
         let { VapeProducts } = this.props;
 
-        if (VapeProducts.length === 0) {
-            return <div>Úi ko có sản phẩm này r :( </div>
+        if (_.isObject(VapeProducts)) {
+            if (_.isArray(VapeProducts.message)) {
+                if (VapeProducts.message.length === 0) {
+                    console.log("haahahah")
+                    return <div>Úi ko có sản phẩm này r :( </div>
+                }
+            }
         }
 
         console.log(VapeProducts)
 
         return (
             <Body>
-                {this.showProducts(VapeProducts)}
+                {this.showProducts(VapeProducts.message)}
             </Body>
         )
     }
@@ -35,13 +41,16 @@ class CateroryTankVape extends Component {
 
     showProducts(VapeProducts) {
         let result = null;
-        if (VapeProducts.length > 0) {
-            result = VapeProducts.map((product, index) => {
-                console.log(product)
-                return <VapeImage {...this.props} key={index} product={product} />
-            })
+        if (_.isArray(VapeProducts)) {
+            if (VapeProducts.length > 0) {
+                console.log('asdadsasd')
+                result = VapeProducts.map((product, index) => {
+                    console.log(product)
+                    return <VapeImage {...this.props} key={index} product={product} />
+                })
+            }
+            return result
         }
-        return result
     }
 }
 

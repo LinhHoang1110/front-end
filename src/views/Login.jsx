@@ -97,6 +97,7 @@ const Login = withFormik({
             password: values.password,
         }).then(res => {
             if (res) {
+                console.log(res)
                 if (remember) {
                     localStorage.setItem("TOKENLOCAL", res.data.token);
                     localStorage.setItem("USERLOCAL", res.data.userFound.username)

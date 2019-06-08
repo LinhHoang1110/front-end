@@ -10,12 +10,19 @@ import queryString from 'query-string';
 import ReactLoading from "react-loading";
 import { Link } from 'react-router-dom';
 
+
 const styles = () => {
     return {
         containerVape: {
             display: "flex",
             flexWrap: "wrap",
             padding: "0 100px",
+        },
+        btnChangePageActive: {
+            backgroundColor: 'blue',
+        },
+        btnChangePage: {
+            backgroundColor: ""
         }
     }
 }
@@ -25,6 +32,7 @@ class ProductsContainer extends Component {
         super(props);
         this.state = ({
             VapeSeller: [],
+            pageNumber: 1,
         })
     }
 
@@ -72,7 +80,11 @@ class ProductsContainer extends Component {
         if (!_.isEqual(this.props.location.search, prevProps.location.search)) {
             const values = queryString.parse(this.props.location.search);
             const { page } = values;
-            this.props.actFetchProducts(parseInt(page));
+            const pageNumber = parseInt(page);
+            this.setState({
+                pageNumber
+            });
+            this.props.actFetchProducts(pageNumber);
         }
     }
 
@@ -119,20 +131,23 @@ class ProductsContainer extends Component {
     //     // }
     // }
 
-    showPage(totalProduct) {
+    showPage(totalProduct, currentPage) {
+        const { classes } = this.props;
         const totalPage = Math.ceil(Number(totalProduct) / 8);
-        // const pages = _.range(1, totalPage + 1);
-        // console.log("HIHIHI");
-        // console.log(pages);
-        // return pages.map( page =>
-        //     <Link to={`/?page=${page}`}>{page}</Link>
-        // )
-        let listEmpty = [];
-        for (let i = 0; i < totalPage; i++) {
-            console.log(listEmpty)
-            listEmpty = [...listEmpty, <button onClick={() => this.changePage(i)}>page {i + 1}</button>]
-        }
-        return listEmpty;
+        const pages = _.range(1, totalPage + 1);
+        return pages.map( page =>
+            <Link to={`/?page=${page}`}>
+                <button className={`${classes.btnChangePage} ${currentPage === page ? classes.btnChangePageActive : ''}`}>
+                    {page}
+                </button>
+            </Link>
+        )
+        // let listEmpty = [];
+        // for (let i = 0; i < totalPage; i++) {
+        //     console.log(listEmpty)
+        //     listEmpty = [...listEmpty, <button  onClick={() => this.changePage(i)}>page {i + 1}</button>]
+        // }
+        // return listEmpty;
     }
 
 
@@ -141,7 +156,7 @@ class ProductsContainer extends Component {
         const { classes, VapeProducts } = this.props;
         const { VapeSeller, pageNumber } = this.state;
         // console.log(VapeSeller.VapeSeller)
-
+        console.log('pageNumber');
         console.log(pageNumber)
 
 
@@ -164,7 +179,7 @@ class ProductsContainer extends Component {
                     {this.showProducts(VapeProducts)}
                 </div>
                 <div>
-                    {this.showPage(VapeProducts.total).map(el => el)}
+                    {this.showPage(VapeProducts.total, pageNumber)}
                 </div>
             </div>
         )
